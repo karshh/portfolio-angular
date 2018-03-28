@@ -1,0 +1,14 @@
+
+.jumbotron-extra {
+	background-color: #272822;
+	color: rgba(255, 255, 255, 0.8);
+	border-radius: 0px;
+	min-height: 600px;
+
+}
+
+.jumboImg {
+	background: url("../../assets/img/jumboimg.PNG" ) center no-repeat;
+    background-size: auto;
+	filter: blur(2px);
+}

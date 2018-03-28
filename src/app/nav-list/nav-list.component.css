@@ -1,12 +1,8 @@
 .navbar-local-style {
-	background-color: transparent;
+	background-color: #272822;
 }
 
 .navbar-brand-font {
 	font-family: 'Aref Ruqaa', monospace;
 	
-}
-
-.navbar-nav-extra {
-	margin-left: 500px; 
 }
