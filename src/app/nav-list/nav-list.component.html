@@ -1,3 +1,18 @@
-<ul *ngFor="let link of links">
-	<li><app-nav-item title={{link}}></app-nav-item></li>
-</ul>
+
+
+<nav class="navbar navbar-expand-lg navbar-light navbar-local-style">
+
+  <a class="navbar-brand navbar-brand-font" href="/home">usharma</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse  navbar-nav-extra" id="navbarNavAltMarkup">
+
+    <div class="navbar-nav" *ngFor="let link of links">
+      <app-nav-item title={{link}}></app-nav-item>
+    </div>
+
+  </div>
+</nav>
