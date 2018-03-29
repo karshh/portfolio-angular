@@ -50,4 +50,11 @@
 .footer {
 	min-height: 100px;
 	background-color: #272822;
+	padding-top: 100px;
+}
+
+.footer hr {
+	background-color: rgba(255, 255, 255, 0.8); 
+	padding: 0px;
+	margin:0px;
 }
