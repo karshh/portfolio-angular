@@ -3,15 +3,21 @@
 	background-color: #272822;
 	color: rgba(255, 255, 255, 0.8);
 	padding-top: 100px;
-	min-height: 600px;
 	font-family: 'Lucida Console';
+	height: 100%;
+}
+
+.jumbotron-extra a {
+	text-decoration: none;
 }
 
 .laptop-screen {
 	min-height: 570px;
     border-top-left-radius: 50px 20px;
     border-top-right-radius: 50px 20px;
-	background-color: rgba(255, 255, 255, 0.8);
+	background-color: black;
+	border: 2px solid rgba(255, 255, 255, 0.8);
+
 }
 
 .laptop-screen-img {
@@ -21,14 +27,27 @@
 	filter: blur(1px);
 	background-color: #272822;
 	min-height: 500px;
-	border-color: #272822;
-	border-width: 2px;
 
+}
+
+.laptop-bottom {
+
+	min-height: 40px;
+	background-color: rgba(255, 255, 255, 0.8);
+    border-bottom-right-radius: 50px 20px;
+    border-bottom-left-radius: 50px 20px;
+	margin: -2px -60px;
 }
 
 .middleContent {
 	
 	width: 100%;
 	min-height: 800px;
-	background-color: rgba(255, 255, 255, 0.8);
+	background-color: black;
+
+}
+
+.footer {
+	min-height: 100px;
+	background-color: #272822;
 }
