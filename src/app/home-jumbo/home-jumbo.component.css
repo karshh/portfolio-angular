@@ -2,13 +2,33 @@
 .jumbotron-extra {
 	background-color: #272822;
 	color: rgba(255, 255, 255, 0.8);
-	border-radius: 0px;
+	padding-top: 100px;
 	min-height: 600px;
+	font-family: 'Lucida Console';
+}
+
+.laptop-screen {
+	min-height: 570px;
+    border-top-left-radius: 50px 20px;
+    border-top-right-radius: 50px 20px;
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
+.laptop-screen-img {
+	margin: 0px 20px;
+	background: url("../../assets/img/jumboimg.PNG" ) left no-repeat;
+    background-size: auto;
+	filter: blur(1px);
+	background-color: #272822;
+	min-height: 500px;
+	border-color: #272822;
+	border-width: 2px;
 
 }
 
-.jumboImg {
-	background: url("../../assets/img/jumboimg.PNG" ) center no-repeat;
-    background-size: auto;
-	filter: blur(2px);
+.middleContent {
+	
+	width: 100%;
+	min-height: 800px;
+	background-color: rgba(255, 255, 255, 0.8);
 }

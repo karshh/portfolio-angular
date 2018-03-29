@@ -1,5 +1,10 @@
 .navbar-local-style {
 	background-color: #272822;
+	min-height: 100px;
+}
+
+.navbar-nav-extra {
+	align-self: right
 }
 
 .navbar-brand-font {
