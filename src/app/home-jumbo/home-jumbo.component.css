@@ -2,7 +2,7 @@
 .jumbotron-extra {
 	background-color: #272822;
 	color: rgba(255, 255, 255, 0.8);
-	padding-top: 100px;
+	padding-top: 50px;
 	font-family: 'Lucida Console';
 	height: 100%;
 }
@@ -12,7 +12,7 @@
 }
 
 .laptop-screen {
-	min-height: 570px;
+	min-height: 500px;
     border-top-left-radius: 50px 20px;
     border-top-right-radius: 50px 20px;
 	background-color: black;
@@ -26,7 +26,7 @@
     background-size: auto;
 	filter: blur(1px);
 	background-color: #272822;
-	min-height: 500px;
+	min-height: 520px;
 
 }
 

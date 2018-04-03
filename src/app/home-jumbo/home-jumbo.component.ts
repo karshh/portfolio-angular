@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeJumboComponent implements OnInit {
 
-  constructor() { }
+	link: string;
+
+  constructor() { 
+  	this.link = 'home';
+  }
 
   ngOnInit() {
   }
