@@ -1,5 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-	
 	background-color: #f8f9f1;
+}
+
+.btn-extra {
+	background-color: #272822;
+	color: #fff;
 }
