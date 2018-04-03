@@ -12,7 +12,7 @@ export class NavListComponent implements OnInit {
   @Input() currentLink: string;
 
   constructor() { 
-  	this.links = ['home', 'portfolio', 'blog', 'about' ,'contact'];
+  	this.links = ['home', 'portfolio', 'blog', 'about' ,'contact', 'login'];
 
   }
 
