@@ -9,8 +9,6 @@ export class NavListComponent implements OnInit {
 
   links: string[];
 
-  @Input() currentLink: string;
-
   constructor() { 
   	this.links = ['home', 'portfolio', 'blog', 'about' ,'contact'];
   }
