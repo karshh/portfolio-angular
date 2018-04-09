@@ -14,9 +14,9 @@ export class NavListComponent implements OnInit {
   @Input() currentLink: string;
 
   constructor(private authService: AuthService) { 
-  	this.links = ['home', 'portfolio', 'blog', 'about' ,'contact'];
+  	this.links = ['home', 'portfolio', 'about' ,'contact'];
     if (authService.isLoggedIn()) this.links.push('profile', 'logout');
-    else this.links.push('login')
+    else this.links.push('login');
   }
 
   ngOnInit() {

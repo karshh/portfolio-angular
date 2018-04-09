@@ -13,18 +13,23 @@ import { TitleComponent } from './page-components/title/title.component';
 import { FormInputComponent } from './page-components/form-input/form-input.component';
 import { FormTextAreaComponent } from './page-components/form-text-area/form-text-area.component';
 import { LoginComponent } from './login/login.component';
-import {AUTH_PROVIDERS } from './services/auth.service'
+import {AUTH_PROVIDERS } from './services/auth.service';
 import { LoggedInGuard } from './guards/logged-in.guard';
+import { LoginRedirectGuard } from './guards/login-redirect.guard';
 import { SubmitButtonComponent } from './page-components/submit-button/submit-button.component';
+import { PortfolioComponent } from './portfolio/portfolio.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeJumboComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'portfolio', component: PortfolioComponent },
 
   // authentication.
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'profile', component: ProfileComponent, canActivate:[LoginRedirectGuard] }
 
 ];
 
@@ -40,7 +45,9 @@ const routes: Routes = [
     FormInputComponent,
     FormTextAreaComponent,
     LoginComponent,
-    SubmitButtonComponent
+    SubmitButtonComponent,
+    PortfolioComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -49,9 +56,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [
-
     AUTH_PROVIDERS,
-    LoggedInGuard],
+    LoggedInGuard,
+    LoginRedirectGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

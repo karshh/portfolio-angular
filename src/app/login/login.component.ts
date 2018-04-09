@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   register(username: string, email: string, password: string): boolean {
     this.message = '';
     if (!this.authService.register(username, email, password)) {
-      this.message = 'Incorrect credentials.';
+      this.message = 'Cannot register. Email already used.';
       setTimeout(function() {
         this.message = '';
       }.bind(this), 2500);
