@@ -25,16 +25,22 @@ export class LoginComponent implements OnInit {
   }
 
   login(email: string, password: string): boolean {
-
+    this.errMessage = '';
+    this.successMessage = '';
     this.loginLoading = true;
 
+    var dt;
+    console.log(email + ": " + password);
     this.authService.login(email, password)
-    .subscribe(() => {
+    .subscribe((data) => {
+      dt = data;
+      this.authService.setUser(email, dt.user);
       this.loginLoading = false;
+
       this.route.navigate(['/']);
     }, (err: any) => {
       this.loginLoading = false;
-      this.errMessage = 'Invalid username or password.';
+      this.errMessage = 'Error:' + err.error.message;
     });
 
     return false;
@@ -42,6 +48,8 @@ export class LoginComponent implements OnInit {
 
   register(username: string, email: string, password: string): boolean {
 
+    this.errMessage = '';
+    this.successMessage = '';
     this.regLoading = true;
     this.authService.register(username, email, password)
     .subscribe(() => {

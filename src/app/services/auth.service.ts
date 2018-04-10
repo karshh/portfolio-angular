@@ -19,17 +19,26 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-
+    console.log(email + ": " + password);
     return this.http.post(this.api + 'auth/login', {'email': email, 'password': password});
   }
 
   logout() {
-
     return this.http.post(this.api + 'auth/logout', {});
   }
 
+  clearUser() {
+    localStorage.removeItem('user');
+    localStorage.removeItem('email');
+  }
+
   getUser(): any {
-    return localStorage.getItem('username');
+    return localStorage.getItem('user');
+  }
+
+  setUser(email: string, user: string) {
+    localStorage.setItem('user', user);
+    localStorage.setItem('email', email);
   }
 
   isLoggedIn(): boolean {

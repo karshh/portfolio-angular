@@ -15,15 +15,15 @@
   <div class="col-lg-6 col-md-12 loginForm">
     <div class="text-center"><p>  Hop on! </p></div>
 
-    <form (ngSubmit)="login(email.value, password.value)">
+    <form (ngSubmit)="login(loginEmail.value, loginPassword.value)">
       <div class="form-group">
         <label for="email">Email: </label>
-        <input class="form-control" type="email" name="email" #email required/>
+        <input class="form-control" type="email" name="email" #loginEmail required/>
       </div>
 
       <div class="form-group">
         <label for="password">Password: </label>
-        <input class="form-control" type="password" name="password" #password required/>
+        <input class="form-control" type="password" name="password" #loginPassword required/>
       </div>
       <br>
       <app-submit-button></app-submit-button>
@@ -50,7 +50,7 @@
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input class="form-control" type="password" name="password"  #password required />
+        <input class="form-control" type="password" name="password"  #password />
       </div>
       <br>
       <app-submit-button></app-submit-button>
