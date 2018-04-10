@@ -13,29 +13,18 @@ export class LoginComponent implements OnInit {
 	errMessage: string;
   successMessage: string;
 
-  loginForm: FormGroup;
-  regForm: FormGroup;
-
   regLoading: boolean = false;
   loginLoading: boolean = false;
 
   link: string;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private route: Router) {
+  constructor(private authService: AuthService, private route: Router) {
     this.errMessage = '';
     this.successMessage = '';
     this.link = 'login';
-
-
-    this.loginForm = fb.group({
-      'email': ['', Validators.required, Validators.email, Validators.min(4)],
-      'password': ['', Validators.required]
-    });
   }
 
   login(email: string, password: string): boolean {
-
-    if (!this.loginForm.valid) return false;
 
     this.loginLoading = true;
 
@@ -44,7 +33,6 @@ export class LoginComponent implements OnInit {
       this.loginLoading = false;
       this.route.navigate(['/']);
     }, (err: any) => {
-
       this.loginLoading = false;
       this.errMessage = 'Invalid username or password.';
     });

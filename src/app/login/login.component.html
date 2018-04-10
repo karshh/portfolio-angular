@@ -15,15 +15,15 @@
   <div class="col-lg-6 col-md-12 loginForm">
     <div class="text-center"><p>  Hop on! </p></div>
 
-    <form [formGroup]="loginForm" (ngSubmit)="login(email.value, password.value)">
+    <form (ngSubmit)="login(email.value, password.value)">
       <div class="form-group">
         <label for="email">Email: </label>
-        <input class="form-control" type="email" name="email" [formControl]="loginForm.controls['email']" #email required/>
+        <input class="form-control" type="email" name="email" #email required/>
       </div>
 
       <div class="form-group">
         <label for="password">Password: </label>
-        <input class="form-control" type="password" name="password"  [formControl]="loginForm.controls['password']" #password required/>
+        <input class="form-control" type="password" name="password" #password required/>
       </div>
       <br>
       <app-submit-button></app-submit-button>
@@ -39,18 +39,18 @@
     <form (ngSubmit)="register(username.value, email.value, password.value)">
       <div class="form-group">
         <label for="username">User</label>
-        <input class="form-control" name="username"  required #username />
+        <input class="form-control" name="username"   #username required />
       </div>
 
 
       <div class="form-group">
         <label for="email">Email</label>
-        <input class="form-control" type="email" name="email" required #email />
+        <input class="form-control" type="email" name="email"  #email required />
       </div>
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input class="form-control" type="password" name="password" required #password />
+        <input class="form-control" type="password" name="password"  #password required />
       </div>
       <br>
       <app-submit-button></app-submit-button>
