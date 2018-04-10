@@ -1,39 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AuthService {
 
-  // Dummy login and logout for now. Change to interact with db later!!!
-  authMap: { [user: string]: string; };
+  api: string = "http://localhost:3000/";
+  loading: boolean;
 
-  constructor(private router: Router) {
-    this.authMap = {};
+  // Dummy login and logout for now. Change to interact with db later!!!
+  constructor(private router: Router, private http: HttpClient) {
   }
   
-  register(user: string, email: string, password: string): boolean {
+  register(user: string, email: string, password: string) {
+    return this.http.post(this.api + 'auth/register', {'username': user, 'email': email, 'password': password});
 
-    if (this.authMap[user]) return false;
-
-    this.authMap[user] = password;
-    return true;
   }
 
-  login(user: string, password: string): boolean {
-    
-    console.log("Current authmap:");
-    console.log(this.authMap);
+  login(email: string, password: string) {
 
-    if (this.authMap[user] && this.authMap[user] == password) {
-      localStorage.setItem('username', user);
-      this.router.navigate(['']);
-    }
-
-    return false;
+    return this.http.post(this.api + 'auth/login', {'email': email, 'password': password});
   }
 
-  logout(): any {
-    localStorage.removeItem('username');
+  logout() {
+
+    return this.http.post(this.api + 'auth/logout', {});
   }
 
   getUser(): any {

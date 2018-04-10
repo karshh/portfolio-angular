@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavItemComponent } from './nav-item/nav-item.component';
@@ -53,12 +55,14 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot(routes)
   ],
   providers: [
     AUTH_PROVIDERS,
     LoggedInGuard,
-    LoginRedirectGuard],
+    LoginRedirectGuard, 
+    HttpClient ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
