@@ -5,8 +5,10 @@
 	
 	<app-title title="Contact"></app-title>
 
-	
-	<div class="row content">
+</div>
+
+<div class="row content">
+	<div class="container">
 		<div class="col-lg-4 col-md-4 col-sm-12">
 			<p> <strong>Phone:</strong> <br><a href="tel:+2266009655">(226) 600-9655</a> </p>
 			<br>
@@ -18,22 +20,22 @@
 		</div>
 
 		<div class="col-lg-8 col-md-8 col-sm-12">
-			<h4><strong>Direct Contact Form</strong></h4>
-			<br>
-
-			<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
- 
-				<app-form-input title="name" titleName="Name" type="text"></app-form-input>
-				<app-form-input title="email" titleName="Email" type="email"></app-form-input>
-				<app-form-input title="subject" titleName="Subject" type="text"></app-form-input>
-				<app-form-text-area title="message" titleName="Message"></app-form-text-area>
+			<div class="infoForm">
+				<h4><strong>Direct Contact Form</strong></h4>
 				<br>
-				<app-submit-button></app-submit-button>
 
-			</form>
+				<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+	 
+					<app-form-input title="name" titleName="Name" type="text"></app-form-input>
+					<app-form-input title="email" titleName="Email" type="email"></app-form-input>
+					<app-form-input title="subject" titleName="Subject" type="text"></app-form-input>
+					<app-form-text-area title="message" titleName="Message"></app-form-text-area>
+					<br>
+					<app-submit-button></app-submit-button>
+
+				</form>
+			</div>
 
 		</div>	
 	</div>
 </div>
-
-<br><br>
