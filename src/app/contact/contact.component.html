@@ -5,37 +5,53 @@
 	
 	<app-title title="Contact"></app-title>
 
-</div>
 
-<div class="row content">
-	<div class="container">
-		<div class="col-lg-4 col-md-4 col-sm-12">
-			<p> <strong>Phone:</strong> <br><a href="tel:+2266009655">(226) 600-9655</a> </p>
-			<br>
-			<p> <strong>Email:</strong> <br><a href="mailto:usharma_@live.com">usharma_@live.com</a> </p>
-			<br>
-			<address><strong>Address:</strong> <br> Unit 3, 48 Becker St <br> Kitchener, ON <br> N2B 1X2 </address>
-			<br><br>
-		 
+	<div class="content">
+		<div class="row justify-content-center">
+			<div class="col-lg-4">
+				<div class="infoForm text-center">
+					
+					<p><a href="https://github.com/karshh" title="https://github.com/karshh">
+					<img class="brand" src="../../assets/img/GitHub.png" alt=""></a> </p>
+				</div>
+				
+			</div>
+			<div class="col-lg-4">
+				<div class="infoForm text-center">
+					
+					<p> <strong>Email:</strong> <br><a href="mailto:usharma_@live.com">usharma_@live.com</a> </p>
+					<br>
+				</div>
+			</div>
+			<div class="col-lg-4">
+			
+				<div class="infoForm text-center">
+					
+					<p><a class="brand" href="https://www.linkedin.com/in/karshsharma/" 
+						title="https://www.linkedin.com/in/karshsharma/">
+							<img src="../../assets/img/LinkedIn.png" alt="">
+					</a></p>
+				</div>	
+
+				<br>
+			</div>
 		</div>
+		<br><br>
 
 		<div class="col-lg-8 col-md-8 col-sm-12">
-			<div class="infoForm">
-				<h4><strong>Direct Contact Form</strong></h4>
+			<h4><strong>Contact Form</strong></h4>
+			<br>
+
+			<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+ 
+				<app-form-input title="name" titleName="Name" type="text"></app-form-input>
+				<app-form-input title="email" titleName="Email" type="email"></app-form-input>
+				<app-form-input title="subject" titleName="Subject" type="text"></app-form-input>
+				<app-form-text-area title="message" titleName="Message"></app-form-text-area>
 				<br>
+				<app-submit-button></app-submit-button>
 
-				<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
-	 
-					<app-form-input title="name" titleName="Name" type="text"></app-form-input>
-					<app-form-input title="email" titleName="Email" type="email"></app-form-input>
-					<app-form-input title="subject" titleName="Subject" type="text"></app-form-input>
-					<app-form-text-area title="message" titleName="Message"></app-form-text-area>
-					<br>
-					<app-submit-button></app-submit-button>
-
-				</form>
-			</div>
-
+			</form>
 		</div>	
 	</div>
 </div>
