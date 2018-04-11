@@ -9,10 +9,16 @@
 }
 
 .infoForm {
-	padding: 20px 30px 20px 30px;
+	padding: 20px 30px 50px 30px;
 	background-color: white;
-	height: 60%;
+	max-height: 60%;
   	box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.infoForm:hover {
+
+	margin-top: -10px;
+	margin-bottom: 10px;
 }
 
 .btn-extra {
@@ -20,6 +26,7 @@
 	color: #fff;
 }
 
-.brand {
-	width: 80px;
+
+.brandImg {
+	height: 30px;
 }
