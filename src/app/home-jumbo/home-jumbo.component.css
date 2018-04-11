@@ -1,60 +1,27 @@
 
 .jumbotron-extra {
-	background-color: #fff;
 	/*color: rgba(255, 255, 255, 0.8);*/
 	padding-top: 50px;
 	font-family: 'Lucida Console';
-	height: 100%;
 }
 
 .jumbotron-extra a {
 	text-decoration: none;
 }
 
-.laptop-screen {
-	min-height: 500px;
-    border-top-left-radius: 50px 20px;
-    border-top-right-radius: 50px 20px;
-	background-color: black;
-	border: 2px solid rgba(255, 255, 255, 0.8);
-
-}
-
-.laptop-screen-img {
-	margin: 0px 20px;
-	background: url("../../assets/img/jumboimg.PNG" ) left no-repeat;
-    background-size: auto;
-	filter: blur(1px);
-	background-color: #272822;
-	min-height: 520px;
-
-}
-
-.laptop-bottom {
-
-	min-height: 40px;
-	background-color: rgba(255, 255, 255, 0.8);
-    border-bottom-right-radius: 50px 20px;
-    border-bottom-left-radius: 50px 20px;
-	margin: -2px -60px;
-}
-
 .middleContent {
-	
-	width: 100%;
-	min-height: 800px;
-	background-color: black;
-
+	padding-top: 30px;
+	padding-bottom: 30px;
+	background-color: #f3f3f3;
 }
 
-.footer {
-	min-height: 100px;
-	background-color: #272822;
-	padding-top: 100px;
+.circle {
+	/*border-radius: 50%;*/
+	padding: 30px;
+	margin: 20px;
+	min-height: 30px;
+	min-width: 30px;
+	background-color: #fff;
+  	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
-.footer hr {
-	background-color: rgba(255, 255, 255, 0.8); 
-	padding: 0px;
-	margin:0px;
-}

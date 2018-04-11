@@ -30,3 +30,7 @@
 .brandImg {
 	height: 30px;
 }
+
+.imgWrap {
+	max-width: 60px;
+}
