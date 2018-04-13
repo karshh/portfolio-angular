@@ -14,10 +14,6 @@ import { ContactComponent } from './contact/contact.component';
 import { TitleComponent } from './page-components/title/title.component';
 import { FormInputComponent } from './page-components/form-input/form-input.component';
 import { FormTextAreaComponent } from './page-components/form-text-area/form-text-area.component';
-import { LoginComponent } from './login/login.component';
-import {AUTH_PROVIDERS } from './services/auth.service';
-import { LoggedInGuard } from './guards/logged-in.guard';
-import { LoginRedirectGuard } from './guards/login-redirect.guard';
 import { SubmitButtonComponent } from './page-components/submit-button/submit-button.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -30,9 +26,6 @@ const routes: Routes = [
   { path: 'portfolio', component: PortfolioComponent },
 
   // authentication.
-  { path: 'login', component: LoginComponent },
-  { path: 'profile', component: ProfileComponent, canActivate:[LoginRedirectGuard] }
-
 ];
 
 @NgModule({
@@ -46,7 +39,6 @@ const routes: Routes = [
     TitleComponent,
     FormInputComponent,
     FormTextAreaComponent,
-    LoginComponent,
     SubmitButtonComponent,
     PortfolioComponent,
     ProfileComponent
@@ -59,9 +51,6 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [
-    AUTH_PROVIDERS,
-    LoggedInGuard,
-    LoginRedirectGuard, 
     HttpClient ],
   bootstrap: [AppComponent]
 })

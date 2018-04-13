@@ -1,3 +1,16 @@
+.topContent {
+	background-color: #404040;
+	color: #f3f3f3;
+	text-shadow: rgba(0,0,0,0.5);
+	padding-top: 50px;
+	font-family: 'Lucida Console';
+}
+
+.topContent a {
+	text-decoration: none;
+}
+
+
 .summary {
 	padding: 20px 30px 5px 30px;
 	background-color: white;

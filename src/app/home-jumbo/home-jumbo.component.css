@@ -1,27 +1,34 @@
 
-.jumbotron-extra {
-	/*color: rgba(255, 255, 255, 0.8);*/
+.dashboard {
+	background-color: #404040;
+	color: #f3f3f3;
+	text-shadow: rgba(0,0,0,0.5);
 	padding-top: 50px;
 	font-family: 'Lucida Console';
-}
-
-.jumbotron-extra a {
-	text-decoration: none;
 }
 
 .middleContent {
 	padding-top: 30px;
 	padding-bottom: 30px;
-	background-color: #f3f3f3;
+	background-color: rgba(0,0,0,0.4);
 }
 
-.circle {
+.middleLeftContent {
+
+	background-color: white;
+}
+
+.middleRightContent {
+	
+	background-color: rgba(0,0,0,0.8);
+}
+.panel {
 	/*border-radius: 50%;*/
-	padding: 30px;
-	margin: 20px;
-	min-height: 30px;
-	min-width: 30px;
-	background-color: #fff;
-  	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+	padding: 15px;
+	margin: 10px;
+	background-color: #FFF;
+	border-color: #FFF;
+  	box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.3);
+  	color: rgba(0, 0, 0, 0.8);
 }
 

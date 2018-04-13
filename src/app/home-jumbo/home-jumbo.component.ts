@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home-jumbo',
@@ -7,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeJumboComponent implements OnInit {
 
-	link: string;
+	link: string = 'home';
+	today: number = Date.now();
 
   constructor() { 
-  	this.link = 'home';
+  	this.updateClock();
+  }
+
+  updateClock(): void {
+  	setInterval(() => {
+  		this.today = Date.now();
+  	}, 995 * 60);
   }
 
   ngOnInit() {
