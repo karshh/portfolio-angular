@@ -7,12 +7,26 @@
 	
 	<div class="row justify-content-center">
 		<div class="panel">
-			<h3>{{today | date:'longDate'}}</h3>
-			<p>{{today | date:'shortTime'}} MST</p>
+			<p><strong>{{today | date:'longDate'}}</strong></p>
+			<p>{{today | date:'shortTime'}} MT</p>
 		</div>
 
-		<div class="panel">
-			<h3>{{ getWeatherData() }}<sup>o</sup>C</h3>
+		<div  *ngIf="isWeatherLoaded()" class="panel">
+			<p>{{ getCurrentWeatherData() }}<sup>o</sup>C</p>
+
+			<div>
+				<table>
+					<tr>
+				    	<th>Firstname</th>
+				    	<th>Lastname</th> 
+				    	<th>Age</th>
+				  	</tr>
+				  	<tr>
+				    	<td *ngFor="let data of getHourlyWeatherData()">{{ data }}<sup>o</sup>C</td>
+				  	</tr>
+				</table>
+			</div> 
+			
 		</div>
 	</div>
 

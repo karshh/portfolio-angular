@@ -1,5 +1,4 @@
-var config = {
-    WEATHER_API_KEY: "your-darksky-api-key", // <-- ADD YOUR DARKSKY API KEY HERE
+export const Config: any = {
+    WEATHER_API_KEY: "my-darksky-api", // <-- ADD YOUR DARKSKY API KEY HERE
     YYC_COORDS: "51.0659,-114.0914"
 };
-module.exports = config;

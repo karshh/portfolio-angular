@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-var Config = require('./config.ts');
+import { Config } from './config'
 
 @Injectable()
 export class WeatherService {
@@ -49,11 +49,11 @@ export class WeatherService {
   	return this.loaded;
   }
 
-  getCurrentWeather(): JSON {
+  getCurrentWeather(): any {
   	return this.currentWeather;
   }
 
-  getHourlyWeather(): Array<JSON> {
+  getHourlyWeather(): Array<any> {
   	return this.hourlyWeather;
   }
 }

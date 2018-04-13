@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
 
 import { WeatherService } from '../services/weather.service';
+import { ClockService } from '../services/clock.service';
 
 @Component({
   selector: 'app-home-jumbo',
@@ -13,31 +13,37 @@ export class HomeJumboComponent implements OnInit {
 	link: string = 'home';
 	today: number = Date.now();
 
-	weatherLoaded: boolean;
 
-  constructor(private weather: WeatherService) { 
-  	this.weatherLoaded = false;
+  constructor(private weather: WeatherService, private clock: ClockService) { 
 
-  	this.updateClock();
-  	this.getWeatherData();
   }
 
-  updateClock(): void {
-  	setInterval(() => {
-  		this.today = Date.now();
-  	}, 995 * 60);
+  getClock(): number {
+  	return this.clock.getClock();
   }
 
-  getWeatherData(): number {
-  	if (this.weather.isLoaded()) this.weatherLoaded = true;
+  isWeatherLoaded() {
+    return this.weather.isLoaded();
+  }
 
-  	if (this.weatherLoaded) {
-	  	let dt = this.weather.getCurrentWeather();
-	  	return Math.round(parseInt(dt.temperature));	
-  	}
+  getCurrentWeatherData(): string {
+    if (!this.isWeatherLoaded()) return; 
+  	return Math.round(this.weather.getCurrentWeather().temperature).toString();	
+  }
+
+  getHourlyWeatherData(): Array<string> {
+    if (!this.isWeatherLoaded()) return;
+    let dt = this.weather.getHourlyWeather();
+    let output: Array<string> = []; 
+    for (var i = 0; i < dt.length; i++) {
+      let temp = Math.round(dt[i].temperature).toString();
+      output.push(temp); 
+    }
+    return output;
   }
 
   ngOnInit() {
   }
+
 
 }
