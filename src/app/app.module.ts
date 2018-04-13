@@ -14,6 +14,7 @@ import { ContactComponent } from './contact/contact.component';
 import { TitleComponent } from './page-components/title/title.component';
 import { FormInputComponent } from './page-components/form-input/form-input.component';
 import { FormTextAreaComponent } from './page-components/form-text-area/form-text-area.component';
+import { WeatherService } from './services/weather.service';
 import { SubmitButtonComponent } from './page-components/submit-button/submit-button.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -51,6 +52,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [
+    WeatherService,
     HttpClient ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import './config.ts';
+var Config = require('./config.ts');
 
 @Injectable()
 export class WeatherService {
@@ -21,20 +21,23 @@ export class WeatherService {
 
   constructor(private http: HttpClient) { 
   	this.loaded = false;
+  	this.updateWeather();
   }
 
   private updateWeather(): void {
-  	while(true) setTimeout(this.getWeather, 1000 * 60 * 30); // update every 30 mins.
+  	this.getWeather();
+  	setTimeout(this.updateWeather, 1000 * 60 * 30); // update every 30 mins.
   }
 
   private getWeather() {
   	this.http.get(this.buildURL())
   	.subscribe((data) => {
+  		console.log(data);
   		let dt, currentDt, hourlyDt; 
   		this.loaded = true;
   		dt = data;
-  		this.currentWeather = dt.data.hourly.data[0];
-  		this.hourlyWeather = dt.data.hourly.data.slice(1,4);  
+  		this.currentWeather = dt.hourly.data[0];
+  		this.hourlyWeather = dt.hourly.data.slice(1,4);  
   	});
   }
 
@@ -44,5 +47,13 @@ export class WeatherService {
 
   isLoaded(): boolean {
   	return this.loaded;
+  }
+
+  getCurrentWeather(): JSON {
+  	return this.currentWeather;
+  }
+
+  getHourlyWeather(): Array<JSON> {
+  	return this.hourlyWeather;
   }
 }
