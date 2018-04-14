@@ -1,13 +1,9 @@
-.topContent {
-	background-color: #404040;
-	color: #f3f3f3;
-	text-shadow: rgba(0,0,0,0.5);
-	padding-top: 50px;
-	font-family: 'Lucida Console';
-}
 
-.topContent a {
-	text-decoration: none;
+
+.bannerImg {
+	max-width: 75%;
+	padding-top: 20px;
+	padding-bottom: 50px;
 }
 
 
@@ -15,11 +11,17 @@
 	padding: 20px 30px 5px 30px;
 	background-color: white;
   	box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.1);
+	color: #101010;
+}
+
+.summary p, .topcontent p {
+	line-height: 8px;
 }
 
 .row-extra {
 	padding: 50px;
-	background-color: #f3f3f3;
+	color: #f3f3f3;
+	background-color: #262626;
   	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -29,5 +31,9 @@
 
 
 .content {
-	font-family: 'Bookman Old Style';
+	font-family: 'Lucida Console';
+}
+
+.topcontent {
+	padding-top: 2em;
 }

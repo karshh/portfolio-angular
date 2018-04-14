@@ -6,7 +6,7 @@ export class ClockService {
   private today: number;
 
   constructor() {
-	this.runClock();
+	  this.runClock();
   }
 
   updateClock():void {
@@ -15,9 +15,8 @@ export class ClockService {
 
   runClock() {
   	this.updateClock();
-  	setInterval(() => this.runClock(), (1000 * 60) - 100);
+  	setInterval(() => this.runClock(), 1000 * 20);
   }
-
 
   getClock() {
   	return this.today;

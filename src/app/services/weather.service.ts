@@ -12,8 +12,7 @@ export class WeatherService {
   private loaded: boolean;
   
 
-  private currentWeather: JSON ;
-  private hourlyWeather: Array<JSON>; // for now I'll just pump out the next three hours and their weather
+  private currentWeather: any ;
 
 
   private coords: string;
@@ -31,13 +30,9 @@ export class WeatherService {
 
   private getWeather() {
   	this.http.get(this.buildURL())
-  	.subscribe((data) => {
-  		console.log(data);
-  		let dt, currentDt, hourlyDt; 
+  	.subscribe((data: any) => { 
   		this.loaded = true;
-  		dt = data;
-  		this.currentWeather = dt.hourly.data[0];
-  		this.hourlyWeather = dt.hourly.data.slice(1,4);  
+  		this.currentWeather = data.hourly.data[0];  
   	});
   }
 
@@ -53,7 +48,4 @@ export class WeatherService {
   	return this.currentWeather;
   }
 
-  getHourlyWeather(): Array<any> {
-  	return this.hourlyWeather;
-  }
 }

@@ -11,35 +11,32 @@ import { ClockService } from '../services/clock.service';
 export class HomeJumboComponent implements OnInit {
 
 	link: string = 'home';
-	today: number = Date.now();
+	temperature: number;
 
 
-  constructor(private weather: WeatherService, private clock: ClockService) { 
+  constructor(private weather: WeatherService, private clock: ClockService) {
 
   }
+
 
   getClock(): number {
   	return this.clock.getClock();
   }
 
-  isWeatherLoaded() {
-    return this.weather.isLoaded();
+  isWeatherLoaded(): boolean {
+    return this.weather.isLoaded() && this.weather.getCurrentWeather();
   }
 
-  getCurrentWeatherData(): string {
-    if (!this.isWeatherLoaded()) return; 
-  	return Math.round(this.weather.getCurrentWeather().temperature).toString();	
-  }
 
-  getHourlyWeatherData(): Array<string> {
+  getCurrentTemperature(): number {
     if (!this.isWeatherLoaded()) return;
-    let dt = this.weather.getHourlyWeather();
-    let output: Array<string> = []; 
-    for (var i = 0; i < dt.length; i++) {
-      let temp = Math.round(dt[i].temperature).toString();
-      output.push(temp); 
-    }
-    return output;
+  	return Math.round(this.weather.getCurrentWeather().temperature);	
+  }
+
+
+  getCurrentHumidity(): number {
+    if (!this.isWeatherLoaded()) return;
+  	return Math.round(this.weather.getCurrentWeather().humidity);	
   }
 
   ngOnInit() {

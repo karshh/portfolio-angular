@@ -2,33 +2,41 @@
 
 <app-nav-list currentLink="{{ link }}"></app-nav-list>
 
-<!-- Vector images have been created by D3images - Freepik.com -->
+<div class="topContent">
+	<div class="container justify-content-center">
+
+			<div class="text-center">
+				<h1>&#123; var name = Karsh &#125;</h1>
+				<br><br>
+				<p> Welcome to my corner. </p>
+				<p> Here, I document my journey dedicated to excelling as a full-stack developer.</p>
+				<p> Check out my 
+					<a href="https://www.linkedin.com/in/karshsharma">linkedin</a> and 
+					<a href="https://github.com/karshh">github</a> profile. </p>
+				<br>
+				<div class="row">
+					
+					<div class="col-lg-4 col-md-4 col-sm-12">
+						<p><i class="fa fa-map-marker"></i> Calgary, AB</p>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-12">
+						<p><i class="fa fa-clock-o"></i> {{ getClock() | date:'shortTime'}} MT </p>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-12">
+						<p><i class="fa fa-thermometer-2"></i> 
+							<span *ngIf="!isWeatherLoaded()"><img src="../assets/img/loading.gif" /></span>
+							<span *ngIf="isWeatherLoaded()">{{ getCurrentTemperature() }}&deg;C</span> 
+						</p>
+					</div>
+				</div>
+				<br><br>
+
+				<img class="bannerImg" src="../assets/img/calgary.svg" />
+
+			</div>
+	</div>
+</div>
+<br><br>
 <div class="dashboard">
 	
-	<div class="row justify-content-center">
-		<div class="panel">
-			<p><strong>{{today | date:'longDate'}}</strong></p>
-			<p>{{today | date:'shortTime'}} MT</p>
-		</div>
-
-		<div  *ngIf="isWeatherLoaded()" class="panel">
-			<p>{{ getCurrentWeatherData() }}<sup>o</sup>C</p>
-
-			<div>
-				<table>
-					<tr>
-				    	<th>Firstname</th>
-				    	<th>Lastname</th> 
-				    	<th>Age</th>
-				  	</tr>
-				  	<tr>
-				    	<td *ngFor="let data of getHourlyWeatherData()">{{ data }}<sup>o</sup>C</td>
-				  	</tr>
-				</table>
-			</div> 
-			
-		</div>
-	</div>
-
-
 </div>
