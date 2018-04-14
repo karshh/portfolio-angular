@@ -1,124 +1,69 @@
 <app-nav-list currentLink="{{ link }}"></app-nav-list>
 
 <div class="content">
-	<div class="topcontent container">
-
-		<div class=" text-center">
-
-			
-			<img class="bannerImg" src="../assets/img/heritageHall.svg" />
-			
-			<h2> Program </h2>
-			<br>
-			<p><i class="fa fa-graduation-cap"></i> SAIT </p>
-			<p><i class="fa fa-certificate"></i> Web Developer </p>
-			<p><i class="fa fa-calendar-o"></i> Jan. 2018 - April 2018 </p>
-			
-
-			<br>
-			<br><br>
-
-
-		</div>
-		<br><br>
+	<div class="contentPanel1 container text-center">
+		<img class="bannerImg" src="../assets/img/heritageHall.svg" />
+		
+		<h2> Program </h2>
+		<br>
+		<p><i class="fa fa-graduation-cap"></i> SAIT </p>
+		<p><i class="fa fa-certificate"></i> Web Developer </p>
+		<p><i class="fa fa-calendar-o"></i> Jan. 2018 - April 2018 </p>
 	</div>
-	<div class="row justify-content-center row-extra">
-	<div class="container text-center">
+
+	<div class="row justify-content-center contentPanel2">
+		<div class="container text-center">
 			<h2> Technical Summary </h2>
 			<br><br>
 			<div class="row justify-content-center">
 				<div class="col-lg-3 col-md-4 col-sm-6 col-extra">
-					
-					<div class="summary text-center">
-						<h5> Introduction </h5>
-						<hr>
-						<p>HTML</p>
-						<p>CSS/SASS</p>
-						<p>Javascript</p>
-						<p>TypeScript</p>
-					</div>
-
-					<br>
+					<app-skill-list [title]="'Introduction'" [skillList]="['HTML', 'CSS/SASS', 'Javascript', 'TypeScript']"></app-skill-list>
 				</div>
 
 				<div class="col-lg-3 col-md-4 col-sm-6">
-					
-					<div class="summary text-center">
-						<h5> Client </h5>
-						<hr>
-						<p>JQuery</p>
-						<p>Angular 4+</p>
-						<p>Bootstrap</p>
-					</div>
-					<br>
+					<app-skill-list [title]="'Client'" [skillList]="['JQuery', 'Angular 4+', 'Bootstrap']"></app-skill-list>
+				</div>
+
+				<div class="col-lg-3 col-md-4 col-sm-6">
+					<app-skill-list [title]="'Server'" [skillList]="['PHP/Laravel', 'Express']"></app-skill-list>
+				</div>
+
+				<div class="col-lg-3 col-md-4 col-sm-6">
+					<app-skill-list [title]="'Databases'" [skillList]="['MySQL', 'PostgreSQL', 'MongoDB']"></app-skill-list>
+				</div>
+
+				<div class="col-lg-3 col-md-4 col-sm-6">
+					<app-skill-list [title]="'Operating System'" [skillList]="['Windows OS', 'Mac OSX', 'Ubuntu', 'CentOS']"></app-skill-list>
 				</div>
 
 
 				<div class="col-lg-3 col-md-4 col-sm-6">
-					
-					<div class="summary text-center">
-						<h5> Server </h5>
-						<hr>
-						<p>PHP/Laravel</p>
-						<p>Express</p>
-					</div>
-					<br>
+					<app-skill-list [title]="'Hosting'" [skillList]="['Amazon EC2', 'Google Cloud']"></app-skill-list>
 				</div>
 
 				<div class="col-lg-3 col-md-4 col-sm-6">
-					
-					<div class="summary text-center">
-						<h5> Databases </h5>
-						<hr>
-						<p>MySQL</p>
-						<p>PostgreSQL</p>
-						<p>MongoDB</p>
-					</div>
-					<br>
-				</div>
-
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					
-					<div class="summary text-center">
-						<h5> Operating System </h5>
-						<hr>
-						<p>Windows OS</p>
-						<p>Mac OSX</p>
-						<p>Ubuntu</p>
-						<p>CentOS</p>
-					</div>
-					<br>
-				</div>
-
-
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					
-					<div class="summary text-center">
-						<h5> Hosting </h5>
-						<hr>
-						<p>Amazon EC2</p>
-						<p>Google Cloud</p>
-					</div>
-					<br>
-				</div>
-
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					
-					<div class="summary text-center">
-						<h5> Source Control </h5>
-						<hr>
-						<p>Github</p>
-						<p>Bitbucket</p>
-						<p>Gitlab</p>
-					</div>
-					<br>
+					<app-skill-list [title]="'Source Control'" [skillList]="['Github', 'Bitbucket', 'Gitlab']"></app-skill-list>
 				</div>
 			</div>
-
-
-
 		</div>
 	</div>
-	
-	
+
+
+	<div class="contentPanel1 container">
+
+		<div class="text-center">
+			<h2> Journey </h2>
+		</div>
+
+		<hr>
+
+		<app-project-info
+			[title]="'Medium-Fake'"
+			[skilLList]="['HTML', 'CSS', 'PHP', 'Javascript', 'MySQL', 'Bootstrap',  'Laravel', 'MySQL', 'AWS EC2']"
+			[timeLine]="'March 2018 - Ongoing'"
+			[githubURL]="'github.com/karshh/medium-fake'"
+			[websiteURL]="'medium.usharma.ca'"
+			[description]="mediumDescription"
+		></app-project-info>
+	</div>
 </div>

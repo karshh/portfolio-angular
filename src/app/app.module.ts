@@ -19,6 +19,8 @@ import { ClockService } from './services/clock.service';
 import { SubmitButtonComponent } from './page-components/submit-button/submit-button.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SkillListComponent } from './page-components/skill-list/skill-list.component';
+import { ProjectInfoComponent } from './page-components/project-info/project-info.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -43,7 +45,9 @@ const routes: Routes = [
     FormTextAreaComponent,
     SubmitButtonComponent,
     PortfolioComponent,
-    ProfileComponent
+    ProfileComponent,
+    SkillListComponent,
+    ProjectInfoComponent
   ],
   imports: [
     BrowserModule,

@@ -6,19 +6,7 @@
 	padding-bottom: 50px;
 }
 
-
-.summary {
-	padding: 20px 30px 5px 30px;
-	background-color: white;
-  	box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.1);
-	color: #101010;
-}
-
-.summary p, .topcontent p {
-	line-height: 8px;
-}
-
-.row-extra {
+.contentPanel2 {
 	padding: 50px;
 	color: #f3f3f3;
 	background-color: #262626;
@@ -34,6 +22,28 @@
 	font-family: 'Lucida Console';
 }
 
-.topcontent {
-	padding-top: 2em;
+.contentPanel1 {
+	padding: 2em 0;	
+}
+
+h2, h3, h4, h5 {
+	line-height: 2em;
+}
+.contentPanel1 p, .contentPanel2 p {
+	line-height: 25px;
+}
+
+.panel {
+	margin: 10px;
+	padding: 20px 30px 5px 30px;
+	background-color: #262626;
+  	box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.1);
+	color: #f3f3f3;
+}
+
+
+.metaInfo td {
+
+	padding-bottom: 10px;
+	padding-right: 20px;
 }

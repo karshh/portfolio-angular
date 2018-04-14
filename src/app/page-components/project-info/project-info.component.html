@@ -1,0 +1,31 @@
+
+<div class="col-auto">
+	<h4>{{ title }}</h4>
+</div>
+<div class="col-auto">
+	<div class="row">
+		<div *ngFor="let data of skilLList" class="panel"><p>{{ data }}</p></div>
+	</div>
+</div>
+<br>
+<div class="col-auto">
+	<table class="metaInfo">
+		<tr>
+			<td><strong>Date:</strong></td>
+			<td>{{ timeLine }}</td>
+		</tr>
+		<tr>
+			<td><strong>Website:</strong></td>
+			<td><a href="https://{{ githubURL }}"  target="_blank">{{ githubURL }}</a></td>
+		</tr>
+		<tr>
+			<td><strong>Github:</strong></td>
+			<td><a href="https://{{ websiteURL }}" target="_blank">{{ websiteURL }}</a></td>
+		</tr>
+	</table>
+</div>
+<br>
+<div class="col-auto" innerHTML="{{description}}"></div>
+<br>
+
+<hr>
