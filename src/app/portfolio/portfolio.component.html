@@ -57,13 +57,15 @@
 
 		<hr>
 
-		<app-project-info
-			[title]="'Medium-Fake'"
-			[skilLList]="['HTML', 'CSS', 'PHP', 'Javascript', 'MySQL', 'Bootstrap',  'Laravel', 'MySQL', 'AWS EC2']"
-			[timeLine]="'March 2018 - Ongoing'"
-			[githubURL]="'github.com/karshh/medium-fake'"
-			[websiteURL]="'medium.usharma.ca'"
-			[description]="mediumDescription"
+		<app-project-info *ngFor="let project of getProjectInfoList()"
+			[title]="project.title"
+			[skillList]="project.skillList"
+			[timeLine]="project.timeLine"
+			[githubURL]="project.github"
+			[websiteURL]="project.website"
+			[description]="project.description"
 		></app-project-info>
 	</div>
+
+
 </div>

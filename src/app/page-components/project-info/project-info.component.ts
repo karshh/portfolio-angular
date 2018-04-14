@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ProjectInfoComponent implements OnInit {
 
 	@Input() title: string;
-	@Input() skilLList: Array<string>;
+	@Input() skillList: Array<string>;
 	@Input() timeLine: string;
 	@Input() description: string;
 	@Input() githubURL: string;
@@ -17,7 +17,6 @@ export class ProjectInfoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  	console.log(this.description);
   }
 
 }
