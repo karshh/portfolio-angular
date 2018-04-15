@@ -9,11 +9,9 @@ export class ProjectInfoService {
 
   
   constructor() {
-  	console.log(Projects);
   	this.projects = new Array<ProjectInfo>();
 
   	for (var i = 0; i < Projects.length; i++) {
-  		
   		this.projects.push(this.convertToProject(Projects[i]));
   	}
   }
@@ -23,7 +21,6 @@ export class ProjectInfoService {
   }
 
   convertToProject(project: any): ProjectInfo {
-  	console.log(project);
   	let projectInfo: ProjectInfo = new ProjectInfo(); 
 	projectInfo.title = project.title;
 	projectInfo.skillList = project.skillList;
