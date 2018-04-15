@@ -1,16 +1,25 @@
 
-.content {
-	font-family: 'Bookman Old Style';
+.content, .form-content {
+	font-family: 'Lucida Console';
 	letter-spacing: 2px;
-	background-color: #f3f3f3;
   	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 	padding: 50px;
 
 }
 
+.content {
+	background-color: #404040;
+	color: #f3f3f3;
+}
+
+.form-content {
+	background-color: #f3f3f3;
+	color: #262626;
+}
+
 .infoForm {
 	padding: 20px 30px 50px 30px;
-	background-color: white;
+	background-color: #f3f3f3;
 	max-height: 60%;
   	box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.1);
 }

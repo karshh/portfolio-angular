@@ -23,6 +23,7 @@ import { ProjectInfoComponent } from './page-components/project-info/project-inf
 import { WeatherService } from './services/weather.service';
 import { ClockService } from './services/clock.service';
 import { ProjectInfoService } from './services/project-info.service';
+import { FooterComponent } from './footer/footer.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeJumboComponent },
@@ -48,7 +49,8 @@ const routes: Routes = [
     PortfolioComponent,
     ProfileComponent,
     SkillListComponent,
-    ProjectInfoComponent
+    ProjectInfoComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

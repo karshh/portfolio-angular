@@ -4,9 +4,12 @@
 <div class="container">
 	
 	<app-title title="Contact"></app-title>
+</div>
 
-
-	<div class="content">
+<div class="content">
+	<div class="container text-center">
+		<h3> Contact Link </h3>
+		<br>
 		<div class="row justify-content-center">
 			<div class="col-lg-4  col-md-6 col-sm-12">
 				<a href="https://github.com/karshh" title="https://github.com/karshh">
@@ -16,7 +19,6 @@
 						</p>
 					</div>
 				</a>
-				
 			</div>
 			<div class="col-lg-4 col-md-6 col-sm-12">
 				<a href="mailto:usharma_@live.com" title="usharma_@live.com">
@@ -37,14 +39,17 @@
 				</a>
 			</div>
 		</div>
-		<br><br>
+	</div>
+</div>
+<div class="form-content">
 
+	<div class="container">
 		<div class="col-lg-8 col-md-8 col-sm-12">
 			<h4><strong>Contact Form</strong></h4>
 			<br>
 
 			<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
- 
+
 				<app-form-input title="name" titleName="Name" type="text"></app-form-input>
 				<app-form-input title="email" titleName="Email" type="email"></app-form-input>
 				<app-form-input title="subject" titleName="Subject" type="text"></app-form-input>
@@ -56,3 +61,5 @@
 		</div>	
 	</div>
 </div>
+
+<app-footer></app-footer>

@@ -1,34 +1,22 @@
-.topContent {
+.topContent, .middleContent {
 	padding-top: 5em;
-	color: #101010;
 	font-family: 'Lucida Console';
 }
 
+.topContent {
+	color: #101010;
+}
 .bannerImg {
 	max-width: 100%;
 }
 
-.dashboard {
+.middleContent {
 	background-color: #404040;
 	color: #f3f3f3;
 	text-shadow: rgba(0,0,0,0.5);
+	min-height: 350px;
 }
 
-.middleContent {
-	padding-top: 30px;
-	padding-bottom: 30px;
-	background-color: rgba(0,0,0,0.4);
-}
-
-.middleLeftContent {
-
-	background-color: white;
-}
-
-.middleRightContent {
-	
-	background-color: rgba(0,0,0,0.8);
-}
 .panel {
 	padding: 15px;
 	margin: 10px;
