@@ -25,6 +25,7 @@ import { NewsService } from './services/news.service';
 import { ProjectInfoService } from './services/project-info.service';
 import { FooterComponent } from './footer/footer.component';
 import { NewsComponent } from './news/news.component';
+import { NewsPanelComponent } from './page-components/news-panel/news-panel.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -52,7 +53,8 @@ const routes: Routes = [
     SkillListComponent,
     ProjectInfoComponent,
     FooterComponent,
-    NewsComponent
+    NewsComponent,
+    NewsPanelComponent
   ],
   imports: [
     BrowserModule,

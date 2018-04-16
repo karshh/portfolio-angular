@@ -23,8 +23,7 @@ export class NewsComponent implements OnInit {
   }
 
   getNewsByRange(a: number, b:number): Array<News> {
-  	let newsList = this.news.getNewsByRange(a,b)
-  	console.log(newsList);
+  	let newsList = this.news.getNewsByRange(a,b);
   	return newsList;
   }
 

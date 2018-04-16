@@ -13,8 +13,9 @@ export class PortfolioComponent implements OnInit {
   link: string;
 
   constructor(private projectInfo: ProjectInfoService) { 
-  	this.link = 'portfolio';  }
-  
+  	this.link = 'portfolio';  
+  }
+   
   getProjectInfoList(): Array<ProjectInfo> {
   	return this.projectInfo.getProjects();
   }

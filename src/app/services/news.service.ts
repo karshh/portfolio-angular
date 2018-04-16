@@ -41,7 +41,7 @@ export class NewsService {
 
   	if (!this.loaded || this.newsList.length < start+1) return [];
 
-  	return this.newsList.slice(start, Math.min(end, this.newsList.length);
+  	return this.newsList.slice(start, Math.min(end, this.newsList.length));
   }
 
   convertToNews(newsInfo: any): News {
@@ -55,7 +55,7 @@ export class NewsService {
   }
 
   isLoaded(): boolean {
-  	return this.loaded && this.newsList;
+  	return this.loaded && this.newsList != null;
   }
 
 
