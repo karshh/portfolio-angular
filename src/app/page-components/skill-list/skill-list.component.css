@@ -6,6 +6,8 @@
 	color: #101010;
 }
 
-.summary p, .topcontent p {
+
+.summary p {
 	line-height: 8px;
+
 }

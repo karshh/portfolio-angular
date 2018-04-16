@@ -3,6 +3,11 @@
 html {
 	min-width: 350px;
 }
+
+body {
+	font-family: 'Lucida Console';
+}
+
 .btn-extra {
 	background-color: #272822;
 	color: #fff;

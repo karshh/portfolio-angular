@@ -1,0 +1,63 @@
+<app-nav-list currentLink="{{ link }}"></app-nav-list>
+
+<div class="content container">
+	<div class="text-center">
+		<h3>Recent News</h3>
+		<p>Powered by: <a href="https://newsroom.calgary.ca/" title="https://newsroom.calgary.ca/"> The Calgary Newsroom</a></p>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-sm-12" *ngFor="let news of getNewsByRange(0,1)">
+			<a class="panelLinks" href="{{ news.link.href }}" target="_blank">
+				<div class="panel">
+					<h6 >{{news.title}}. </h6>
+					<small> {{ news.pubdate | date }} </small>
+					<small> {{ news.pubdate | date:'shortTime' }} </small>
+				</div>
+			</a>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-12" >
+			<div *ngFor="let news of getNewsByRange(1,4)">
+				<a class="panelLinks" href="{{ news.link.href }}" target="_blank">
+				<div class="panel">
+					<h6 >{{news.title}}. </h6>
+					<small> {{ news.pubdate | date }} </small>
+					<small> {{ news.pubdate | date:'shortTime' }} </small>
+				</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-lg-4 col-md-4 col-sm-12" *ngFor="let news of getNewsByRange(4,7)">
+			<a class="panelLinks" href="{{ news.link.href }}" target="_blank">
+				<div class="panel">
+					<h6 >{{news.title}}. </h6>
+					<small> {{ news.pubdate | date }} </small>
+					<small> {{ news.pubdate | date:'shortTime' }} </small>
+				</div>
+			</a>
+		</div>
+		
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-lg-3 col-md-4 col-sm-12" *ngFor="let news of getNewsByRange(7,11)">
+			<a class="panelLinks" href="{{ news.link.href }}" target="_blank">
+				<div class="panel">
+					<h6 >{{news.title}}. </h6>
+					<small> {{ news.pubdate | date }} </small>
+					<small> {{ news.pubdate | date:'shortTime' }} </small>
+				</div>
+			</a>
+		</div>
+		
+	</div>
+
+</div>
+
+<div class="trafficContent">
+	
+</div>
+<app-footer></app-footer>

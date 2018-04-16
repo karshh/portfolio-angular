@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { NavItemComponent } from './nav-item/nav-item.component';
 import { NavListComponent } from './nav-list/nav-list.component';
 import { HomeJumboComponent } from './home-jumbo/home-jumbo.component';
-import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { TitleComponent } from './page-components/title/title.component';
 import { FormInputComponent } from './page-components/form-input/form-input.component';
@@ -22,14 +21,17 @@ import { ProjectInfoComponent } from './page-components/project-info/project-inf
 
 import { WeatherService } from './services/weather.service';
 import { ClockService } from './services/clock.service';
+import { NewsService } from './services/news.service';
 import { ProjectInfoService } from './services/project-info.service';
 import { FooterComponent } from './footer/footer.component';
+import { NewsComponent } from './news/news.component';
+
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeJumboComponent },
-  { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'portfolio', component: PortfolioComponent },
+  { path: 'news', component: NewsComponent },
 
   // authentication.
 ];
@@ -40,7 +42,6 @@ const routes: Routes = [
     NavItemComponent,
     NavListComponent,
     HomeJumboComponent,
-    AboutComponent,
     ContactComponent,
     TitleComponent,
     FormInputComponent,
@@ -50,7 +51,8 @@ const routes: Routes = [
     ProfileComponent,
     SkillListComponent,
     ProjectInfoComponent,
-    FooterComponent
+    FooterComponent,
+    NewsComponent
   ],
   imports: [
     BrowserModule,
@@ -63,6 +65,7 @@ const routes: Routes = [
     WeatherService,
     ClockService,
     ProjectInfoService,
+    NewsService,
     HttpClient ],
   bootstrap: [AppComponent]
 })
