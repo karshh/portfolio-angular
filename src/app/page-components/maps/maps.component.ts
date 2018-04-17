@@ -11,7 +11,7 @@ export class MapsComponent implements OnInit {
 
   zoom: number = 10;
   latitude: number = 51.0486;
-  longitude: number = -114.0708;
+  longitude: number = -114.0516;
   mapStyles: any = MapStyle;
 
   @Input() title:string;

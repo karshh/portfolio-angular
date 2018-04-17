@@ -16,36 +16,11 @@
 			<h2> Technical Summary </h2>
 			<br><br>
 			<div class="row justify-content-center">
-				<div class="col-lg-3 col-md-4 col-sm-6 col-extra">
-					<app-skill-list [title]="'Introduction'" [skillList]="['HTML', 'CSS/SASS', 'Javascript', 'TypeScript']"></app-skill-list>
-				</div>
-
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<app-skill-list [title]="'Client'" [skillList]="['JQuery', 'Angular 4+', 'Bootstrap']"></app-skill-list>
-				</div>
-
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<app-skill-list [title]="'Server'" [skillList]="['PHP/Laravel', 'Express']"></app-skill-list>
-				</div>
-
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<app-skill-list [title]="'Databases'" [skillList]="['MySQL', 'PostgreSQL', 'MongoDB']"></app-skill-list>
-				</div>
-
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<app-skill-list [title]="'OS & Linux Images'" [skillList]="['Windows OS', 'Mac OSX', 'Ubuntu', 'Debian', 'Amazon AMI']"></app-skill-list>
-				</div>
-
-
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<app-skill-list [title]="'Web Services'" [skillList]="['Apache', 'Nginx']"></app-skill-list>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<app-skill-list [title]="'Hosting'" [skillList]="['Amazon EC2', 'Google Cloud']"></app-skill-list>
-				</div>
-
-				<div class="col-lg-3 col-md-4 col-sm-6">
-					<app-skill-list [title]="'Source Control'" [skillList]="['Github', 'Bitbucket', 'Gitlab']"></app-skill-list>
+				<div *ngFor="let skill of getSkillInfoList()" class="col-lg-3 col-md-4 col-sm-6">
+					<app-skill-list 
+						[title]="skill.title" 
+						[skillList]="skill.skillList">	
+					</app-skill-list>
 				</div>
 			</div>
 		</div>
@@ -57,17 +32,15 @@
 		<div class="text-center">
 			<h2> Journey </h2>
 		</div>
-
 		<hr>
-
 		<app-project-info *ngFor="let project of getProjectInfoList()"
 			[title]="project.title"
 			[skillList]="project.skillList"
 			[timeLine]="project.timeLine"
 			[githubURL]="project.github"
 			[websiteURL]="project.website"
-			[description]="project.description"
-		></app-project-info>
+			[description]="project.description">
+		</app-project-info>
 	</div>
 
 

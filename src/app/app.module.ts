@@ -25,6 +25,7 @@ import { WeatherService } from './services/weather.service';
 import { ClockService } from './services/clock.service';
 import { NewsService } from './services/news.service';
 import { ProjectInfoService } from './services/project-info.service';
+import { SkillInfoService } from './services/skill-info.service';
 import { TrafficIncidentService } from './services/traffic-incident.service';
 import { DetourService } from './services/detour.service';
 import { FooterComponent } from './footer/footer.component';
@@ -76,6 +77,7 @@ const routes: Routes = [
   providers: [
     WeatherService,
     ClockService,
+    SkillInfoService,
     ProjectInfoService,
     TrafficIncidentService,
     DetourService,
