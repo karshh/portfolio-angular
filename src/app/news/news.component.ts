@@ -4,7 +4,6 @@ import { News } from '../classes/news';
 import { TrafficIncidentService } from '../services/traffic-incident.service';
 import { DetourService } from '../services/detour.service';
 import { MapInfo } from '../classes/map-info';
-import { MapStyle } from '../services/config';
 
 @Component({
   selector: 'app-news',
@@ -15,10 +14,6 @@ export class NewsComponent implements OnInit {
 
 	link: string;
 
-  zoom: number = 10;
-  latitude: number = 51.0486;
-  longitude: number = -114.0708;
-  mapStyles: any = MapStyle;
 
   constructor(
     private news: NewsService, 

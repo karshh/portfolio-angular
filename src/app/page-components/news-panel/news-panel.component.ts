@@ -10,6 +10,8 @@ export class NewsPanelComponent implements OnInit {
 	@Input() title: string;
 	@Input() link: URL;
 	@Input() pubdate: Date;
+
+  @Input() loaded: boolean;
 	
   constructor() { }
 

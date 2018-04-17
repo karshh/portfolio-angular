@@ -8,24 +8,24 @@
 	<hr>
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-12" *ngFor="let news of getNewsByRange(0,1)">
-				<app-news-panel [title]="news.title" [pubdate]="news.pubdate" [link]="news.link"></app-news-panel>
+				<app-news-panel [loaded]="isNewsLoaded()" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link"></app-news-panel>
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-12" >
 			<div *ngFor="let news of getNewsByRange(1,4)">
-				<app-news-panel [title]="news.title" [pubdate]="news.pubdate" [link]="news.link"></app-news-panel>
+				<app-news-panel [loaded]="isNewsLoaded()" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link"></app-news-panel>
 			</div>
 		</div>
 	</div>
 	<br>
 	<div class="row">
 		<div class="col-lg-4 col-md-4 col-sm-12" *ngFor="let news of getNewsByRange(4,7)">
-			<app-news-panel [title]="news.title" [pubdate]="news.pubdate" [link]="news.link"></app-news-panel>
+			<app-news-panel [loaded]="isNewsLoaded()" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link"></app-news-panel>
 		</div>
 	</div>
 	<br>
 	<div class="row justify-content-center">
 		<div class="col-lg-3 col-md-4 col-sm-12" *ngFor="let news of getNewsByRange(7,11)">
-			<app-news-panel [title]="news.title" [pubdate]="news.pubdate" [link]="news.link"></app-news-panel>
+			<app-news-panel [loaded]="isNewsLoaded()" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link"></app-news-panel>
 		</div>
 	</div>
 	<br><br>
@@ -39,7 +39,7 @@
 				<br><br>
 			</div>
 			<div class="col-lg-6 col-md-12 col-sm-12">
-				<app-maps [title]="'Detours'" [mapInfoList]="getDetoursList()"></app-maps>
+				<app-maps [title]="'Current Detours'" [mapInfoList]="getDetoursList()"></app-maps>
 			</div>
 		</div>
 	</div>

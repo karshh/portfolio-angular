@@ -9,3 +9,10 @@ agm-map {
    width: 90%;
    margin: 20px;
  }
+
+.mapsHr {
+	background-color: #f3f3f3;
+	width: 300px;
+
+	align-self: left;
+ }
