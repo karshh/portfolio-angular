@@ -48,14 +48,67 @@
 			<h4><strong>Contact Form</strong></h4>
 			<br>
 
-			<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+			<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
 
-				<app-form-input title="name" titleName="Name" type="text"></app-form-input>
-				<app-form-input title="email" titleName="Email" type="email"></app-form-input>
-				<app-form-input title="subject" titleName="Subject" type="text"></app-form-input>
-				<app-form-text-area title="message" titleName="Message"></app-form-text-area>
-				<br>
+				<pre>{{contactForm.value | json}}</pre>
+				<pre>Valid? {{ contactForm.controls.name.valid }}</pre>
+				<pre>Valid? {{ contactForm.controls.email.valid }}</pre>
+				<pre>Valid? {{ contactForm.controls.subject.valid }}</pre>
+				<pre>Valid? {{ contactForm.controls.message.valid }}</pre>
+
+		      	<div  class="form-group">
+			        <label for="name">Name</label>
+			        <input 	type="text" 
+			        		class="form-control"
+			        		id="name" 
+							[formControl]="name" 
+							[ngClass]="{
+							  'has-danger': name.invalid && name.dirty,
+							  'has-success': name.valid && name.dirty
+							}"
+			        		required>
+					<div class="" *ngIf="name.errors && (name.dirty || name.touched)">
+					  	<font color="red"><small *ngIf="name.errors.required"> *Name is required</small></font>
+					</div>			
+		      	</div>
+				<div class="form-group">
+					<label 	for="email">Email</label>
+					<input 	class="form-control" 
+							type="email" 
+							name="email"
+							[formControl]="email" 
+							required>
+					<div class="" *ngIf="email.errors && (email.dirty || email.touched)">
+					  	<font color="red"><small *ngIf="email.errors.required"> *Email is required<br></small>
+					  	<small *ngIf="email.errors.email"> *Email must be valid type</small></font>
+					</div>			
+				</div>
+				<div class="form-group">
+					<label 	for="subject">Subject</label>
+					<input 	class="form-control" 
+							type="text" 
+							name="subject"
+							[formControl]="subject" 
+							required>
+					<div class="" *ngIf="subject.errors && (subject.dirty || subject.touched)">
+					  	<font color="red"><small *ngIf="subject.errors.required"> *Subject is required</small></font>
+					</div>			
+				</div>
+				<div class="form-group">
+					<label 	for="message">Message</label>
+					<textarea 	class="form-control" 
+								name="message" 
+								rows="4" 
+								[formControl]="message"
+								required></textarea>
+					<div class="" *ngIf="message.errors && (message.dirty || message.touched)">
+					  	<font color="red"><small *ngIf="message.errors.required"> *Message is required</small></font>
+					</div>			
+				</div>
 				<app-submit-button></app-submit-button>
+				<div class="" *ngIf="errMessage.length > 0">
+				  	<font color="red"><small> * {{ errMessage }} </small></font>
+				</div>	
 
 			</form>
 		</div>	
