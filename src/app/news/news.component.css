@@ -1,16 +1,18 @@
-.panelLinks {
-    text-decoration: none;
+
+.content, .trafficContent {
+    padding-top: 20px;
+}
+
+.trafficContent {
+    background-color: #202020;
     color: #f3f3f3;
 }
 
-.panel {
-    height: 100%;
-    background-color: #404040;
-	padding: 15px 20px 10px 20px;
-  	box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.1);
-    user-select: none;
-}
+agm-map {
+   height: 500px;
+   width: 500px;
+ }
 
-.content {
-    padding-top: 20px;
-}
+.trafficIncidentsMap {
+    color: black;
+ }

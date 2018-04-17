@@ -4,7 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { AgmCoreModule } from '@agm/core'
 
+import { Config } from './services/config';
 import { AppComponent } from './app.component';
 import { NavItemComponent } from './nav-item/nav-item.component';
 import { NavListComponent } from './nav-list/nav-list.component';
@@ -23,6 +25,7 @@ import { WeatherService } from './services/weather.service';
 import { ClockService } from './services/clock.service';
 import { NewsService } from './services/news.service';
 import { ProjectInfoService } from './services/project-info.service';
+import { TrafficIncidentService } from './services/traffic-incident.service';
 import { FooterComponent } from './footer/footer.component';
 import { NewsComponent } from './news/news.component';
 import { NewsPanelComponent } from './page-components/news-panel/news-panel.component';
@@ -61,12 +64,17 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    AgmCoreModule.forRoot({
+      apiKey: Config.GOOGLE_API_KEY,
+      libraries: ["places"]
+    })
   ],
   providers: [
     WeatherService,
     ClockService,
     ProjectInfoService,
+    TrafficIncidentService,
     NewsService,
     HttpClient ],
   bootstrap: [AppComponent]

@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { News } from '../classes/news';
+import { Config } from './config'
 
 @Injectable()
 export class NewsService {
 
 	private loaded: boolean;
 	private newsList: Array<News>;
+
 
   constructor(private http: HttpClient) {
   	this.loaded = false;
@@ -21,7 +23,8 @@ export class NewsService {
 
   private getNews() {
   	this.newsList = [];
-  	this.http.get(this.buildURL())
+    let headers = new HttpHeaders().set('$$app_token', Config.YYC_APP_TOKEN);
+    this.http.get(this.buildURL(), { 'headers': headers})
   	.subscribe((data: any) => {
   		for (var i = 0; i < data.length; i++) {
   			if (!data[i].pubdate) continue;
@@ -40,8 +43,8 @@ export class NewsService {
   getNewsByRange(start:number, end:number): Array<News> {
 
   	if (!this.loaded || this.newsList.length < start+1) return [];
-
   	return this.newsList.slice(start, Math.min(end, this.newsList.length));
+
   }
 
   convertToNews(newsInfo: any): News {
