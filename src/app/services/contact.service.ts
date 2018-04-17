@@ -15,18 +15,22 @@ export class ContactService {
   }
 
 
-	sendEmail(contact: Contact): void {
+	sendEmail(contact: Contact): void  {
   	this.status = MessageStatus.SENDING;
   	console.log('Sending message: ' + contact._subject);
   	
-  	this.http.post(this.buildURL(), {
-  		_replyto: contact._replyto,
-  		name: contact.name,
-  		_subject: contact._subject,
-  		message: contact.message,
-  		_honeypot: contact._honeypot
-  	}).subscribe(() => {
 
+    // let formData: FormData = new FormData(); 
+    // formData.append('_replyto', contact._replyto);
+    // formData.append('name', contact.name);
+    // formData.append('_subject', contact._subject);
+    // formData.append('message', contact.message);
+    // formData.append('_honeypot', contact._honeypot);
+
+    let headers: HttpHeaders = new HttpHeaders();
+
+  	this.http.post(this.buildURL(), contact).subscribe((res) => {
+      console.log(res);
   		console.log('Sent message: ' + contact._subject);
   		this.status = MessageStatus.SUCCESS;
   	}, (err) => {
@@ -62,7 +66,7 @@ export class ContactService {
 	}
 
   private buildURL():string {
-  	return 'https://mailthis.to/' + Config.MAILTO_ID;
+  	return 'https://formspree.io/' + Config.MAILTO_ID;
   }
 
 }
