@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { TrafficIncident } from '../classes/traffic-incident';
+import { MapInfo } from '../classes/map-info';
 import { Config } from './config';
 
 @Injectable()
 export class TrafficIncidentService {
 
 	private loaded: boolean;
-	private trafficIncidentList: Array<TrafficIncident>;
+	private trafficIncidentList: Array<MapInfo>;
 
   constructor(private http: HttpClient) {
   	this.loaded = false;
@@ -26,16 +26,12 @@ export class TrafficIncidentService {
   	this.http.get(this.buildURL(), { 'headers': headers})
   	.subscribe((data: any) => {
 		let yesterday = new Date();
-		console.log(yesterday);
 		yesterday.setDate(yesterday.getDate() - 1);
-		console.log(yesterday);
   		for (var i = 0; i < data.length; i++) {
-
-  			let ts: TrafficIncident = this.convertToTrafficIncident(data[i]);
+  			let ts: MapInfo = this.convertToTrafficIncident(data[i]);
+  			// Only add in data from the last 24 hours.
   			if (ts.updated > yesterday) this.trafficIncidentList.push(ts);
   		}
-  		this.trafficIncidentList.sort((a: any,b: any) => b.updated - a.updated);
-  		console.log(this.trafficIncidentList);
   		this.loaded = true;
   	});
   }
@@ -44,8 +40,8 @@ export class TrafficIncidentService {
   	return 'https://data.calgary.ca/resource/m328-x8wy.json?$limit=20000';
   }
 
-  convertToTrafficIncident(ts: any): TrafficIncident {
-  	let trafficIncident: TrafficIncident = new TrafficIncident(); 
+  convertToTrafficIncident(ts: any): MapInfo {
+  	let trafficIncident: MapInfo = new MapInfo(); 
 	trafficIncident.description = ts.description;
 	trafficIncident.location = ts.incident_info;
 	trafficIncident.latitude = +ts.latitude;
@@ -63,7 +59,7 @@ export class TrafficIncidentService {
   }
 
 
-  getTrafficIncidentList(): Array<TrafficIncident> {
+  getTrafficIncidentList(): Array<MapInfo> {
   	return this.trafficIncidentList;
   }
 

@@ -1,0 +1,27 @@
+<h3>{{ title }}</h3>
+<br>
+<div class="trafficIncidentsMap text-left">
+	
+  <agm-map 
+  	[zoom]="zoom" 
+  	[latitude]="latitude" 
+  	[longitude]="longitude"
+	[disableDefaultUI]="true"
+  	[styles]="mapStyles"  #gm>
+
+	<agm-marker *ngFor="let mapInfo of mapInfoList" 
+		[latitude]="mapInfo.latitude" 
+		[longitude]="mapInfo.longitude"
+		(markerClick)="gm.lastOpen?.close(); gm.lastOpen = infoWindow">
+
+		<agm-info-window #infoWindow>
+            <br>
+            <p><strong>{{mapInfo.location}}</strong></p>
+            <p><strong>{{mapInfo.description}}</strong></p>
+
+            <p><strong>Updated:</strong> {{mapInfo.updated | date:'shortTime'}}</p>
+
+          </agm-info-window> 
+	</agm-marker>
+  </agm-map>
+</div>

@@ -26,9 +26,11 @@ import { ClockService } from './services/clock.service';
 import { NewsService } from './services/news.service';
 import { ProjectInfoService } from './services/project-info.service';
 import { TrafficIncidentService } from './services/traffic-incident.service';
+import { DetourService } from './services/detour.service';
 import { FooterComponent } from './footer/footer.component';
 import { NewsComponent } from './news/news.component';
 import { NewsPanelComponent } from './page-components/news-panel/news-panel.component';
+import { MapsComponent } from './page-components/maps/maps.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -57,7 +59,8 @@ const routes: Routes = [
     ProjectInfoComponent,
     FooterComponent,
     NewsComponent,
-    NewsPanelComponent
+    NewsPanelComponent,
+    MapsComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +78,7 @@ const routes: Routes = [
     ClockService,
     ProjectInfoService,
     TrafficIncidentService,
+    DetourService,
     NewsService,
     HttpClient ],
   bootstrap: [AppComponent]

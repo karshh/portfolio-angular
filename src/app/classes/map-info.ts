@@ -1,4 +1,4 @@
-export class TrafficIncident {
+export class MapInfo {
 	description: string;
 	location: string;
 	latitude: number;

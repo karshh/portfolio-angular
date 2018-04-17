@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NewsService } from '../services/news.service';
 import { News } from '../classes/news';
 import { TrafficIncidentService } from '../services/traffic-incident.service';
-import { TrafficIncident } from '../classes/traffic-incident';
+import { DetourService } from '../services/detour.service';
+import { MapInfo } from '../classes/map-info';
 import { MapStyle } from '../services/config';
 
 @Component({
@@ -17,12 +18,12 @@ export class NewsComponent implements OnInit {
   zoom: number = 10;
   latitude: number = 51.0486;
   longitude: number = -114.0708;
-
   mapStyles: any = MapStyle;
 
   constructor(
     private news: NewsService, 
-    private trafficIncident: TrafficIncidentService
+    private trafficIncident: TrafficIncidentService,
+    private detour : DetourService
     ) {
   	
     this.link = "news";
@@ -51,10 +52,20 @@ export class NewsComponent implements OnInit {
     return this.trafficIncident.isLoaded();
   }
 
-  getTrafficIncidentList(): Array<TrafficIncident> {
+  getTrafficIncidentList(): Array<MapInfo> {
     return this.trafficIncident.getTrafficIncidentList();
   }
 
+  // Detours
+
+  
+  isDetoursLoaded(): boolean {
+    return this.detour.isLoaded();
+  }
+
+  getDetoursList(): Array<MapInfo> {
+    return this.detour.getDetoursList();
+  }
 
 
 
