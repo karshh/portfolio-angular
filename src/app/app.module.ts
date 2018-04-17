@@ -28,6 +28,7 @@ import { ProjectInfoService } from './services/project-info.service';
 import { SkillInfoService } from './services/skill-info.service';
 import { TrafficIncidentService } from './services/traffic-incident.service';
 import { DetourService } from './services/detour.service';
+import { ContactService } from './services/contact.service';
 import { FooterComponent } from './footer/footer.component';
 import { NewsComponent } from './news/news.component';
 import { NewsPanelComponent } from './page-components/news-panel/news-panel.component';
@@ -82,6 +83,7 @@ const routes: Routes = [
     TrafficIncidentService,
     DetourService,
     NewsService,
+    ContactService,
     HttpClient ],
   bootstrap: [AppComponent]
 })

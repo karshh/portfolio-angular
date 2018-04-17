@@ -3,7 +3,7 @@
 
 <div class="container">
 	
-	<app-title title="Contact"></app-title>
+	<app-title title="Reach out to me!"></app-title>
 </div>
 
 <div class="content">
@@ -50,12 +50,6 @@
 
 			<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
 
-				<pre>{{contactForm.value | json}}</pre>
-				<pre>Valid? {{ contactForm.controls.name.valid }}</pre>
-				<pre>Valid? {{ contactForm.controls.email.valid }}</pre>
-				<pre>Valid? {{ contactForm.controls.subject.valid }}</pre>
-				<pre>Valid? {{ contactForm.controls.message.valid }}</pre>
-
 		      	<div  class="form-group">
 			        <label for="name">Name</label>
 			        <input 	type="text" 
@@ -80,7 +74,7 @@
 							required>
 					<div class="" *ngIf="email.errors && (email.dirty || email.touched)">
 					  	<font color="red"><small *ngIf="email.errors.required"> *Email is required<br></small>
-					  	<small *ngIf="email.errors.email"> *Email must be valid type</small></font>
+					  	<small *ngIf="!email.errors.required && email.errors.email"> *Email must be valid type</small></font>
 					</div>			
 				</div>
 				<div class="form-group">
@@ -105,7 +99,20 @@
 					  	<font color="red"><small *ngIf="message.errors.required"> *Message is required</small></font>
 					</div>			
 				</div>
-				<app-submit-button></app-submit-button>
+
+   				<input type="hidden" name="additionalInfo" value="" [formControl]="additionalInfo">
+   				<div class="row">
+					<div class="col-auto">
+						<app-submit-button></app-submit-button>
+					</div>
+					<div *ngIf="messagePassed" class="col-auto">
+						<img *ngIf="isBusy()" href="../assets/img/loading.gif" />
+						<p *ngIf="isSuccess()"><i class="fa fa-check"></i> Sent.</p>
+						<p *ngIf="isFailure()"><i class="fa fa-close"></i> 
+							Could not send message. Try again in a bit!</p>
+					</div>
+   					
+   				</div>
 				<div class="" *ngIf="errMessage.length > 0">
 				  	<font color="red"><small> * {{ errMessage }} </small></font>
 				</div>	
