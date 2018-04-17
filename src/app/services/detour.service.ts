@@ -30,7 +30,6 @@ export class DetourService {
   			let ts: MapInfo = this.convertToDetours(data[i]);
   			this.detoursList.push(ts);
   		}
-  		console.log(this.detoursList);
   		this.loaded = true;
   	});
   }

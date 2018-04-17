@@ -13,6 +13,7 @@ export class NewsService {
   constructor(private http: HttpClient) {
   	this.loaded = false;
   	this.newsList = [];
+    for (var i = 0; i < 20; i++) this.newsList.push(new News()); // dummy news.
   	this.updateNews();
   }
 
@@ -22,10 +23,12 @@ export class NewsService {
   }
 
   private getNews() {
-  	this.newsList = [];
+    this.loaded = false; // enter loading view screen.
+    
     let headers = new HttpHeaders().set('$$app_token', Config.YYC_APP_TOKEN);
     this.http.get(this.buildURL(), { 'headers': headers})
   	.subscribe((data: any) => {
+      this.newsList = [];
   		for (var i = 0; i < data.length; i++) {
   			if (!data[i].pubdate) continue;
   			let news: News = this.convertToNews(data[i]);
@@ -41,8 +44,6 @@ export class NewsService {
   }
 
   getNewsByRange(start:number, end:number): Array<News> {
-
-  	if (!this.loaded || this.newsList.length < start+1) return [];
   	return this.newsList.slice(start, Math.min(end, this.newsList.length));
 
   }

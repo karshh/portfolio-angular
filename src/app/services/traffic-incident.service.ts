@@ -21,10 +21,11 @@ export class TrafficIncidentService {
   }
 
   private getTrafficIncidents() {
-  	this.trafficIncidentList = [];
+  	this.loaded = false;
   	let headers = new HttpHeaders().set('$$app_token', Config.YYC_APP_TOKEN);
   	this.http.get(this.buildURL(), { 'headers': headers})
   	.subscribe((data: any) => {
+  		this.trafficIncidentList = [];
 		let yesterday = new Date();
 		yesterday.setDate(yesterday.getDate() - 1);
   		for (var i = 0; i < data.length; i++) {
