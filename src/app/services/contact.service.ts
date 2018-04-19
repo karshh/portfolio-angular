@@ -55,7 +55,7 @@ export class ContactService {
 	}
 
   private buildURL():string {
-  	return 'https://formspree.io/' + Config.MAILTO_ID;
+  	return Config.PROXY_URL + 'https://formspree.io/' + Config.MAILTO_ID;
   }
 
 }
