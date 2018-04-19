@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core'
 
+import { ResponseInterceptor } from './response-interceptor';
 import { Config } from './services/config';
 import { AppComponent } from './app.component';
 import { NavItemComponent } from './nav-item/nav-item.component';
@@ -76,6 +77,11 @@ const routes: Routes = [
     })
   ],
   providers: [
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: ResponseInterceptor,
+    //   multi: true
+    // },
     WeatherService,
     ClockService,
     SkillInfoService,

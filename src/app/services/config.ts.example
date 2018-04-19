@@ -3,7 +3,8 @@ export const Config: any = {
     GOOGLE_API_KEY: "my-google-api", // <-- ADD YOUR GOOGLEMAPS API KEY HERE
     YYC_APP_TOKEN: "my-app-token",
     MAILTO_ID: "your-mailto-id",
-    YYC_COORDS: "51.0659,-114.0914"
+    YYC_COORDS: "51.0659,-114.0914",
+    PROXY_URL: 'https://cors-anywhere.herokuapp.com/'
 };
 
 export const MapStyle: Array<any> =[
