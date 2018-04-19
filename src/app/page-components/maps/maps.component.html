@@ -16,8 +16,8 @@
 		<agm-info-window #infoWindow>
             <br>
             <p><strong>{{mapInfo.location}}</strong></p>
-            <p><strong>{{mapInfo.description}}</strong></p>
-
+            <div [innerHTML]="mapInfo.description"></div>
+            <br>
             <p><strong>Updated:</strong> {{mapInfo.updated | date:'shortTime'}}</p>
 
           </agm-info-window> 

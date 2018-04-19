@@ -27,11 +27,10 @@ export class TrafficIncidentService {
   	.subscribe((data: any) => {
   		this.trafficIncidentList = [];
 		let yesterday = new Date();
-		yesterday.setDate(yesterday.getDate() - 1);
+		yesterday.setHours(yesterday.getHours() - 6); // only show traffic data thats been updated in the last 6 hours
   		for (var i = 0; i < data.length; i++) {
   			let ts: MapInfo = this.convertToTrafficIncident(data[i]);
-  			// Only add in data from the last 24 hours.
-  			if (ts.updated > yesterday) this.trafficIncidentList.push(ts);
+  			if (ts.updated >= yesterday) this.trafficIncidentList.push(ts);
   		}
   		this.loaded = true;
   	});

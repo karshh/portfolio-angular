@@ -47,7 +47,7 @@
 		<div class="col-lg-8 col-md-8 col-sm-12">
 			<h4><strong>Contact Form</strong></h4>
 			<br>
-
+			
 			<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
 
 		      	<div  class="form-group">
@@ -55,11 +55,7 @@
 			        <input 	type="text" 
 			        		class="form-control"
 			        		id="name" 
-							[formControl]="name" 
-							[ngClass]="{
-							  'has-danger': name.invalid && name.dirty,
-							  'has-success': name.valid && name.dirty
-							}"
+							[formControl]="name"
 			        		required>
 					<div class="" *ngIf="name.errors && (name.dirty || name.touched)">
 					  	<font color="red"><small *ngIf="name.errors.required"> *Name is required</small></font>
@@ -101,21 +97,18 @@
 				</div>
 
    				<input type="hidden" name="additionalInfo" value="" [formControl]="additionalInfo">
-   				<div class="row">
-					<div class="col-auto">
-						<app-submit-button></app-submit-button>
-					</div>
-					<div *ngIf="messagePassed" class="col-auto">
-						<img *ngIf="isBusy()" href="../assets/img/loading.gif" />
-						<p *ngIf="isSuccess()"><i class="fa fa-check"></i> Sent.</p>
-						<p *ngIf="isFailure()"><i class="fa fa-close"></i> 
-							Could not send message. Try again in a bit!</p>
-					</div>
+
+				<button class="btn btn-extra" [disabled]="!contactForm.valid">
+					Submit
+				</button>
+				
+				<br><br>
+				<div *ngIf="messagePassed">
+					<p *ngIf="isBusy()"><i class="fa  w3-spin fa-refresh"></i> Sending.</p>
+					<p *ngIf="isSuccess()"><i class="fa fa-check"></i> Sent.</p>
+					<p *ngIf="isFailure()"><i class="fa fa-close"></i> Could not send message. Try again in a bit. </p>
+				</div>
    					
-   				</div>
-				<div class="" *ngIf="errMessage.length > 0">
-				  	<font color="red"><small> * {{ errMessage }} </small></font>
-				</div>	
 
 			</form>
 		</div>	

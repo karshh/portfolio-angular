@@ -17,17 +17,6 @@ export class ContactService {
 
 	sendEmail(contact: Contact): void  {
   	this.status = MessageStatus.SENDING;
-  	console.log('Sending message: ' + contact._subject);
-  	
-
-    // let formData: FormData = new FormData(); 
-    // formData.append('_replyto', contact._replyto);
-    // formData.append('name', contact.name);
-    // formData.append('_subject', contact._subject);
-    // formData.append('message', contact.message);
-    // formData.append('_honeypot', contact._honeypot);
-
-    let headers: HttpHeaders = new HttpHeaders();
 
   	this.http.post(this.buildURL(), contact).subscribe((res) => {
       console.log(res);

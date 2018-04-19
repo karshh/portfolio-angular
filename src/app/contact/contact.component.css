@@ -43,3 +43,8 @@
 .imgWrap {
 	max-width: 60px;
 }
+
+.btn-extra {
+	background-color: #272822;
+	color: #fff;
+}
