@@ -40,7 +40,7 @@ export class NewsService {
   }
   
   private buildURL(): string {
-  	return 'https://data.calgary.ca/resource/5ehk-wfu2.json';
+  	return Config.PROXY_URL + 'https://data.calgary.ca/resource/5ehk-wfu2.json';
   }
 
   getNewsByRange(start:number, end:number): Array<News> {
