@@ -19,13 +19,13 @@ export class ContactService {
   	this.status = MessageStatus.SENDING;
 
   	this.http.post(this.buildURL(), contact).subscribe((res) => {
-      console.log(res);
-  		console.log('Sent message: ' + contact._subject);
+    //   console.log(res);
+  		// console.log('Sent message: ' + contact._subject);
   		this.status = MessageStatus.SUCCESS;
   	}, (err) => {
 
-  		console.log('Failed to send message: ' + contact._subject);
-  		console.log(err);
+  		// console.log('Failed to send message: ' + contact._subject);
+  		// console.log(err);
   		this.status = MessageStatus.FAILURE;
   	})
 
@@ -55,7 +55,7 @@ export class ContactService {
 	}
 
   private buildURL():string {
-  	return Config.PROXY_URL + 'https://formspree.io/' + Config.MAILTO_ID;
+  	return 'https://formspree.io/' + Config.MAILTO_ID;
   }
 
 }
