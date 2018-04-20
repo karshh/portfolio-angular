@@ -41,6 +41,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'portfolio', component: PortfolioComponent },
   { path: 'news', component: NewsComponent },
+  { path: '**', redirectTo: 'home', pathMatch: 'full'}
 
   // authentication.
 ];
