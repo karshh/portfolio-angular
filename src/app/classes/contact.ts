@@ -4,7 +4,7 @@ export class Contact {
 	_replyto: string;
 	_subject: string;
 	message: string;
-	_gotcha: string;
+	_honeypot: string;
 	_confirmation: string;
 
 }

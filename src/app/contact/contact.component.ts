@@ -106,7 +106,7 @@ export class ContactComponent implements OnInit {
     contact._replyto = form.email;
     contact._subject = form.subject;
     contact.message = form.message;
-    contact._gotcha = form.additionalInfo;
+    contact._honeypot = form.additionalInfo;
     contact._confirmation = 'sent.';
 
     return contact;

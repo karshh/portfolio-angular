@@ -18,8 +18,8 @@ export class ContactService {
 	sendEmail(contact: Contact): void  {
   	this.status = MessageStatus.SENDING;
 
-  	this.http.post(this.buildURL(), contact).subscribe((res) => {
-    //   console.log(res);
+  	this.http.post(this.buildURL(), contact, { responseType: 'text' }).subscribe((res) => {
+      // console.log(res);
   		// console.log('Sent message: ' + contact._subject);
   		this.status = MessageStatus.SUCCESS;
   	}, (err) => {
@@ -55,7 +55,7 @@ export class ContactService {
 	}
 
   private buildURL():string {
-  	return 'https://formspree.io/' + Config.MAILTO_ID;
+  	return 'https://mailthis.to/' + Config.MAILTO_ID;
   }
 
 }

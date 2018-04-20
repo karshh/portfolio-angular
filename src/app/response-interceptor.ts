@@ -12,16 +12,11 @@ export class ResponseInterceptor implements HttpInterceptor {
 
 		console.log("intercepted request ... ");
 		req = req.clone({
-			withCredentials: true
+			headers: new HttpHeaders({ 'Origin': 'https://usharma.ca'})
 		});
 		return next.handle(req)
 		      .map((event: HttpEvent<any>) => {
 		        if (event instanceof HttpResponse) {
-		          event = event.clone({
-		          	headers: new HttpHeaders({
-		          		'Access-Control-Allow-Origin': 'http://localhost:4200'
-		          	})
-		          });
 		          console.info('HttpResponse::event =', event, ';');
 		        } else console.info('event =', event, ';');
 		        return event;
