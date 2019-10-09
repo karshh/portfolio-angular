@@ -1,7 +1,7 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 
 @Injectable()
@@ -14,13 +14,11 @@ export class ResponseInterceptor implements HttpInterceptor {
 		req = req.clone({
 			headers: new HttpHeaders({ 'Origin': 'https://usharma.ca'})
 		});
-		return next.handle(req)
-		      .map((event: HttpEvent<any>) => {
+		return next.handle(req).pipe(tap((event: HttpEvent<any>) => {
 		        if (event instanceof HttpResponse) {
 		          console.info('HttpResponse::event =', event, ';');
 		        } else console.info('event =', event, ';');
-		        return event;
-		      });
+		      }));
 		  }
 
 	}
