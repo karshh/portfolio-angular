@@ -40,7 +40,7 @@ export class NewsService {
   }
   
   private buildURL(): string {
-  	return Config.PROXY_URL + 'https://data.calgary.ca/resource/5ehk-wfu2.json';
+  	return Config.PROXY_URL + 'https://data.calgary.ca/resource/3x6m-4vs7.json';
   }
 
   getNewsByRange(start:number, end:number): Array<News> {
@@ -52,7 +52,7 @@ export class NewsService {
   	let news: News = new News(); 
   	news.title = newsInfo.title;
   	news.pubdate = new Date(newsInfo.pubdate);
-  	news.link = new URL(newsInfo.link);
+  	news.link = new URL(newsInfo.link.url);
 
 		return news;
 

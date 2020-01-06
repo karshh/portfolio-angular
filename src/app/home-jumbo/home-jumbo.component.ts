@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { WeatherService } from '../services/weather.service';
-import { ClockService } from '../services/clock.service';
 
 @Component({
   selector: 'app-home-jumbo',
@@ -14,13 +13,11 @@ export class HomeJumboComponent implements OnInit {
 	today: number = Date.now();
 
 
-  constructor(private weather: WeatherService, private clock: ClockService) { 
+  constructor(private weather: WeatherService) { 
 
   }
 
-  getClock(): number {
-  	return this.clock.getClock();
-  }
+  getClock = new Date().toLocaleTimeString("en-US", {timeZone: "America/Denver"});
 
   isWeatherLoaded() {
     return this.weather.isLoaded();

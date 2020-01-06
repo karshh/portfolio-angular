@@ -4,6 +4,5 @@ export class MapInfo {
 	latitude: number;
 	longitude: number;
 
-	updated: Date;
 	created: Date;
 }

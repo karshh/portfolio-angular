@@ -62,7 +62,6 @@ export class ContactComponent implements OnInit {
 
 
     this.errMessage = '';
-    // console.log('Form submitted:', this.contactForm.value);
     let contact: Contact = this.buildContact(this.contactForm.value);
     
     // checking this.messagePassed after this return checks if the 
@@ -73,7 +72,6 @@ export class ContactComponent implements OnInit {
 
     this.contactService.sendEmail(contact);
     this.messagePassed = true;
-    // console.log('Message' + contact._subject + ' has been passed.');
     this.contactForm.reset();
   }
 

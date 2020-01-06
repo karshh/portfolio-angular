@@ -21,7 +21,6 @@ import { SkillListComponent } from './page-components/skill-list/skill-list.comp
 import { ProjectInfoComponent } from './page-components/project-info/project-info.component';
 
 import { WeatherService } from './services/weather.service';
-import { ClockService } from './services/clock.service';
 import { NewsService } from './services/news.service';
 import { ProjectInfoService } from './services/project-info.service';
 import { SkillInfoService } from './services/skill-info.service';
@@ -82,7 +81,6 @@ const routes: Routes = [
     //   multi: true
     // },
     WeatherService,
-    ClockService,
     SkillInfoService,
     ProjectInfoService,
     TrafficIncidentService,

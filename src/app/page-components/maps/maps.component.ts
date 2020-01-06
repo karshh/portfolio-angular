@@ -16,7 +16,7 @@ export class MapsComponent implements OnInit {
 
   @Input() title:string;
   @Input() mapInfoList:Array<MapInfo>;
-
+  @Input() showLastUpdated = false;
   constructor() { }
 
   ngOnInit() {

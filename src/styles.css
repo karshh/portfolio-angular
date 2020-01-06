@@ -1,11 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-
+@font-face {
+	font-family: 'LucidaConsole';
+	src: url('assets/lucida_console.ttf');
+}
 html {
 	min-width: 350px;
 }
 
 body {
-	font-family: 'Lucida Console';
+	font-family: 'LucidaConsole';
 }
 
 .btn-extra {

@@ -18,7 +18,7 @@
             <p><strong>{{mapInfo.location}}</strong></p>
             <div [innerHTML]="mapInfo.description"></div>
             <br>
-            <p><strong>Updated:</strong> {{mapInfo.updated | date:'shortTime'}}</p>
+            <p *ngIf="showLastUpdated"><strong >Created:</strong> {{mapInfo.created | date:'shortTime'}}</p>
 
           </agm-info-window> 
 	</agm-marker>

@@ -9,8 +9,6 @@ export class ResponseInterceptor implements HttpInterceptor {
 	constructor() { }
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-		console.log("intercepted request ... ");
 		req = req.clone({
 			headers: new HttpHeaders({ 'Origin': 'https://usharma.ca'})
 		});
