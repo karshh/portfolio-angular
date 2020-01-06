@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeJumboComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'portfolio', component: PortfolioComponent },
+  { path: 'sait', component: PortfolioComponent },
   { path: 'news', component: NewsComponent },
   { path: '**', redirectTo: 'home', pathMatch: 'full'}
 

@@ -13,7 +13,7 @@ export class NavListComponent implements OnInit {
   @Input() currentLink: string;
 
   constructor() { 
-  	this.links = ['home','news','portfolio','contact'];
+  	this.links = ['home','news','sait','contact'];
   }
 
   ngOnInit() {

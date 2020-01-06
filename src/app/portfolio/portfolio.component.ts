@@ -27,7 +27,7 @@ export class PortfolioComponent implements OnInit {
     return this.skillInfo.getSkills();
   }
   ngOnInit() {
-    this.link = "portfolio";
+    this.link = "sait";
   }
 
 }
