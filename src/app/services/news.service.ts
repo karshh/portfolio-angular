@@ -26,7 +26,7 @@ export class NewsService {
     this.loaded = false; // enter loading view screen.
     
     let headers = new HttpHeaders().set('$$app_token', Config.YYC_APP_TOKEN);
-    this.http.get(this.buildURL(), { 'headers': headers})
+    this.http.get(this.buildURL(), { headers })
   	.subscribe((data: any) => {
       this.newsList = [];
   		for (var i = 0; i < data.length; i++) {
@@ -40,7 +40,7 @@ export class NewsService {
   }
   
   private buildURL(): string {
-  	return 'https://data.calgary.ca/resource/3x6m-4vs7.json';
+  	return Config.PROXY_URL + 'https://data.calgary.ca/resource/3x6m-4vs7.json';
   }
 
   getNewsByRange(start:number, end:number): Array<News> {

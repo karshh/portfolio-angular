@@ -37,7 +37,7 @@ export class TrafficIncidentService {
 	}
 
 	private buildURL(): string {
-		return 'https://data.calgary.ca/resource/m328-x8wy.json?$limit=20000';
+		return Config.PROXY_URL + 'https://data.calgary.ca/resource/m328-x8wy.json?$limit=20000';
 	}
 
 	convertToTrafficIncident(ts: any): MapInfo {

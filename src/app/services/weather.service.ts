@@ -29,17 +29,16 @@ export class WeatherService {
   }
 
   private getWeather() {
-    this.http.get(this.buildURL(), {headers: {'Content-Type': 'application/json'}})
+
+    this.http.get(this.buildURL(), {'responseType': 'json' })
   	.subscribe((data: any) => { 
-      console.log(data);
-      console.log(this.buildURL());
   		this.loaded = true;
   		this.currentWeather = data.hourly.data[0];  
   	});
   }
 
   private buildURL(): string {
-  	return this.BASE_URL + this.API_KEY + '/' +  this.COORDS + '?units=si';
+  	return Config.PROXY_URL + this.BASE_URL + this.API_KEY + '/' +  this.COORDS + '?units=si';
   }
 
   isLoaded(): boolean {

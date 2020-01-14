@@ -24,7 +24,7 @@ export class DetourService {
 	private getDetours() {
 		this.detoursList = [];
 		let headers = new HttpHeaders().set('$$app_token', Config.YYC_APP_TOKEN);
-		this.http.get(this.buildURL(), { 'headers': headers })
+		this.http.get(this.buildURL(), { headers })
 			.subscribe((data: any) => {
 				for (var i = 0; i < data.length; i++) {
 					let ts: MapInfo = this.convertToDetours(data[i]);
@@ -35,7 +35,7 @@ export class DetourService {
 	}
 
 	private buildURL(): string {
-		return 'https://data.calgary.ca/resource/q5fe-imxj.json';
+		return Config.PROXY_URL + 'https://data.calgary.ca/resource/q5fe-imxj.json';
 	}
 
 	convertToDetours(ts: any): MapInfo {
