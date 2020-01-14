@@ -33,12 +33,12 @@ import { NewsPanelComponent } from './page-components/news-panel/news-panel.comp
 import { MapsComponent } from './page-components/maps/maps.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeJumboComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'sait', component: PortfolioComponent },
   { path: 'news', component: NewsComponent },
-  { path: '**', redirectTo: 'home', pathMatch: 'full'}
+  { path: '**', redirectTo: '/home', pathMatch: 'full'}
 
   // authentication.
 ];
