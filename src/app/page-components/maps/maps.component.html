@@ -11,7 +11,7 @@
 	<agm-marker *ngFor="let mapInfo of mapInfoList" 
 		[latitude]="mapInfo.latitude" 
 		[longitude]="mapInfo.longitude"
-		(markerClick)="gm.lastOpen?.close(); gm.lastOpen = infoWindow">
+		(markerClick)="gm['lastOpen']?.close(); gm['lastOpen'] = infoWindow">
 
 		<agm-info-window #infoWindow>
             <br>
