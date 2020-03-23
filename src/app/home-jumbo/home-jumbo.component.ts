@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { WeatherService } from '../services/weather.service';
+import { Observable, timer, Subject, of } from 'rxjs';
+import { map, flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home-jumbo',
@@ -10,25 +12,20 @@ import { WeatherService } from '../services/weather.service';
 export class HomeJumboComponent implements OnInit {
 
 	link: string = 'home';
-	today: number = Date.now();
-
-
+  clock$: Observable<string>;
+  temperature$: Observable<any>;
+  
   constructor(private weather: WeatherService) { 
-
-  }
-
-  getClock = new Date().toLocaleTimeString("en-US", {timeZone: "America/Denver"});
-
-  isWeatherLoaded() {
-    return this.weather.isLoaded();
-  }
-
-  getCurrentTemperature(): string {
-    if (!this.isWeatherLoaded()) return; 
-  	return Math.round(this.weather.getCurrentWeather().temperature).toString();	
   }
 
   ngOnInit() {
+    
+    this.clock$ = timer(0, 500)
+    .pipe(map(_ => new Date().toLocaleTimeString("en-US", {timeZone: "America/Denver"})))
+    
+    this.temperature$ = timer(0, 1000*60*10)
+    .pipe(flatMap(() => this.weather.getWeather()))
+    .pipe(map((data: any) => data.currently.temperature))
   }
 
 
