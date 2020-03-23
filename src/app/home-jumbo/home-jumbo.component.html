@@ -20,19 +20,21 @@
 						<p><i class="fa fa-map-marker"></i> Calgary, AB</p>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-12">
-						<p><i class="fa fa-clock-o"></i> {{ getClock }} MT </p>
+						<p><i class="fa fa-clock-o"></i> 
+							<span *ngIf="clock$ | async as clock; else clockLoading"> {{ clock }} MT </span>
+							<ng-template #clockLoading>&nbsp;<img src="../assets/img/loading.gif" /></ng-template>
+							 </p>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-12">
 						<p><i class="fa fa-thermometer-2"></i> 
-							<span *ngIf="!isWeatherLoaded()"><img src="../assets/img/loading.gif" /></span>
-							<span *ngIf="isWeatherLoaded()"> {{ getCurrentTemperature() }}&deg;C</span> 
+							<ng-template #temperatureLoading>&nbsp;<img src="../assets/img/loading.gif" /></ng-template>
+							<span *ngIf="temperature$ | async as temperature else temperatureLoading"> {{ temperature }} &deg;C</span> 
 						</p>
 					</div>
 				</div>
 				<br><br>
 
 				<img draggable="false" (dragstart)="false;" class="bannerImg" src="../assets/img/calgary.svg" />
-
 			</div>
 	</div>
 </div>
@@ -41,7 +43,7 @@
 		
 		<div class="row justify-content-center">
 			<div class="col-lg-8 col-md-7 col-sm-12">
-				<p><i class="fa fa-check"></i> Angular 5.0</p>
+				<p><i class="fa fa-check"></i> Angular 9+</p>
 				<p><i class="fa fa-check"></i> Bootstrap 4.0</p>
 				<p><i class="fa fa-check"></i> Component oriented architecture.</p>
 				<p><i class="fa fa-check"></i> Utilization of real-time services through IoC.</p>
