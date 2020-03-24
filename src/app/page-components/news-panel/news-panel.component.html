@@ -1,12 +1,13 @@
-<div *ngIf="loaded" class="panel">
-	<a class="panelLinks" href="{{ link.href }}" target="_blank">
-		<h6 >{{title}}. </h6>
-		<p><small> {{ pubdate | date }} </small> <small> {{ pubdate | date:'shortTime' }} </small></p>
-	</a>
-</div>
-<div *ngIf="!loaded" class="panelAnimate">
-	<a class="panelLinks" href="" target="_blank">
-		<h6 > &nbsp; </h6>
-		<p> &nbsp; </p>
-	</a>
-</div>
+
+	<div *ngIf="loaded; else unloaded" class="panel">
+		<a class="panelLinks" href="{{ link.href }}" target="_blank">
+			<h6 >{{title}}. </h6>
+			<p><small> {{ pubdate | date }} </small> <small> {{ pubdate | date:'shortTime' }} </small></p>
+		</a>
+	</div>
+	<ng-template #unloaded class="panelAnimate">
+			<a class="panelLinks" href="" target="_blank">
+				<h6 > &nbsp; </h6>
+				<p> &nbsp; </p>
+			</a>
+	</ng-template>

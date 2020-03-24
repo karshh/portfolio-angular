@@ -12,37 +12,33 @@ import { MapInfo } from '../classes/map-info';
 })
 export class NewsComponent implements OnInit {
 
-	link: string;
+  link: string;
 
+  news: News[];
 
   constructor(
-    private news: NewsService, 
+    private newsService: NewsService,
     private trafficIncident: TrafficIncidentService,
-    private detour : DetourService
-    ) {
-  	
+    private detour: DetourService
+  ) {
     this.link = "news";
+    this.news = [];
+    for (var i = 0; i < 25; i++) this.news.push(new News());
 
   }
 
   ngOnInit() {
-
+    this.newsService.getNews().subscribe(data => this.news = data);
   }
-
 
   // News from the Calgary Newsroom.
-  
-  isNewsLoaded(): boolean {
-  	return this.news.isLoaded();
-  }
 
-  getNewsByRange(a: number, b:number): Array<News> {
-  	let newsList = this.news.getNewsByRange(a,b);
-  	return newsList;
+  getNewsByRange(a: number, b: number): News[] {
+    return this.news.slice(a, b);
   }
 
   // Traffic Incidents
-  
+
   isTrafficIncidentLoaded(): boolean {
     return this.trafficIncident.isLoaded();
   }
@@ -53,7 +49,7 @@ export class NewsComponent implements OnInit {
 
   // Detours
 
-  
+
   isDetoursLoaded(): boolean {
     return this.detour.isLoaded();
   }
