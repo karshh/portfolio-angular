@@ -7,9 +7,6 @@ import { AgmCoreModule } from '@agm/core'
 
 import { Config } from './services/config';
 import { AppComponent } from './app.component';
-import { NavItemComponent } from './nav-item/nav-item.component';
-import { NavListComponent } from './nav-list/nav-list.component';
-import { HomeJumboComponent } from './home-jumbo/home-jumbo.component';
 import { ContactComponent } from './contact/contact.component';
 import { TitleComponent } from './page-components/title/title.component';
 import { FormInputComponent } from './page-components/form-input/form-input.component';
@@ -27,14 +24,15 @@ import { SkillInfoService } from './services/skill-info.service';
 import { TrafficIncidentService } from './services/traffic-incident.service';
 import { DetourService } from './services/detour.service';
 import { ContactService } from './services/contact.service';
-import { FooterComponent } from './footer/footer.component';
 import { NewsComponent } from './news/news.component';
 import { NewsPanelComponent } from './page-components/news-panel/news-panel.component';
 import { MapsComponent } from './page-components/maps/maps.component';
+import { TemplateComponent } from './template/template.component';
+import { HomeModule } from './home/home.module';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeJumboComponent },
+  { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
   { path: 'contact', component: ContactComponent },
   { path: 'sait', component: PortfolioComponent },
   { path: 'news', component: NewsComponent },
@@ -46,9 +44,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    NavItemComponent,
-    NavListComponent,
-    HomeJumboComponent,
     ContactComponent,
     TitleComponent,
     FormInputComponent,
@@ -58,12 +53,13 @@ const routes: Routes = [
     ProfileComponent,
     SkillListComponent,
     ProjectInfoComponent,
-    FooterComponent,
     NewsComponent,
     NewsPanelComponent,
-    MapsComponent
+    MapsComponent,
+    TemplateComponent
   ],
   imports: [
+    HomeModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,

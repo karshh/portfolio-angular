@@ -1,0 +1,28 @@
+.navbar-local-style {
+	background-color: #262626;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.navbar-nav-extra {
+	align-self: right;
+	text-transform: uppercase;
+}
+
+.navbar-brand-font {
+	font-family: 'Aref Ruqaa', monospace;
+}
+
+.nav-link-extra {
+	font-family: 'LucidaConsole';
+	margin-left: 20px;
+}
+
+.footer {
+	padding-top: 20px;
+	color: #f3f3f3;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+	/* Height of the footer */
+	background-color: #202020;
+}
