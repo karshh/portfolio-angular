@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectInfoService } from '../services/project-info.service';
-import { ProjectInfo } from '../classes/project-info'
-import { SkillInfoService } from '../services/skill-info.service';
-import { SkillInfo } from '../classes/skill-info'
+import { ProjectInfo } from './classes/project-info'
+import { SkillInfo } from './classes/skill-info'
+import { ProjectInfoService } from './services/project-info.service';
+import { SkillInfoService } from './services/skill-info.service';
 
 @Component({
   selector: 'app-portfolio',

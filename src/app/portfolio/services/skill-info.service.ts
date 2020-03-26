@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SkillInfo } from '../classes/skill-info';
-import { Skills } from './skills';
+import { Skills } from 'src/app/services/skills';
 
 @Injectable()
 export class SkillInfoService {

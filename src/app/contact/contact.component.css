@@ -48,3 +48,8 @@
 	background-color: #272822;
 	color: #fff;
 }
+
+.jumbotron-extra {
+	background-color: transparent;
+	font-family: 'LucidaConsole';
+}

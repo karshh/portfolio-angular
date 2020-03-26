@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TemplateComponent implements OnInit {
 
-  links = ['home','news','sait','contact'];
+  links = ['home', 'news', 'sait', 'contact'];
   getClock = Date.now();
 
   navItemClass = {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Contact } from '../classes/contact';
+import { Contact } from '../portfolio/classes/contact';
 import { Config } from '../../../config';
 
 enum MessageStatus { AVAILABLE, SENDING, SUCCESS, FAILURE };
