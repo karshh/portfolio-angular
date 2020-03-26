@@ -2,36 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MapInfo } from '../classes/map-info';
 import { Config } from '../../../../config';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 
 @Injectable()
 export class DetourService {
 
-	private loaded: boolean;
-	private detoursList: Array<MapInfo>;
 
 	constructor(private http: HttpClient) {
-		this.loaded = false;
-		this.detoursList = [];
-		this.updateDetours();
 	}
 
-	private updateDetours(): void {
-		this.getDetours();
-		setTimeout(this.updateDetours, 1000 * 60 * 60 * 1); // update every 1 hour.
-	}
 
-	private getDetours() {
-		this.detoursList = [];
+	getDetours(): Observable<MapInfo[]> {
 		let headers = new HttpHeaders().set('$$app_token', Config.YYC_APP_TOKEN);
-		this.http.get(this.buildURL(), { headers })
-			.subscribe((data: any) => {
-				for (var i = 0; i < data.length; i++) {
-					let ts: MapInfo = this.convertToDetours(data[i]);
-					this.detoursList.push(ts);
-				}
-				this.loaded = true;
-			});
+		return this.http.get(this.buildURL(), { headers })
+			.pipe(map((result: Array<any>) => result.map(data => this.convertToDetours(data))));
 	}
 
 	private buildURL(): string {
@@ -49,14 +35,4 @@ export class DetourService {
 		return detours;
 
 	}
-
-	isLoaded(): boolean {
-		return this.loaded && this.detoursList != null;
-	}
-
-
-	getDetoursList(): Array<MapInfo> {
-		return this.detoursList;
-	}
-
 }

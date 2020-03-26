@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MapStyle } from '../../../../config';
 import { MapInfo } from '../classes/map-info';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-maps',
@@ -15,7 +16,7 @@ export class MapsComponent implements OnInit {
   mapStyles: any = MapStyle;
 
   @Input() title:string;
-  @Input() mapInfoList:Array<MapInfo>;
+  @Input() mapInfo: Observable<MapInfo[]>;
   @Input() showLastUpdated = false;
   constructor() { }
 

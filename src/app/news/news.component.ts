@@ -4,6 +4,7 @@ import { News } from './classes/news';
 import { DetourService } from './services/detour.service';
 import { MapInfo } from './classes/map-info';
 import { TrafficIncidentService } from './services/traffic-incident.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-news',
@@ -12,23 +13,19 @@ import { TrafficIncidentService } from './services/traffic-incident.service';
 })
 export class NewsComponent implements OnInit {
 
-  link: string;
-
-
   constructor(
     private news: NewsService,
-    private trafficIncident: TrafficIncidentService,
-    private detour: DetourService
-  ) {
+    private trafficIncidentService: TrafficIncidentService,
+    private detourService: DetourService
+  ) {}
 
-    this.link = "news";
-
-  }
+  trafficIncident$: Observable<MapInfo[]>;
+  detour$: Observable<MapInfo[]>;
 
   ngOnInit() {
-
+    this.detour$ = this.detourService.getDetours();
+    this.trafficIncident$ = this.trafficIncidentService.getTrafficIncidents();
   }
-
 
   // News from the Calgary Newsroom.
 
@@ -40,30 +37,4 @@ export class NewsComponent implements OnInit {
     let newsList = this.news.getNewsByRange(a, b);
     return newsList;
   }
-
-  // Traffic Incidents
-
-  isTrafficIncidentLoaded(): boolean {
-    return this.trafficIncident.isLoaded();
-  }
-
-  getTrafficIncidentList(): Array<MapInfo> {
-    return this.trafficIncident.getTrafficIncidentList();
-  }
-
-  // Detours
-
-
-  isDetoursLoaded(): boolean {
-    return this.detour.isLoaded();
-  }
-
-  getDetoursList(): Array<MapInfo> {
-    return this.detour.getDetoursList();
-  }
-
-
-
-
-
 }

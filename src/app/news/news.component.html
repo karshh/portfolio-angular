@@ -37,12 +37,12 @@
 	<br><br>
 	<div class="row  text-center justify-content-around">
 		<div class="col-lg-5 col-md-10 col-sm-12">
-			<app-maps [title]="'Traffic Incidents'" [mapInfoList]="getTrafficIncidentList()" [showLastUpdated]="true">
+			<app-maps [title]="'Traffic Incidents'" [mapInfo]="trafficIncident$" [showLastUpdated]="true">
 			</app-maps>
 			<br><br>
 		</div>
 		<div class="col-lg-5 col-md-10 col-sm-12">
-			<app-maps [title]="'Current Detours'" [mapInfoList]="getDetoursList()"></app-maps>
+			<app-maps [title]="'Current Detours'" [mapInfo]="detour$"></app-maps>
 		</div>
 	</div>
 	<br><br>

@@ -8,17 +8,17 @@
 	[disableDefaultUI]="true"
   	[styles]="mapStyles"  #gm>
 
-	<agm-marker *ngFor="let mapInfo of mapInfoList" 
-		[latitude]="mapInfo.latitude" 
-		[longitude]="mapInfo.longitude"
+	<agm-marker *ngFor="let m of mapInfo | async" 
+		[latitude]="m.latitude" 
+		[longitude]="m.longitude"
 		(markerClick)="gm['lastOpen']?.close(); gm['lastOpen'] = infoWindow">
 
 		<agm-info-window #infoWindow>
             <br>
-            <p><strong>{{mapInfo.location}}</strong></p>
-            <div [innerHTML]="mapInfo.description"></div>
+            <p><strong>{{m.location}}</strong></p>
+            <div [innerHTML]="m.description"></div>
             <br>
-            <p *ngIf="showLastUpdated"><strong >Created:</strong> {{mapInfo.created | date:'shortTime'}}</p>
+            <p *ngIf="showLastUpdated"><strong >Created:</strong> {{m.created | date:'shortTime'}}</p>
 
           </agm-info-window> 
 	</agm-marker>
