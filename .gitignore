@@ -44,5 +44,5 @@ testem.log
 Thumbs.db
 
 # Others
-/src/app/services/config.ts
+config.ts
 

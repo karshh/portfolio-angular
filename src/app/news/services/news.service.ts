@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { News } from '../classes/news';
-import { Config } from './config'
+import { Config } from '../../../../config';
 
 @Injectable()
 export class NewsService {

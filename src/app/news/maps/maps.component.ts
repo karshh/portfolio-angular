@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MapStyle } from '../../services/config';
-import { MapInfo } from '../../classes/map-info';
+import { MapStyle } from '../../../../config';
+import { MapInfo } from '../classes/map-info';
 
 @Component({
   selector: 'app-maps',

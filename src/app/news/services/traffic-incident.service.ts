@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Config } from '../../../../config';
 import { MapInfo } from '../classes/map-info';
-import { Config } from './config';
 
 @Injectable()
 export class TrafficIncidentService {

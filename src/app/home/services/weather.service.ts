@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Config } from './config'
-import { tap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Config } from '../../../../config'
 
 @Injectable()
 export class WeatherService {

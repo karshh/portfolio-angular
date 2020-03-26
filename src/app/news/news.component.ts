@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NewsService } from '../services/news.service';
-import { News } from '../classes/news';
-import { TrafficIncidentService } from '../services/traffic-incident.service';
-import { DetourService } from '../services/detour.service';
-import { MapInfo } from '../classes/map-info';
+import { NewsService } from './services/news.service';
+import { News } from './classes/news';
+import { DetourService } from './services/detour.service';
+import { MapInfo } from './classes/map-info';
+import { TrafficIncidentService } from './services/traffic-incident.service';
 
 @Component({
   selector: 'app-news',
@@ -12,15 +12,15 @@ import { MapInfo } from '../classes/map-info';
 })
 export class NewsComponent implements OnInit {
 
-	link: string;
+  link: string;
 
 
   constructor(
-    private news: NewsService, 
+    private news: NewsService,
     private trafficIncident: TrafficIncidentService,
-    private detour : DetourService
-    ) {
-  	
+    private detour: DetourService
+  ) {
+
     this.link = "news";
 
   }
@@ -31,18 +31,18 @@ export class NewsComponent implements OnInit {
 
 
   // News from the Calgary Newsroom.
-  
+
   isNewsLoaded(): boolean {
-  	return this.news.isLoaded();
+    return this.news.isLoaded();
   }
 
-  getNewsByRange(a: number, b:number): Array<News> {
-  	let newsList = this.news.getNewsByRange(a,b);
-  	return newsList;
+  getNewsByRange(a: number, b: number): Array<News> {
+    let newsList = this.news.getNewsByRange(a, b);
+    return newsList;
   }
 
   // Traffic Incidents
-  
+
   isTrafficIncidentLoaded(): boolean {
     return this.trafficIncident.isLoaded();
   }
@@ -53,7 +53,7 @@ export class NewsComponent implements OnInit {
 
   // Detours
 
-  
+
   isDetoursLoaded(): boolean {
     return this.detour.isLoaded();
   }
