@@ -1,0 +1,27 @@
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-local-style">
+    <div class="container">
+      <a class="navbar-brand navbar-brand-font" [routerLink]="['/']">usharma</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end navbar-nav-extra" id="navbarNavAltMarkup">
+
+        <div class="navbar-nav" *ngFor="let link of links">
+          <a [ngClass]="navItemClass" [routerLink]="['/' + link]">{{ link }}</a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </nav>
+  <router-outlet></router-outlet>
+
+  <div class="footer text-center">
+    <div class="container">
+      <p>Copyright &copy; Karsh Sharma {{ getClock | date:'yyyy' }}</p>
+    </div>
+  </div>

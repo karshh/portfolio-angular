@@ -1,8 +1,4 @@
-
-<app-nav-list currentLink="{{ link }}"></app-nav-list>
-
 <div class="container">
-	
 	<app-title title="Reach out to me!"></app-title>
 </div>
 
@@ -33,7 +29,7 @@
 				<a href="https://www.linkedin.com/in/karshsharma/" title="https://www.linkedin.com/in/karshsharma/">
 					<div class="infoForm text-center">
 						<p>
-							<img class="brandImg"  src="../../assets/img/LinkedIn.png" alt="">
+							<img class="brandImg" src="../../assets/img/LinkedIn.png" alt="">
 						</p>
 					</div>
 				</a>
@@ -48,72 +44,54 @@
 		<div class="col-lg-8 col-md-8 col-sm-12">
 			<h4><strong>Contact Form</strong></h4>
 			<br>
-			
+
 			<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
 
-		      	<div  class="form-group">
-			        <label for="name">Name</label>
-			        <input 	type="text" 
-			        		class="form-control"
-			        		id="name" 
-							[formControl]="name"
-			        		required>
+				<div class="form-group">
+					<label for="name">Name</label>
+					<input type="text" class="form-control" id="name" [formControl]="name" required>
 					<div class="" *ngIf="name.errors && (name.dirty || name.touched)">
-					  	<font color="red"><small *ngIf="name.errors.required"> *Name is required</small></font>
-					</div>			
-		      	</div>
+						<font color="red"><small *ngIf="name.errors.required"> *Name is required</small></font>
+					</div>
+				</div>
 				<div class="form-group">
-					<label 	for="email">Email</label>
-					<input 	class="form-control" 
-							type="email" 
-							name="email"
-							[formControl]="email" 
-							required>
+					<label for="email">Email</label>
+					<input class="form-control" type="email" name="email" [formControl]="email" required>
 					<div class="" *ngIf="email.errors && (email.dirty || email.touched)">
-					  	<font color="red"><small *ngIf="email.errors.required"> *Email is required<br></small>
-					  	<small *ngIf="!email.errors.required && email.errors.email"> *Email must be valid type</small></font>
-					</div>			
+						<font color="red"><small *ngIf="email.errors.required"> *Email is required<br></small>
+							<small *ngIf="!email.errors.required && email.errors.email"> *Email must be valid type</small></font>
+					</div>
 				</div>
 				<div class="form-group">
-					<label 	for="subject">Subject</label>
-					<input 	class="form-control" 
-							type="text" 
-							name="subject"
-							[formControl]="subject" 
-							required>
+					<label for="subject">Subject</label>
+					<input class="form-control" type="text" name="subject" [formControl]="subject" required>
 					<div class="" *ngIf="subject.errors && (subject.dirty || subject.touched)">
-					  	<font color="red"><small *ngIf="subject.errors.required"> *Subject is required</small></font>
-					</div>			
+						<font color="red"><small *ngIf="subject.errors.required"> *Subject is required</small></font>
+					</div>
 				</div>
 				<div class="form-group">
-					<label 	for="message">Message</label>
-					<textarea 	class="form-control" 
-								name="message" 
-								rows="4" 
-								[formControl]="message"
-								required></textarea>
+					<label for="message">Message</label>
+					<textarea class="form-control" name="message" rows="4" [formControl]="message" required></textarea>
 					<div class="" *ngIf="message.errors && (message.dirty || message.touched)">
-					  	<font color="red"><small *ngIf="message.errors.required"> *Message is required</small></font>
-					</div>			
+						<font color="red"><small *ngIf="message.errors.required"> *Message is required</small></font>
+					</div>
 				</div>
 
-   				<input type="hidden" name="additionalInfo" value="" [formControl]="additionalInfo">
+				<input type="hidden" name="additionalInfo" value="" [formControl]="additionalInfo">
 
 				<button class="btn btn-extra" [disabled]="!contactForm.valid">
 					Submit
 				</button>
-				
+
 				<br><br>
 				<div *ngIf="messagePassed">
 					<p *ngIf="isBusy()"><i class="fa  w3-spin fa-refresh"></i> Sending.</p>
 					<p *ngIf="isSuccess()"><i class="fa fa-check"></i> Sent.</p>
 					<p *ngIf="isFailure()"><i class="fa fa-close"></i> Could not send message. Try again in a bit. </p>
 				</div>
-   					
+
 
 			</form>
-		</div>	
+		</div>
 	</div>
 </div>
-
-<app-footer></app-footer>

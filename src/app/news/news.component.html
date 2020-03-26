@@ -1,47 +1,49 @@
-<app-nav-list currentLink="{{ link }}"></app-nav-list>
-
 <div class="content container">
 	<div class="text-center">
 		<h3>Recent Local News</h3>
-		<p>Powered by: <a href="https://newsroom.calgary.ca/" title="https://newsroom.calgary.ca/"> The Calgary Newsroom</a></p>
+		<p>Powered by: <a href="https://newsroom.calgary.ca/" title="https://newsroom.calgary.ca/"> The Calgary
+				Newsroom</a></p>
 	</div>
 	<hr>
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-12" *ngFor="let news of getNewsByRange(0,1)">
-				<app-news-panel [loaded]="isNewsLoaded()" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link"></app-news-panel>
+			<app-news-panel [loaded]="isNewsLoaded()" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link">
+			</app-news-panel>
 		</div>
-		<div class="col-lg-6 col-md-6 col-sm-12" >
+		<div class="col-lg-6 col-md-6 col-sm-12">
 			<div *ngFor="let news of getNewsByRange(1,4)">
-				<app-news-panel [loaded]="isNewsLoaded()" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link"></app-news-panel>
+				<app-news-panel [loaded]="isNewsLoaded()" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link">
+				</app-news-panel>
 			</div>
 		</div>
 	</div>
 	<br>
 	<div class="row">
 		<div class="col-lg-4 col-md-4 col-sm-12" *ngFor="let news of getNewsByRange(4,7)">
-			<app-news-panel [loaded]="isNewsLoaded()" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link"></app-news-panel>
+			<app-news-panel [loaded]="isNewsLoaded()" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link">
+			</app-news-panel>
 		</div>
 	</div>
 	<br>
 	<div class="row justify-content-center">
 		<div class="col-lg-3 col-md-4 col-sm-12" *ngFor="let news of getNewsByRange(7,11)">
-			<app-news-panel [loaded]="isNewsLoaded()" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link"></app-news-panel>
+			<app-news-panel [loaded]="isNewsLoaded()" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link">
+			</app-news-panel>
 		</div>
 	</div>
 	<br><br>
 </div>
 <div class="trafficContent">
-		<br><br>
-		<div class="row  text-center justify-content-around">
-			<div class="col-lg-5 col-md-10 col-sm-12">
-				<app-maps [title]="'Traffic Incidents'" [mapInfoList]="getTrafficIncidentList()" [showLastUpdated]="true"></app-maps>
-				<br><br>
-			</div>
-			<div class="col-lg-5 col-md-10 col-sm-12">
-				<app-maps [title]="'Current Detours'" [mapInfoList]="getDetoursList()"></app-maps>
-			</div>
+	<br><br>
+	<div class="row  text-center justify-content-around">
+		<div class="col-lg-5 col-md-10 col-sm-12">
+			<app-maps [title]="'Traffic Incidents'" [mapInfoList]="getTrafficIncidentList()" [showLastUpdated]="true">
+			</app-maps>
+			<br><br>
 		</div>
+		<div class="col-lg-5 col-md-10 col-sm-12">
+			<app-maps [title]="'Current Detours'" [mapInfoList]="getDetoursList()"></app-maps>
+		</div>
+	</div>
 	<br><br>
 </div>
-
-<app-footer></app-footer>
