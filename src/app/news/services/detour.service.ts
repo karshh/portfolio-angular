@@ -21,7 +21,7 @@ export class DetourService {
 	}
 
 	private buildURL(): string {
-		return Config.PROXY_URL + 'https://data.calgary.ca/resource/q5fe-imxj.json';
+		return Config.PROXY_URL + 'https://data.calgary.ca/resource/w8zq-79bq.json';
 	}
 
 	convertToDetours(ts: any): MapInfo {

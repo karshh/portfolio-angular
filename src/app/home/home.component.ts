@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     this.temperature$ = timer(0, 1000 * 60 * 10)
       .pipe(
         flatMap(_ => this.weather.getWeather()),
-        map((data: any) => data.currently.temperature)
+        map((data: any) => data.current.temp_c)
       );
   }
 

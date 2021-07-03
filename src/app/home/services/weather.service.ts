@@ -6,9 +6,7 @@ import { Config } from '../../../../config'
 @Injectable()
 export class WeatherService {
 
-  private BASE_URL: string = 'https://api.darksky.net/forecast/';
   private API_KEY: string = Config.WEATHER_API_KEY;
-  private COORDS: string = Config.YYC_COORDS // SAIT
 
   constructor(private http: HttpClient) {}
 
@@ -17,6 +15,6 @@ export class WeatherService {
   }
 
   private buildURL(): string {
-  	return Config.PROXY_URL + this.BASE_URL + this.API_KEY + '/' +  this.COORDS + '?units=si';
+    return Config.PROXY_URL + `https://api.weatherapi.com/v1/current.json?key=${this.API_KEY}&q=Calgary&aqi=no`;
   }
 }
