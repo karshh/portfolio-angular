@@ -8,12 +8,12 @@ export class NewsService {
 
 	private loaded: boolean;
 	private newsList: Array<News>;
-
+	private url = Config.PROXY_URL + 'https://data.calgary.ca/resource/3x6m-4vs7.json';
 
   constructor(private http: HttpClient) {
   	this.loaded = false;
   	this.newsList = [];
-    for (var i = 0; i < 20; i++) this.newsList.push(new News()); // dummy news.
+    for (var i = 0; i < 20; i++) this.newsList.push(new News(null, null, null)); // dummy news.
   	this.updateNews();
   }
 
@@ -24,38 +24,19 @@ export class NewsService {
 
   private getNews() {
     this.loaded = false; // enter loading view screen.
-    
     let headers = new HttpHeaders().set('$$app_token', Config.YYC_APP_TOKEN);
-    this.http.get(this.buildURL(), { headers })
-  	.subscribe((data: any) => {
-      this.newsList = [];
-  		for (var i = 0; i < data.length; i++) {
-  			if (!data[i].pubdate) continue;
-  			let news: News = this.convertToNews(data[i]);
-  			this.newsList.push(news);
-  		}
-  		this.newsList.sort((a: any,b: any) => b.pubdate - a.pubdate);
+    this.http.get(this.url, { headers })
+  	.subscribe((data: any[]) => {
+    	this.newsList = data
+		.filter(newsItem => newsItem.pubdate !== null)
+		.map(newsItem => new News(newsItem.title, new Date(newsItem.pubdate), new URL(newsItem.link.url)))
+		.sort((a: News,b: News) => b.pubdate.valueOf() - a.pubdate.valueOf())
   		this.loaded = true;
   	});
-  }
-  
-  private buildURL(): string {
-  	return Config.PROXY_URL + 'https://data.calgary.ca/resource/3x6m-4vs7.json';
   }
 
   getNewsByRange(start:number, end:number): Array<News> {
   	return this.newsList.slice(start, Math.min(end, this.newsList.length));
-
-  }
-
-  convertToNews(newsInfo: any): News {
-  	let news: News = new News(); 
-  	news.title = newsInfo.title;
-  	news.pubdate = new Date(newsInfo.pubdate);
-  	news.link = new URL(newsInfo.link.url);
-
-		return news;
-
   }
 
   isLoaded(): boolean {
