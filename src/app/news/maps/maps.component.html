@@ -1,21 +1,27 @@
 <h3>{{ title }}</h3>
 <div class="trafficIncidentsMap text-left">
-  <ng-container *ngIf="mapsStatus$ | async as mapsStatus">
-    <google-map *ngIf="mapsStatus === 'ready'; else mapUnavailable" height="500px" width="100%" [options]="mapOptions">
-      <map-marker *ngFor="let incident of mapInfo | async"
-        #marker="mapMarker"
-        [position]="{ lat: incident.latitude, lng: incident.longitude }"
-        (mapClick)="openInfoWindow(marker, incident, infoWindow)">
-      </map-marker>
-
-      <map-info-window #infoWindow="mapInfoWindow">
-        <ng-container *ngIf="selectedIncident as incident">
-          <p><strong>{{ incident.location }}</strong></p>
-          <div [innerHTML]="incident.description"></div>
-          <p *ngIf="showLastUpdated"><strong>Created:</strong> {{ incident.created | date:'shortTime' }}</p>
-        </ng-container>
-      </map-info-window>
-    </google-map>
-    <ng-template #mapUnavailable><p>Map unavailable.</p></ng-template>
-  </ng-container>
+  @if (mapsStatus$ | async; as mapsStatus) {
+    @if (mapsStatus === 'ready') {
+      <google-map height="500px" width="100%" [options]="mapOptions">
+        @for (incident of mapInfo | async; track incident) {
+          <map-marker
+            #marker="mapMarker"
+            [position]="{ lat: incident.latitude, lng: incident.longitude }"
+            (mapClick)="openInfoWindow(marker, incident, infoWindow)">
+          </map-marker>
+        }
+        <map-info-window #infoWindow="mapInfoWindow">
+          @if (selectedIncident; as incident) {
+            <p><strong>{{ incident.location }}</strong></p>
+            <div [innerHTML]="incident.description"></div>
+            @if (showLastUpdated) {
+              <p><strong>Created:</strong> {{ incident.created | date:'h:mm a' }}</p>
+            }
+          }
+        </map-info-window>
+      </google-map>
+    } @else {
+      <p>Map unavailable.</p>
+    }
+  }
 </div>

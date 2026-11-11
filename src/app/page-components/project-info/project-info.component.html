@@ -1,29 +1,31 @@
 <div class="col-auto">
-	<h4>{{ title }}</h4>
+  <h4>{{ title }}</h4>
 </div>
 <div class="col-auto">
-	<div class="row">
-		<div *ngFor="let data of skillList" class="panel"><p>{{ data }}</p></div>
-	</div>
+  <div class="row">
+    @for (data of skillList; track data) {
+      <div class="panel"><p>{{ data }}</p></div>
+    }
+  </div>
 </div>
 <br>
-<div class="col-auto">
+  <div class="col-auto">
 
-	<p>
-		<strong><i class="fa fa-calendar" aria-hidden="true"></i></strong> {{ timeLine }}
-	</p>
-	<p>
-		<strong><i class="fa fa-github" aria-hidden="true"></i></strong> 
-		<a href="https://{{ githubURL }}"  target="_blank"> {{ githubURL }}</a>
-	</p>
-	<p>
-		<strong><i class="fa fa-sticky-note-o" aria-hidden="true"></i></strong> 
-		<a href="https://{{ websiteURL }}" target="_blank"> {{ websiteURL }}</a>
-	</p>
-	
-</div>
-<br>
-<div class="col-auto" innerHTML="{{description}}"></div>
-<br>
+    <p>
+      <strong><i class="fa fa-calendar" aria-hidden="true"></i></strong> {{ timeLine }}
+    </p>
+    <p>
+      <strong><i class="fa fa-github" aria-hidden="true"></i></strong>
+      <a href="https://{{ githubURL }}"  target="_blank"> {{ githubURL }}</a>
+    </p>
+    <p>
+      <strong><i class="fa fa-sticky-note-o" aria-hidden="true"></i></strong>
+      <a href="https://{{ websiteURL }}" target="_blank"> {{ websiteURL }}</a>
+    </p>
 
-<hr>
+  </div>
+  <br>
+    <div class="col-auto" innerHTML="{{description}}"></div>
+    <br>
+
+      <hr>

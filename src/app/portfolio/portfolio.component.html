@@ -1,37 +1,41 @@
 <div class="content">
-	<div class="contentPanel1 container text-center">
-		<img draggable="false" (dragstart)="false;" class="bannerImg" src="../assets/img/heritageHall.svg" />
+  <div class="contentPanel1 container text-center">
+    <img draggable="false" (dragstart)="false;" class="bannerImg" src="../assets/img/heritageHall.svg" />
 
-		<h2> Program </h2>
-		<br>
-		<p><i class="fa fa-graduation-cap"></i> SAIT </p>
-		<p><i class="fa fa-certificate"></i> Web Developer </p>
-		<p><i class="fa fa-calendar-o"></i> Jan. 2018 - April 2018 </p>
-	</div>
+    <h2> Program </h2>
+    <br>
+      <p><i class="fa fa-graduation-cap"></i> SAIT </p>
+      <p><i class="fa fa-certificate"></i> Web Developer </p>
+      <p><i class="fa fa-calendar-o"></i> Jan. 2018 - April 2018 </p>
+    </div>
 
-	<div class="row justify-content-center contentPanel2">
-		<div class="container text-center">
-			<h2> Technical Summary </h2>
-			<br><br>
-			<div class="row justify-content-center">
-				<div *ngFor="let skill of getSkillInfoList()" class="col-lg-3 col-md-4 col-sm-6">
-					<app-skill-list [title]="skill.title" [skillList]="skill.skillList">
-					</app-skill-list>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="row justify-content-center contentPanel2">
+      <div class="container text-center">
+        <h2> Technical Summary </h2>
+        <br><br>
+        <div class="row justify-content-center">
+          @for (skill of getSkillInfoList(); track skill) {
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <app-skill-list [title]="skill.title" [skillList]="skill.skillList">
+              </app-skill-list>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
 
 
-	<div class="contentPanel1 container">
+    <div class="contentPanel1 container">
 
-		<div class="text-center">
-			<h2> Journey </h2>
-		</div>
-		<hr>
-		<app-project-info *ngFor="let project of getProjectInfoList()" [title]="project.title"
-			[skillList]="project.skillList" [timeLine]="project.timeLine" [githubURL]="project.github"
-			[websiteURL]="project.website" [description]="project.description">
-		</app-project-info>
-	</div>
-</div>
+      <div class="text-center">
+        <h2> Journey </h2>
+      </div>
+      <hr>
+        @for (project of getProjectInfoList(); track project) {
+          <app-project-info [title]="project.title"
+            [skillList]="project.skillList" [timeLine]="project.timeLine" [githubURL]="project.github"
+            [websiteURL]="project.website" [description]="project.description">
+          </app-project-info>
+        }
+      </div>
+    </div>
