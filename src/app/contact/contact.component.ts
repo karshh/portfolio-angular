@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators  } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ContactService } from '../services/contact.service';
 import { Contact } from '../portfolio/classes/contact';
 
@@ -11,13 +11,13 @@ import { Contact } from '../portfolio/classes/contact';
 export class ContactComponent implements OnInit {
 
 	link: string;
-  contactForm: FormGroup;
+  contactForm: UntypedFormGroup;
 
-  name: FormControl;
-  email: FormControl;
-  subject: FormControl;
-  message: FormControl;
-  additionalInfo: FormControl;
+  name: UntypedFormControl;
+  email: UntypedFormControl;
+  subject: UntypedFormControl;
+  message: UntypedFormControl;
+  additionalInfo: UntypedFormControl;
 
   messagePassed: boolean;
   messageSent: boolean;
@@ -31,7 +31,7 @@ export class ContactComponent implements OnInit {
     this.errMessage = '';
 
     this.createFormControls();
-    this.contactForm = new FormGroup({
+    this.contactForm = new UntypedFormGroup({
       name: this.name,
       email: this.email,
       subject: this.subject,
@@ -42,11 +42,11 @@ export class ContactComponent implements OnInit {
   }
 
   private createFormControls(): void { 
-    this.name = new FormControl('', Validators.required);
-    this.email = new FormControl('', [ Validators.required, Validators.email]);
-    this.subject = new FormControl('', Validators.required);
-    this.message = new FormControl('', [Validators.required]);
-    this.additionalInfo = new FormControl();
+    this.name = new UntypedFormControl('', Validators.required);
+    this.email = new UntypedFormControl('', [ Validators.required, Validators.email]);
+    this.subject = new UntypedFormControl('', Validators.required);
+    this.message = new UntypedFormControl('', [Validators.required]);
+    this.additionalInfo = new UntypedFormControl();
   }
 
   ngOnInit() {
