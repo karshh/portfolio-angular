@@ -5,6 +5,9 @@
 }
 html {
 	min-width: 350px;
+	/* Preserve the base typography and clipping from the former W3.CSS theme. */
+	font-size: 15px;
+	overflow-x: hidden;
 }
 
 body {
