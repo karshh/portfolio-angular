@@ -1,6 +1,6 @@
 @if (loaded) {
   <div class="panel">
-    <a class="panelLinks" href="{{ link.href }}" target="_blank">
+    <a class="panelLinks" [href]="link.href" target="_blank" rel="noopener noreferrer">
       <h6 >{{title}}. </h6>
       <p><small> {{ pubdate | date }} </small> <small> {{ pubdate | date:'h:mm a' }} </small></p>
     </a>

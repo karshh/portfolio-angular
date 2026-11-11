@@ -5,53 +5,66 @@
     Newsroom</a></p>
   </div>
   <hr>
-    <div class="row">
-      @for (news of getNewsByRange(0,1); track news) {
-        <div class="col-lg-6 col-md-6 col-sm-12">
-          <app-news-panel [loaded]="isNewsLoaded()" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link">
-          </app-news-panel>
+  @if (newsState$ | async; as newsState) {
+    @if (newsState.status === 'error') {
+      <div class="newsError text-center" role="alert">
+        <p>Local news is temporarily unavailable.</p>
+        <button type="button" class="btn btn-outline-secondary" (click)="retryNews()">Retry news</button>
+      </div>
+    } @else if (newsState.status === 'loading') {
+      <div class="newsLoading text-center" role="status" aria-live="polite">Loading local news…</div>
+    } @else {
+      <div data-testid="news-list">
+        <div class="row">
+          @for (news of getNewsByRange(newsState.news, 0, 1); track news.link.href) {
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <app-news-panel [loaded]="true" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link">
+              </app-news-panel>
+            </div>
+          }
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            @for (news of getNewsByRange(newsState.news, 1, 4); track news.link.href) {
+              <div>
+                <app-news-panel [loaded]="true" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link">
+                </app-news-panel>
+              </div>
+            }
+          </div>
         </div>
-      }
-      <div class="col-lg-6 col-md-6 col-sm-12">
-        @for (news of getNewsByRange(1,4); track news) {
-          <div>
-            <app-news-panel [loaded]="isNewsLoaded()" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link">
-            </app-news-panel>
-          </div>
-        }
-      </div>
-    </div>
-    <br>
-      <div class="row">
-        @for (news of getNewsByRange(4,7); track news) {
-          <div class="col-lg-4 col-md-4 col-sm-12">
-            <app-news-panel [loaded]="isNewsLoaded()" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link">
-            </app-news-panel>
-          </div>
-        }
-      </div>
-      <br>
-        <div class="row justify-content-center">
-          @for (news of getNewsByRange(7,11); track news) {
-            <div class="col-lg-3 col-md-4 col-sm-12">
-              <app-news-panel [loaded]="isNewsLoaded()" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link">
+        <br>
+        <div class="row">
+          @for (news of getNewsByRange(newsState.news, 4, 7); track news.link.href) {
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <app-news-panel [loaded]="true" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link">
               </app-news-panel>
             </div>
           }
         </div>
-        <br><br>
-      </div>
-      <div class="trafficContent">
-        <br><br>
-        <div class="row  text-center justify-content-around">
-          <div class="col-lg-5 col-md-10 col-sm-12">
-            <app-maps [title]="'Traffic Incidents'" [mapInfo]="trafficIncident$" [showLastUpdated]="true">
-            </app-maps>
-            <br><br>
-          </div>
-          <div class="col-lg-5 col-md-10 col-sm-12">
-            <app-maps [title]="'Current Detours'" [mapInfo]="detour$"></app-maps>
-          </div>
+        <br>
+        <div class="row justify-content-center">
+          @for (news of getNewsByRange(newsState.news, 7, 11); track news.link.href) {
+            <div class="col-lg-3 col-md-4 col-sm-12">
+              <app-news-panel [loaded]="true" [title]="news.title" [pubdate]="news.pubdate" [link]="news.link">
+              </app-news-panel>
+            </div>
+          }
         </div>
-        <br><br>
       </div>
+    }
+  }
+  <br><br>
+</div>
+<div class="trafficContent">
+  <br><br>
+  <div class="row text-center justify-content-around">
+    <div class="col-lg-5 col-md-10 col-sm-12">
+      <app-maps [title]="'Traffic Incidents'" [mapInfo]="trafficIncident$" [showLastUpdated]="true">
+      </app-maps>
+      <br><br>
+    </div>
+    <div class="col-lg-5 col-md-10 col-sm-12">
+      <app-maps [title]="'Current Detours'" [mapInfo]="detour$"></app-maps>
+    </div>
+  </div>
+  <br><br>
+</div>

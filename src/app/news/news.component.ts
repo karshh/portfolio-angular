@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { NewsService } from './services/news.service';
+import { NewsService, NewsState } from './services/news.service';
 import { News } from './classes/news';
 import { DetourService } from './services/detour.service';
 import { MapInfo } from './classes/map-info';
@@ -23,20 +23,21 @@ export class NewsComponent implements OnInit {
 
   trafficIncident$: Observable<MapInfo[]>;
   detour$: Observable<MapInfo[]>;
+  newsState$: Observable<NewsState>;
 
   ngOnInit() {
+    this.newsState$ = this.news.state$;
     this.detour$ = this.detourService.getDetours();
     this.trafficIncident$ = this.trafficIncidentService.getTrafficIncidents();
   }
 
   // News from the Calgary Newsroom.
 
-  isNewsLoaded(): boolean {
-    return this.news.isLoaded();
+  retryNews(): void {
+    this.news.retry();
   }
 
-  getNewsByRange(a: number, b: number): Array<News> {
-    let newsList = this.news.getNewsByRange(a, b);
-    return newsList;
+  getNewsByRange(news: News[], a: number, b: number): News[] {
+    return news.slice(a, Math.min(b, news.length));
   }
 }

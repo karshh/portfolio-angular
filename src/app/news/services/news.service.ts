@@ -1,52 +1,73 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map, merge, Observable, of, shareReplay, startWith, Subject, switchMap, timer } from 'rxjs';
 import { News } from '../classes/news';
-import { Config } from '../../../../config';
+
+interface CalgaryNewsItem {
+  title?: string;
+  pubdate?: string;
+  link?: string;
+}
+
+export type NewsState =
+  | { status: 'loading'; news: News[] }
+  | { status: 'ready'; news: News[] }
+  | { status: 'error'; news: News[] };
+
+const NEWS_ENDPOINT = 'https://data.calgary.ca/resource/3x6m-4vs7.json';
+const REFRESH_INTERVAL_MS = 30 * 60 * 1000;
 
 @Injectable()
 export class NewsService {
+  private readonly retry$ = new Subject<void>();
 
-	private loaded: boolean;
-	private newsList: Array<News>;
-	private url = Config.PROXY_URL + 'https://data.calgary.ca/resource/3x6m-4vs7.json';
+  readonly state$: Observable<NewsState> = merge(
+    of(undefined),
+    timer(REFRESH_INTERVAL_MS, REFRESH_INTERVAL_MS),
+    this.retry$
+  ).pipe(
+    switchMap(() => this.getNews().pipe(
+      map(news => ({ status: 'ready' as const, news })),
+      catchError(() => of({ status: 'error' as const, news: [] })),
+      startWith({ status: 'loading' as const, news: [] })
+    )),
+    shareReplay({ bufferSize: 1, refCount: true })
+  );
 
-  constructor(private http: HttpClient) {
-  	this.loaded = false;
-  	this.newsList = [];
-    for (var i = 0; i < 20; i++) this.newsList.push(new News(null, null, null)); // dummy news.
-  	this.updateNews();
+  constructor(private readonly http: HttpClient) {}
+
+  retry(): void {
+    this.retry$.next();
   }
 
-  private updateNews(): void {
-  	this.getNews();
-  	setTimeout(this.updateNews, 1000 * 60 * 30); // update every 30 mins.
+  private getNews(): Observable<News[]> {
+    const params = new HttpParams()
+      .set('$select', 'title,pubdate,link')
+      .set('$where', 'pubdate is not null')
+      .set('$order', 'pubdate DESC')
+      .set('$limit', '11');
+
+    return this.http.get<CalgaryNewsItem[]>(NEWS_ENDPOINT, { params }).pipe(
+      map(items => items
+        .map(item => this.toNews(item))
+        .filter((item): item is News => item !== null)
+        .sort((a, b) => b.pubdate.valueOf() - a.pubdate.valueOf())
+        .slice(0, 11))
+    );
   }
 
-  private getNews() {
-    this.loaded = false; // enter loading view screen.
-    let headers = new HttpHeaders().set('$$app_token', Config.YYC_APP_TOKEN);
-    this.http.get(this.url, { headers })
-  	.subscribe((data: any[]) => {
-    	this.newsList = data
-		.filter(newsItem => newsItem.pubdate !== null)
-		.map(newsItem => new News(newsItem.title, new Date(newsItem.pubdate), new URL(newsItem.link.url)))
-		.sort((a: News,b: News) => b.pubdate.valueOf() - a.pubdate.valueOf())
-  		this.loaded = true;
-  	});
+  private toNews(item: CalgaryNewsItem): News | null {
+    if (!item.title?.trim() || !item.pubdate || !item.link) return null;
+
+    const pubdate = new Date(item.pubdate);
+    if (Number.isNaN(pubdate.valueOf())) return null;
+
+    try {
+      const link = new URL(item.link);
+      if (link.protocol !== 'https:') return null;
+      return new News(item.title.trim(), pubdate, link);
+    } catch {
+      return null;
+    }
   }
-
-  getNewsByRange(start:number, end:number): Array<News> {
-  	return this.newsList.slice(start, Math.min(end, this.newsList.length));
-  }
-
-  isLoaded(): boolean {
-  	return this.loaded && this.newsList != null;
-  }
-
-
-  getCurrentNews(): Array<News> {
-  	return this.newsList;
-  }
-
-
 }

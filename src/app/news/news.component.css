@@ -8,3 +8,9 @@
     background-color: #262626;;
     color: #f3f3f3;
 }
+
+.newsLoading,
+.newsError {
+    min-height: 8rem;
+    padding: 2rem 1rem;
+}
