@@ -1,3 +1,5 @@
+import { HomeModule } from './home.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
@@ -8,7 +10,7 @@ describe('HomeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      imports: [HomeModule, HttpClientTestingModule]
     })
     .compileComponents();
   }));
@@ -18,6 +20,8 @@ describe('HomeComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+  afterEach(() => fixture.destroy());
 
   it('should create', () => {
     expect(component).toBeTruthy();

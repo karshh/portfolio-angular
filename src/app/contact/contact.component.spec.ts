@@ -1,3 +1,5 @@
+import { ContactModule } from './contact.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ContactComponent } from './contact.component';
@@ -8,7 +10,7 @@ describe('ContactComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContactComponent ]
+      imports: [ContactModule, HttpClientTestingModule]
     })
     .compileComponents();
   }));
@@ -18,6 +20,8 @@ describe('ContactComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+  afterEach(() => fixture.destroy());
 
   it('should create', () => {
     expect(component).toBeTruthy();

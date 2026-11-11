@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed, inject } from '@angular/core/testing';
 
 import { ContactService } from './contact.service';
@@ -5,6 +6,7 @@ import { ContactService } from './contact.service';
 describe('ContactService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       providers: [ContactService]
     });
   });

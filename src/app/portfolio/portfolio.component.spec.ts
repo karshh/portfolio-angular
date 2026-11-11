@@ -1,3 +1,5 @@
+import { PortfolioModule } from './portfolio.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PortfolioComponent } from './portfolio.component';
@@ -8,7 +10,7 @@ describe('PortfolioComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PortfolioComponent ]
+      imports: [PortfolioModule, HttpClientTestingModule]
     })
     .compileComponents();
   }));
@@ -18,6 +20,8 @@ describe('PortfolioComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+  afterEach(() => fixture.destroy());
 
   it('should create', () => {
     expect(component).toBeTruthy();

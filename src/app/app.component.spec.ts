@@ -1,11 +1,11 @@
+import { AppModule } from './app.module';
+import { RouterTestingModule } from '@angular/router/testing';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
+      imports: [AppModule, RouterTestingModule],
     }).compileComponents();
   }));
   it('should create the app', waitForAsync(() => {
@@ -18,10 +18,11 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('app');
   }));
-  it('should render title in a h1 tag', waitForAsync(() => {
+  it('should render the portfolio template', waitForAsync(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to app!');
+    expect(compiled.querySelector('app-template')).toBeTruthy();
+    expect(compiled.querySelector('router-outlet')).toBeTruthy();
   }));
 });
