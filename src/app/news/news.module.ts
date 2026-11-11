@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NewsComponent } from './news.component';
 import { NewsService } from './services/news.service';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapsComponent } from './maps/maps.component';
 import { NewsPanelComponent } from './news-panel/news-panel.component';
@@ -25,7 +25,7 @@ const routes: Routes = [
     NewsService,
     DetourService,
     TrafficIncidentService,
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(withXhr(), withInterceptorsFromDi())
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ProjectInfo } from './classes/project-info'
 import { SkillInfo } from './classes/skill-info'
 import { ProjectInfoService } from './services/project-info.service';
@@ -8,6 +8,7 @@ import { SkillInfoService } from './services/skill-info.service';
   selector: 'app-portfolio',
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 

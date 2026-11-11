@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NewsService } from './services/news.service';
 import { News } from './classes/news';
 import { DetourService } from './services/detour.service';
@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
   selector: 'app-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class NewsComponent implements OnInit {

@@ -2,13 +2,13 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed, inject } from '@angular/core/testing';
 
 import { ContactService } from './contact.service';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 
 describe('ContactService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [],
-      providers: [ContactService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+      providers: [ContactService, provideHttpClient(withXhr(), withInterceptorsFromDi()), provideHttpClientTesting()]
     });
   });
 

@@ -1,6 +1,6 @@
 # Portfolio
 
-This project uses Angular 21. Use Node.js 20.20.2 and npm 10. Run `npm ci`, then copy `config.ts.example` to `config.ts` and fill in the API settings you need.
+This project uses Angular 22. Use Node.js 22.23.4 and npm 10. Run `npm ci`, then copy `config.ts.example` to `config.ts` and fill in the API settings you need.
 
 ## Development server
 

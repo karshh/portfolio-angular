@@ -1,14 +1,14 @@
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed, inject } from '@angular/core/testing';
 import { TrafficIncidentService } from './traffic-incident.service';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 
 
 describe('TrafficIncidentService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [],
-      providers: [TrafficIncidentService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+      providers: [TrafficIncidentService, provideHttpClient(withXhr(), withInterceptorsFromDi()), provideHttpClientTesting()]
     });
   });
 
