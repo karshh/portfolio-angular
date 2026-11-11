@@ -1,13 +1,14 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed, inject } from '@angular/core/testing';
 
 import { DetourService } from './detour.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('DetourService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [DetourService]
+      imports: [],
+      providers: [DetourService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
     });
   });
 

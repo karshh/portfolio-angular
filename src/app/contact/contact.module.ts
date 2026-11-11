@@ -6,7 +6,7 @@ import { ContactComponent } from './contact.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContactService } from '../services/contact.service';
 import { SubmitButtonComponent } from '../page-components/submit-button/submit-button.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 const routes: Routes = [
   { path: '', component: ContactComponent }
@@ -18,14 +18,14 @@ const routes: Routes = [
     SubmitButtonComponent
   ],
   providers: [
-    ContactService
+    ContactService,
+    provideHttpClient(withInterceptorsFromDi())
   ],
   imports: [
     FormsModule,
-    HttpClientModule,
     ReactiveFormsModule,
     CommonModule,
     RouterModule.forChild(routes)
-  ] // import MODULES
+  ]
 })
 export class ContactModule { }
