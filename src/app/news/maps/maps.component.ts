@@ -11,7 +11,8 @@ const mapsLoader = new Loader({ apiKey: Config.GOOGLE_API_KEY });
 @Component({
   selector: 'app-maps',
   templateUrl: './maps.component.html',
-  styleUrls: ['./maps.component.css']
+  styleUrls: ['./maps.component.css'],
+  standalone: false
 })
 export class MapsComponent {
   @Input() title: string;

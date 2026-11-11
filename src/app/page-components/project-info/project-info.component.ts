@@ -3,7 +3,8 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-project-info',
   templateUrl: './project-info.component.html',
-  styleUrls: ['./project-info.component.css']
+  styleUrls: ['./project-info.component.css'],
+  standalone: false
 })
 export class ProjectInfoComponent implements OnInit {
 

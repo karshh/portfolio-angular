@@ -3,7 +3,8 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-form-text-area',
   templateUrl: './form-text-area.component.html',
-  styleUrls: ['./form-text-area.component.css']
+  styleUrls: ['./form-text-area.component.css'],
+  standalone: false
 })
 export class FormTextAreaComponent implements OnInit {
 

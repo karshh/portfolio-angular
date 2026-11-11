@@ -3,7 +3,8 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-news-panel',
   templateUrl: './news-panel.component.html',
-  styleUrls: ['./news-panel.component.css']
+  styleUrls: ['./news-panel.component.css'],
+  standalone: false
 })
 export class NewsPanelComponent implements OnInit {
 

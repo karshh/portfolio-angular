@@ -3,7 +3,8 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-form-input',
   templateUrl: './form-input.component.html',
-  styleUrls: ['./form-input.component.css']
+  styleUrls: ['./form-input.component.css'],
+  standalone: false
 })
 export class FormInputComponent implements OnInit {
   
