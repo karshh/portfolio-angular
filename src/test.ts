@@ -1,6 +1,6 @@
 // Initializes the Angular test environment. The Angular CLI discovers the test files.
 
-import 'zone.js/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { getTestBed } from '@angular/core/testing';
 import {
   BrowserDynamicTestingModule,
@@ -13,3 +13,8 @@ getTestBed().initTestEnvironment(
   platformBrowserDynamicTesting(),
   { teardown: { destroyAfterEach: false } }
 );
+
+// Native async tests avoid patching Jasmine APIs, which are read-only in Jasmine 7.
+beforeEach(() => {
+  getTestBed().configureTestingModule({ providers: [provideZonelessChangeDetection()] });
+});

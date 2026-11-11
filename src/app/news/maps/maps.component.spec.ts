@@ -1,4 +1,4 @@
-import { ComponentFixture, fakeAsync, flushMicrotasks, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { GoogleMapsModule, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { Loader } from '@googlemaps/js-api-loader';
 import { MapInfo } from '../classes/map-info';
@@ -8,29 +8,30 @@ describe('MapsComponent', () => {
   let component: MapsComponent;
   let fixture: ComponentFixture<MapsComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [MapsComponent],
       imports: [GoogleMapsModule]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MapsComponent);
     component = fixture.componentInstance;
   });
 
-  it('keeps the map hidden and shows a fallback if the Maps API fails to load', fakeAsync(() => {
+  it('keeps the map hidden and shows a fallback if the Maps API fails to load', async () => {
     spyOn(Loader.prototype, 'importLibrary').and.callFake(() => Promise.reject(new Error('Maps API unavailable')));
 
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('google-map')).toBeNull();
 
-    flushMicrotasks();
+    expect(await component.mapsStatus$.toPromise()).toBe('unavailable');
+    await fixture.whenStable();
     fixture.detectChanges();
     expect(fixture.nativeElement.textContent).toContain('Map unavailable.');
-  }));
+  });
 
   it('shows the selected incident in the shared info window', () => {
     const marker = {} as MapMarker;
