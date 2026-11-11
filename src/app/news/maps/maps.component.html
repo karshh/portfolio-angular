@@ -1,27 +1,16 @@
 <h3>{{ title }}</h3>
-<div class="trafficIncidentsMap text-left">
-  @if (mapsStatus$ | async; as mapsStatus) {
-    @if (mapsStatus === 'ready') {
-      <google-map height="500px" width="100%" [options]="mapOptions">
-        @for (incident of mapInfo | async; track incident) {
-          <map-marker
-            #marker="mapMarker"
-            [position]="{ lat: incident.latitude, lng: incident.longitude }"
-            (mapClick)="openInfoWindow(marker, incident, infoWindow)">
-          </map-marker>
-        }
-        <map-info-window #infoWindow="mapInfoWindow">
-          @if (selectedIncident; as incident) {
-            <p><strong>{{ incident.location }}</strong></p>
-            <div [innerHTML]="incident.description"></div>
-            @if (showLastUpdated) {
-              <p><strong>Created:</strong> {{ incident.created | date:'h:mm a' }}</p>
-            }
-          }
-        </map-info-window>
-      </google-map>
-    } @else {
-      <p>Map unavailable.</p>
-    }
+<div class="mapShell">
+  @if (status === 'loading') {
+    <p class="mapMessage" role="status">Loading {{ title | lowercase }}…</p>
   }
+  @if (status === 'error') {
+    <div class="mapMessage" role="alert">
+      <p>{{ title }} are temporarily unavailable.</p>
+      <button type="button" class="btn btn-outline-light" (click)="retry()">Retry {{ title | lowercase }}</button>
+    </div>
+  }
+  @if (status === 'empty') {
+    <p class="mapMessage" role="status">No {{ title | lowercase }} to display.</p>
+  }
+  <div #mapContainer class="leafletMap" data-testid="leaflet-map" [attr.aria-label]="title + ' map'"></div>
 </div>

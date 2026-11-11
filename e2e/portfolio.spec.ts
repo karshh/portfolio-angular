@@ -1,11 +1,14 @@
 import { expect, test } from '@playwright/test';
 import { calgaryWeather } from './fixtures/weather';
+import { activeDetours, trafficIncidents } from './fixtures/maps';
 
 test.beforeEach(async ({ page }) => {
   await page.route('**/cors-anywhere.herokuapp.com/**', route => route.fulfill({ json: [] }));
+  await page.route('https://data.calgary.ca/resource/35ra-9556.json?**', route => route.fulfill({ json: trafficIncidents }));
+  await page.route('https://data.calgary.ca/resource/w8zq-79bq.json?**', route => route.fulfill({ json: activeDetours }));
+  await page.route('https://tile.openstreetmap.org/**', route => route.abort());
   await page.route('https://api.weather.gc.ca/collections/swob-realtime/items?**', route =>
     route.fulfill({ json: calgaryWeather() }));
-  await page.route('**/maps.googleapis.com/**', route => route.abort());
 });
 
 for (const [route, heading] of [

@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { activeDetours, trafficIncidents } from './fixtures/maps';
 
 const NEWS_ENDPOINT = 'https://data.calgary.ca/resource/3x6m-4vs7.json?**';
 const newsItems = Array.from({ length: 11 }, (_, index) => ({
@@ -9,7 +10,9 @@ const newsItems = Array.from({ length: 11 }, (_, index) => ({
 
 test.beforeEach(async ({ page }) => {
   await page.route('**/cors-anywhere.herokuapp.com/**', route => route.fulfill({ json: [] }));
-  await page.route('**/maps.googleapis.com/**', route => route.abort());
+  await page.route('https://data.calgary.ca/resource/35ra-9556.json?**', route => route.fulfill({ json: trafficIncidents }));
+  await page.route('https://data.calgary.ca/resource/w8zq-79bq.json?**', route => route.fulfill({ json: activeDetours }));
+  await page.route('https://tile.openstreetmap.org/**', route => route.abort());
 });
 
 test('renders current Calgary news response data and safe external links', async ({ page }) => {

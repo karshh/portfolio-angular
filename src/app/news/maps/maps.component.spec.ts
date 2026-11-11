@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { GoogleMapsModule, MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { of, throwError } from 'rxjs';
 import { MapInfo } from '../classes/map-info';
 import { MapsComponent } from './maps.component';
 
@@ -8,38 +8,41 @@ describe('MapsComponent', () => {
   let fixture: ComponentFixture<MapsComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [MapsComponent],
-      imports: [GoogleMapsModule]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(() => {
+    await TestBed.configureTestingModule({ declarations: [MapsComponent] }).compileComponents();
     fixture = TestBed.createComponent(MapsComponent);
     component = fixture.componentInstance;
+    component.title = 'Traffic Incidents';
   });
 
-  it('keeps the map hidden and shows a fallback if the Maps API fails to load', async () => {
-    spyOn(google.maps, 'importLibrary').and.callFake(() => Promise.reject(new Error('Maps API unavailable')));
+  afterEach(() => fixture.destroy());
+
+  it('renders a Leaflet map and marker with the muted legacy visual treatment', async () => {
+    component.mapInfo = of([
+      new MapInfo('Road closure', 'Memorial Drive', 51.0569, -114.0757, new Date('2026-11-11T18:51:38Z'))
+    ]);
 
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('google-map')).toBeNull();
-
-    expect(await component.mapsStatus$.toPromise()).toBe('unavailable');
     await fixture.whenStable();
     fixture.detectChanges();
-    expect(fixture.nativeElement.textContent).toContain('Map unavailable.');
+
+    expect(component.status).toBe('ready');
+    expect(fixture.nativeElement.querySelector('.leaflet-container')).not.toBeNull();
+    expect(fixture.nativeElement.querySelectorAll('.leaflet-interactive').length).toBe(1);
+    expect(fixture.nativeElement.querySelector('.leaflet-tile-pane').style.filter).toContain('grayscale');
   });
 
-  it('shows the selected incident in the shared info window', () => {
-    const marker = {} as MapMarker;
-    const infoWindow = jasmine.createSpyObj<MapInfoWindow>('MapInfoWindow', ['open']);
-    const incident = new MapInfo('Road closure', 'Calgary', 51.0486, -114.0516, new Date());
+  it('shows a retryable error and recovers', async () => {
+    component.mapInfo = throwError(() => new Error('Unavailable'));
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+    expect(component.status).toBe('error');
+    expect(fixture.nativeElement.textContent).toContain('temporarily unavailable');
 
-    component.openInfoWindow(marker, incident, infoWindow);
-
-    expect(component.selectedIncident).toBe(incident);
-    expect(infoWindow.open).toHaveBeenCalledWith(marker);
+    component.mapInfo = of([]);
+    component.retry();
+    fixture.detectChanges();
+    expect(component.status).toBe('empty');
+    expect(fixture.nativeElement.textContent).toContain('No traffic incidents to display.');
   });
 });

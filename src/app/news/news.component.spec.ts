@@ -10,7 +10,6 @@ describe('NewsComponent', () => {
   let fixture: ComponentFixture<NewsComponent>;
 
   beforeEach(async () => {
-    spyOn(google.maps, 'importLibrary').and.callFake(() => Promise.reject(new Error('Maps API unavailable')));
     await TestBed.configureTestingModule({
       imports: [NewsModule],
       providers: [provideHttpClient(withXhr(), withInterceptorsFromDi()), provideHttpClientTesting()]

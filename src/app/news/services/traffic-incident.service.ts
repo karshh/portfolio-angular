@@ -1,28 +1,54 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Config } from '../../../../config';
+import { defer, map, Observable } from 'rxjs';
 import { MapInfo } from '../classes/map-info';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+
+interface CalgaryTrafficIncident {
+  incident_info?: string;
+  description?: string;
+  start_dt_utc?: string;
+  modified_dt_utc?: string;
+  latitude?: string;
+  longitude?: string;
+}
+
+const TRAFFIC_ENDPOINT = 'https://data.calgary.ca/resource/35ra-9556.json';
+const RECENT_INCIDENT_WINDOW_MS = 6 * 60 * 60 * 1000;
 
 @Injectable()
 export class TrafficIncidentService {
+  constructor(private readonly http: HttpClient) {}
 
-	private url = Config.PROXY_URL + 'https://data.calgary.ca/resource/35ra-9556.json?$limit=20000';
+  getTrafficIncidents(now?: Date): Observable<MapInfo[]> {
+    return defer(() => {
+      const cutoff = new Date((now ?? new Date()).getTime() - RECENT_INCIDENT_WINDOW_MS).toISOString().replace(/Z$/, '');
+      const params = new HttpParams()
+        .set('$select', 'incident_info,description,start_dt_utc,modified_dt_utc,longitude,latitude')
+        .set('$where', `modified_dt_utc >= '${cutoff}'`)
+        .set('$order', 'modified_dt_utc DESC')
+        .set('$limit', '200');
 
-	constructor(private http: HttpClient) {}
+      return this.http.get<CalgaryTrafficIncident[]>(TRAFFIC_ENDPOINT, { params }).pipe(
+        map(items => items
+          .map(item => this.toMapInfo(item))
+          .filter((item): item is MapInfo => item !== null))
+      );
+    });
+  }
 
-	getTrafficIncidents(): Observable<MapInfo[]> {
-		let headers = new HttpHeaders().set('$$app_token', Config.YYC_APP_TOKEN);
-		return this.http.get(this.url, { 'headers': headers })
-			.pipe(map((data: Array<any>) => {
-				let yesterday = new Date();
-				yesterday.setHours(yesterday.getHours() - 6); // only show traffic data thats been updated in the last 6 hours
+  private toMapInfo(item: CalgaryTrafficIncident): MapInfo | null {
+    const latitude = Number(item.latitude);
+    const longitude = Number(item.longitude);
+    const created = this.parseUtcDate(item.start_dt_utc);
+    if (!item.description?.trim() || !item.incident_info?.trim() ||
+        !Number.isFinite(latitude) || !Number.isFinite(longitude) || !created) return null;
 
-				let trafficIncidentList: MapInfo[] = data
-				.filter((ts) => ts.created < yesterday)
-				.map((ts) => new MapInfo(ts.description, ts.incident_info, +ts.latitude, +ts.longitude, new Date(ts.start_dt)));
-				return trafficIncidentList;
-			}));
-	}
+    return new MapInfo(item.description.trim(), item.incident_info.trim(), latitude, longitude, created);
+  }
+
+  private parseUtcDate(value?: string): Date | null {
+    if (!value) return null;
+    const date = new Date(value.endsWith('Z') ? value : `${value}Z`);
+    return Number.isNaN(date.valueOf()) ? null : date;
+  }
 }

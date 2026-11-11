@@ -36,6 +36,8 @@ The minimatch override upgrades affected versions (7.x through 11.0.0) to patche
 
 The Home page reads Celsius observations directly from [Environment and Climate Change Canada GeoMet](https://api.weather.gc.ca/collections/swob-stations/items/3031094?f=html), using Calgary International CS station `3031094`. No weather API key, SDK, or CORS proxy is needed. The widget credits ECCC as required by its [data licence](https://eccc-msc.github.io/open-data/licence/readme_en/).
 
+The News page reads recent traffic incidents and currently active construction detours directly from [Open Calgary](https://data.calgary.ca/) and displays them with Leaflet and OpenStreetMap. The maps require no API key or billing account and retain visible OpenStreetMap attribution.
+
 Weather loads on entry and refreshes every ten minutes. Requests time out after 15 seconds. Missing, malformed, or more than three-hour-old observations show “Weather unavailable” with a retry button; automatic refresh continues after errors. Zero and negative temperatures display normally. Hover over the temperature to see its station and observation timestamp.
 
 `npm run e2e` uses deterministic GeoMet responses for widget states. Run `npx playwright test --project=live-weather` for the opt-in check against the real GeoMet API; it requires internet access and fails if the live service is unavailable.
