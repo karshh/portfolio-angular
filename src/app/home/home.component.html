@@ -18,7 +18,7 @@
               <div class="col-lg-4 col-md-4 col-sm-12">
                 <p><i class="fa fa-clock-o"></i>
                 @if (clock$ | async; as clock) {
-                  <span> {{ clock }} MT </span>
+                  <span role="timer" aria-label="Calgary time" data-testid="calgary-clock"> {{ clock }} </span>
                 } @else {
                   &nbsp;<img src="../assets/img/loading.gif" />
                 }

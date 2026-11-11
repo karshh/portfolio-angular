@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, Subject, merge, of, timer } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { WeatherObservation, WeatherService } from './services/weather.service';
+import { formatCalgaryTime } from './calgary-time';
 
 export type WeatherState =
   | { status: 'loading' }
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.clock$ = timer(0, 500).pipe(
-      map(() => new Date().toLocaleTimeString('en-US', { timeZone: 'America/Denver' }))
+      map(() => formatCalgaryTime(new Date()))
     );
 
     this.weather$ = merge(of(undefined), timer(600000, 600000), this.weatherRefresh).pipe(

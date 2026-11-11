@@ -39,3 +39,7 @@ The Home page reads Celsius observations directly from [Environment and Climate 
 Weather loads on entry and refreshes every ten minutes. Requests time out after 15 seconds. Missing, malformed, or more than three-hour-old observations show “Weather unavailable” with a retry button; automatic refresh continues after errors. Zero and negative temperatures display normally. Hover over the temperature to see its station and observation timestamp.
 
 `npm run e2e` uses deterministic GeoMet responses for widget states. Run `npx playwright test --project=live-weather` for the opt-in check against the real GeoMet API; it requires internet access and fails if the live service is unavailable.
+
+## Calgary clock
+
+The Home clock follows Calgary time independently of the visitor’s time zone. From November 1, 2026 it uses Alberta Time (ABT), UTC−6 year-round, as specified by the [Government of Alberta](https://www.alberta.ca/albertas-new-time-system-abt). A fixed IANA offset is used after that transition so older browser time-zone databases cannot incorrectly move the clock back an hour in winter. Earlier dates use the historical `America/Edmonton` rules.
