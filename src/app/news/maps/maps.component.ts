@@ -1,12 +1,12 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
-import { Loader } from '@googlemaps/js-api-loader';
+import { importLibrary, setOptions } from '@googlemaps/js-api-loader';
 import { defer, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Config, MapStyle } from '../../../../config';
 import { MapInfo } from '../classes/map-info';
 
-const mapsLoader = new Loader({ apiKey: Config.GOOGLE_API_KEY });
+setOptions({ key: Config.GOOGLE_API_KEY });
 
 @Component({
   selector: 'app-maps',
@@ -27,8 +27,8 @@ export class MapsComponent {
     styles: MapStyle
   };
   readonly mapsStatus$ = defer(() => Promise.all([
-    mapsLoader.importLibrary('maps'),
-    mapsLoader.importLibrary('marker')
+    importLibrary('maps'),
+    importLibrary('marker')
   ])).pipe(
     map(() => 'ready'),
     catchError(() => of('unavailable'))

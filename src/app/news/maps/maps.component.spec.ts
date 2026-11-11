@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { GoogleMapsModule, MapInfoWindow, MapMarker } from '@angular/google-maps';
-import { Loader } from '@googlemaps/js-api-loader';
 import { MapInfo } from '../classes/map-info';
 import { MapsComponent } from './maps.component';
 
@@ -22,7 +21,7 @@ describe('MapsComponent', () => {
   });
 
   it('keeps the map hidden and shows a fallback if the Maps API fails to load', async () => {
-    spyOn(Loader.prototype, 'importLibrary').and.callFake(() => Promise.reject(new Error('Maps API unavailable')));
+    spyOn(google.maps, 'importLibrary').and.callFake(() => Promise.reject(new Error('Maps API unavailable')));
 
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('google-map')).toBeNull();

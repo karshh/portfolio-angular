@@ -1,4 +1,3 @@
-import { Loader } from '@googlemaps/js-api-loader';
 import { NewsModule } from './news.module';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -11,7 +10,7 @@ describe('NewsComponent', () => {
   let fixture: ComponentFixture<NewsComponent>;
 
   beforeEach(async () => {
-    spyOn(Loader.prototype, 'importLibrary').and.callFake(() => Promise.reject(new Error('Maps API unavailable')));
+    spyOn(google.maps, 'importLibrary').and.callFake(() => Promise.reject(new Error('Maps API unavailable')));
     await TestBed.configureTestingModule({
       imports: [NewsModule],
       providers: [provideHttpClient(withXhr(), withInterceptorsFromDi()), provideHttpClientTesting()]
