@@ -4,9 +4,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NewsComponent } from './news.component';
 import { NewsService } from './services/news.service';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { AgmCoreModule } from '@agm/core'
-import { Config } from '../../../config';
+import { HttpClientModule } from '@angular/common/http';
+import { GoogleMapsModule } from '@angular/google-maps';
 import { MapsComponent } from './maps/maps.component';
 import { NewsPanelComponent } from './news-panel/news-panel.component';
 import { DetourService } from './services/detour.service';
@@ -31,10 +30,7 @@ const routes: Routes = [
     CommonModule,
     HttpClientModule,
     RouterModule.forChild(routes),
-    AgmCoreModule.forRoot({
-      apiKey: Config.GOOGLE_API_KEY,
-      libraries: ["places"]
-    })
+    GoogleMapsModule
   ] // import MODULES
 })
 export class NewsModule {}

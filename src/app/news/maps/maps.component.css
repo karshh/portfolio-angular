@@ -4,9 +4,8 @@
  }
 
 
-agm-map {
-   height: 500px;
-   width: 100%;
+google-map {
+   display: block;
    margin: 20px;
  }
 

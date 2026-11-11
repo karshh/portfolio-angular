@@ -1,5 +1,7 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
+import { ComponentFixture, fakeAsync, flushMicrotasks, TestBed, waitForAsync } from '@angular/core/testing';
+import { GoogleMapsModule, MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { Loader } from '@googlemaps/js-api-loader';
+import { MapInfo } from '../classes/map-info';
 import { MapsComponent } from './maps.component';
 
 describe('MapsComponent', () => {
@@ -8,7 +10,8 @@ describe('MapsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ MapsComponent ]
+      declarations: [MapsComponent],
+      imports: [GoogleMapsModule]
     })
     .compileComponents();
   }));
@@ -16,10 +19,27 @@ describe('MapsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MapsComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('keeps the map hidden and shows a fallback if the Maps API fails to load', fakeAsync(() => {
+    spyOn(Loader.prototype, 'importLibrary').and.callFake(() => Promise.reject(new Error('Maps API unavailable')));
+
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('google-map')).toBeNull();
+
+    flushMicrotasks();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain('Map unavailable.');
+  }));
+
+  it('shows the selected incident in the shared info window', () => {
+    const marker = {} as MapMarker;
+    const infoWindow = jasmine.createSpyObj<MapInfoWindow>('MapInfoWindow', ['open']);
+    const incident = new MapInfo('Road closure', 'Calgary', 51.0486, -114.0516, new Date());
+
+    component.openInfoWindow(marker, incident, infoWindow);
+
+    expect(component.selectedIncident).toBe(incident);
+    expect(infoWindow.open).toHaveBeenCalledWith(marker);
   });
 });

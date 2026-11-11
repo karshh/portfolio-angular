@@ -1,6 +1,6 @@
 # Portfolio
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.8.
+This project uses Angular 13. Use Node.js 16 (16.10 or later in the 16.x series) and npm 8. Run `npm ci`, then copy `config.ts.example` to `config.ts` and fill in the API settings you need.
 
 ## Development server
 
@@ -12,7 +12,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `npm run build` to build the project. The build artifacts are stored in `dist/portfolio`. Use `npm run build -- --configuration production` for a production build.
 
 ## Running unit tests
 

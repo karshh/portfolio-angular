@@ -1,10 +1,10 @@
-FROM node:alpine AS builder
+FROM node:16.20.2-alpine AS builder
 
 WORKDIR /app
 
 COPY . .
 
-RUN npm install
+RUN npm ci
 RUN npm run build
 
 
