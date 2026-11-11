@@ -1,6 +1,6 @@
 # Portfolio
 
-This project uses Angular 15. Use Node.js 16 (16.13 or later in the 16.x series) and npm 8. Run `npm ci`, then copy `config.ts.example` to `config.ts` and fill in the API settings you need.
+This project uses Angular 16. Use Node.js 16 (16.14 or later in the 16.x series) and npm 8. Run `npm ci`, then copy `config.ts.example` to `config.ts` and fill in the API settings you need.
 
 ## Development server
 
