@@ -1,6 +1,6 @@
 # Portfolio
 
-This project uses Angular 19. Use Node.js 20.20.2 and npm 10. Run `npm ci`, then copy `config.ts.example` to `config.ts` and fill in the API settings you need.
+This project uses Angular 20. Use Node.js 20.20.2 and npm 10. Run `npm ci`, then copy `config.ts.example` to `config.ts` and fill in the API settings you need.
 
 ## Development server
 
@@ -20,7 +20,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Run `npx playwright install chromium` once, then `npm run e2e` to check page rendering, navigation, and contact-form validation. Playwright starts the local development server when needed. The tests use local API responses and skip the external Maps API.
 
 ## Further help
 
