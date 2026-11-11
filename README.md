@@ -25,3 +25,9 @@ Run `npx playwright install chromium` once, then `npm run e2e` to check page ren
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Dependency compatibility
+
+Angular 22 currently requires TypeScript 6.0.x, so TypeScript remains on 6.0.3 until Angular supports the next major release.
+
+The minimatch override upgrades affected versions (7.x through 11.0.0) to patched 11.0.8 for ESLint and TypeScript ESLint. It leaves the older minimatch APIs used by Karma and coverage tooling unchanged. Remove the override once upstream dependencies request a patched release.
