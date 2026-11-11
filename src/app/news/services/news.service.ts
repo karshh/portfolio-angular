@@ -16,6 +16,7 @@ export type NewsState =
 
 const NEWS_ENDPOINT = 'https://data.calgary.ca/resource/3x6m-4vs7.json';
 const REFRESH_INTERVAL_MS = 30 * 60 * 1000;
+const NEWS_CANDIDATE_LIMIT = 25;
 
 @Injectable()
 export class NewsService {
@@ -45,7 +46,7 @@ export class NewsService {
       .set('$select', 'title,pubdate,link')
       .set('$where', 'pubdate is not null')
       .set('$order', 'pubdate DESC')
-      .set('$limit', '11');
+      .set('$limit', NEWS_CANDIDATE_LIMIT.toString());
 
     return this.http.get<CalgaryNewsItem[]>(NEWS_ENDPOINT, { params }).pipe(
       map(items => items
@@ -65,6 +66,7 @@ export class NewsService {
     try {
       const link = new URL(item.link);
       if (link.protocol !== 'https:') return null;
+      if (link.hostname === 'newsroom.calgary.ca' && link.pathname === '/') return null;
       return new News(item.title.trim(), pubdate, link);
     } catch {
       return null;

@@ -30,9 +30,10 @@ describe('NewsService', () => {
 
     const request = http.expectOne(req => req.url === ENDPOINT);
     expect(request.request.headers.has('$$app_token')).toBeFalse();
-    expect(request.request.params.get('$limit')).toBe('11');
+    expect(request.request.params.get('$limit')).toBe('25');
     expect(request.request.params.get('$order')).toBe('pubdate DESC');
     request.flush([
+      { title: 'City of Calgary Newsroom', pubdate: '2026-11-11T13:00:00', link: 'https://newsroom.calgary.ca/' },
       { title: ' Older story ', pubdate: '2026-11-09T12:00:00', link: 'https://newsroom.calgary.ca/older/' },
       { title: 'Newest story', pubdate: '2026-11-11T12:00:00', link: 'https://newsroom.calgary.ca/newest/' },
       { title: 'Bad date', pubdate: 'not-a-date', link: 'https://newsroom.calgary.ca/bad/' },
@@ -44,6 +45,7 @@ describe('NewsService', () => {
     expect(ready?.status).toBe('ready');
     if (ready?.status !== 'ready') fail('Expected ready news state');
     expect(ready.news.map(item => item.title)).toEqual(['Newest story', 'Older story']);
+    expect(ready.news.some(item => item.link.href === 'https://newsroom.calgary.ca/')).toBeFalse();
     expect(ready.news[0].link.href).toBe('https://newsroom.calgary.ca/newest/');
   });
 
