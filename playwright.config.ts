@@ -2,6 +2,10 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   testDir: './e2e',
+  projects: [
+    { name: 'app', testIgnore: '**/*.live.spec.ts' },
+    { name: 'live-weather', testMatch: '**/*.live.spec.ts', timeout: 45000 }
+  ],
   workers: 1,
   reporter: 'list',
   use: {

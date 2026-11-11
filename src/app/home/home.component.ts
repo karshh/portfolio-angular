@@ -1,8 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Observable, Subject, merge, of, timer } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { WeatherObservation, WeatherService } from './services/weather.service';
 
-import { Observable, timer } from 'rxjs';
-import { map, flatMap } from 'rxjs/operators';
-import { WeatherService } from './services/weather.service';
+export type WeatherState =
+  | { status: 'loading' }
+  | { status: 'ready'; observation: WeatherObservation }
+  | { status: 'error' };
 
 @Component({
   selector: 'app-home',
@@ -12,25 +16,28 @@ import { WeatherService } from './services/weather.service';
   standalone: false
 })
 export class HomeComponent implements OnInit {
-
-  link: string = 'home';
+  link = 'home';
   clock$: Observable<string>;
-  temperature$: Observable<any>;
+  weather$: Observable<WeatherState>;
+  private readonly weatherRefresh = new Subject<void>();
 
-  constructor(private weather: WeatherService) {
-  }
+  constructor(private weather: WeatherService) {}
 
   ngOnInit() {
+    this.clock$ = timer(0, 500).pipe(
+      map(() => new Date().toLocaleTimeString('en-US', { timeZone: 'America/Denver' }))
+    );
 
-    this.clock$ = timer(0, 500)
-      .pipe(map(_ => new Date().toLocaleTimeString("en-US", { timeZone: "America/Denver" })))
-
-    this.temperature$ = timer(0, 1000 * 60 * 10)
-      .pipe(
-        flatMap(_ => this.weather.getWeather()),
-        map((data: any) => data.current.temp_c)
-      );
+    this.weather$ = merge(of(undefined), timer(600000, 600000), this.weatherRefresh).pipe(
+      switchMap(() => this.weather.getWeather().pipe(
+        map((observation): WeatherState => ({ status: 'ready', observation })),
+        catchError(() => of<WeatherState>({ status: 'error' })),
+        startWith<WeatherState>({ status: 'loading' })
+      ))
+    );
   }
 
-
+  retryWeather(): void {
+    this.weatherRefresh.next();
+  }
 }

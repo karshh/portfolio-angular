@@ -26,6 +26,22 @@
 	color: #f3f3f3;
 }
 
+.weather-reading {
+  margin-bottom: .25rem;
+}
 
+.weather-source {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: .7rem;
+}
 
-
+.weather-retry {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}

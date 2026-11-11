@@ -25,13 +25,34 @@
               </p>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12">
-              <p><i class="fa fa-thermometer-2"></i>
-              @if (temperature$ | async; as temperature) {
-                <span> {{ temperature }} &deg;C</span>
-              } @else {
-                &nbsp;<img src="../assets/img/loading.gif" />
+              @if (weather$ | async; as weather) {
+                <div class="weather-widget" role="region" aria-label="Calgary temperature"
+                  aria-live="polite" [attr.aria-busy]="weather.status === 'loading'">
+                  <p class="weather-reading"><i class="fa fa-thermometer-2" aria-hidden="true"></i>
+                    @switch (weather.status) {
+                      @case ('ready') {
+                        <span data-testid="temperature"
+                          [title]="weather.observation.station + ' · Observed ' + weather.observation.observedAt">
+                          {{ weather.observation.temperatureC | number:'1.0-1' }} &deg;C
+                        </span>
+                      }
+                      @case ('loading') {
+                        &nbsp;<img src="../assets/img/loading.gif" alt="Loading Calgary temperature" />
+                      }
+                      @case ('error') {
+                        <span> Weather unavailable </span>
+                        <button type="button" class="weather-retry" (click)="retryWeather()"
+                          aria-label="Retry weather">Retry</button>
+                      }
+                    }
+                  </p>
+                  <small class="weather-source">Data source:
+                    <a href="https://eccc-msc.github.io/open-data/licence/readme_en/" target="_blank" rel="noopener noreferrer">
+                      Environment and Climate Change Canada
+                    </a>
+                  </small>
+                </div>
               }
-            </p>
           </div>
         </div>
         <br><br>

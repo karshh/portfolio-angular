@@ -1,12 +1,10 @@
 import { expect, test } from '@playwright/test';
+import { calgaryWeather } from './fixtures/weather';
 
 test.beforeEach(async ({ page }) => {
-  await page.route('**/cors-anywhere.herokuapp.com/**', async route => {
-    const body = route.request().url().includes('weatherapi.com')
-      ? { current: { temp_c: 20 } }
-      : [];
-    await route.fulfill({ json: body });
-  });
+  await page.route('**/cors-anywhere.herokuapp.com/**', route => route.fulfill({ json: [] }));
+  await page.route('https://api.weather.gc.ca/collections/swob-realtime/items?**', route =>
+    route.fulfill({ json: calgaryWeather() }));
   await page.route('**/maps.googleapis.com/**', route => route.abort());
 });
 

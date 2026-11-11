@@ -7,7 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "playwright test"
+    "e2e": "playwright test --project=app"
   },
   "private": true,
   "dependencies": {

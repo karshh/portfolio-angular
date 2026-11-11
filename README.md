@@ -31,3 +31,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Angular 22 currently requires TypeScript 6.0.x, so TypeScript remains on 6.0.3 until Angular supports the next major release. Chokidar 5 is an explicit development dependency to satisfy Angular DevKit's optional `^5.0.0` peer; Karma keeps its own compatible Chokidar 3 copy.
 
 The minimatch override upgrades affected versions (7.x through 11.0.0) to patched 11.0.8 for ESLint and TypeScript ESLint. It leaves the older minimatch APIs used by Karma and coverage tooling unchanged. Remove the override once upstream dependencies request a patched release.
+
+## Calgary weather widget
+
+The Home page reads Celsius observations directly from [Environment and Climate Change Canada GeoMet](https://api.weather.gc.ca/collections/swob-stations/items/3031094?f=html), using Calgary International CS station `3031094`. No weather API key, SDK, or CORS proxy is needed. The widget credits ECCC as required by its [data licence](https://eccc-msc.github.io/open-data/licence/readme_en/).
+
+Weather loads on entry and refreshes every ten minutes. Requests time out after 15 seconds. Missing, malformed, or more than three-hour-old observations show “Weather unavailable” with a retry button; automatic refresh continues after errors. Zero and negative temperatures display normally. Hover over the temperature to see its station and observation timestamp.
+
+`npm run e2e` uses deterministic GeoMet responses for widget states. Run `npx playwright test --project=live-weather` for the opt-in check against the real GeoMet API; it requires internet access and fails if the live service is unavailable.
