@@ -6,7 +6,7 @@ import { ContactComponent } from './contact.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContactService } from '../services/contact.service';
 import { SubmitButtonComponent } from '../page-components/submit-button/submit-button.component';
-import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 const routes: Routes = [
   { path: '', component: ContactComponent }
@@ -19,7 +19,7 @@ const routes: Routes = [
   ],
   providers: [
     ContactService,
-    provideHttpClient(withXhr(), withInterceptorsFromDi())
+    provideHttpClient(withInterceptorsFromDi())
   ],
   imports: [
     FormsModule,

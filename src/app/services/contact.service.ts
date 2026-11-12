@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Contact } from '../portfolio/classes/contact';
-import { Config } from '../../../config';
 
 enum MessageStatus { AVAILABLE, SENDING, SUCCESS, FAILURE };
 
@@ -15,16 +14,12 @@ export class ContactService {
   }
 
 
-	sendEmail(contact: Contact): void  {
-  	this.status = MessageStatus.SENDING;
-
-  	this.http.post(this.buildURL(), contact, { responseType: 'text' }).subscribe((res) => {
-  		this.status = MessageStatus.SUCCESS;
-  	}, (err) => {
-  		this.status = MessageStatus.FAILURE;
-  	})
-
-
+  sendEmail(contact: Contact): void  {
+    this.status = MessageStatus.SENDING;
+    this.http.post('/api/contact', contact).subscribe({
+      next: () => this.status = MessageStatus.SUCCESS,
+      error: () => this.status = MessageStatus.FAILURE
+    });
   }
 
 	isAvailable():boolean {
@@ -49,8 +44,7 @@ export class ContactService {
 		return true;
 	}
 
-  private buildURL():string {
-  	return 'https://mailthis.to/' + Config.MAILTO_ID;
+  getConfig() {
+    return this.http.get<{ turnstileSiteKey: string }>('/api/contact/config');
   }
-
 }

@@ -53,3 +53,21 @@
 	background-color: transparent;
 	font-family: 'LucidaConsole';
 }
+
+.website-field {
+	position: absolute;
+	left: -10000px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.turnstile-container {
+	min-height: 65px;
+	margin: 1.25rem 0;
+}
+
+.contact-error {
+	color: #b00020;
+	margin: 0 0 1rem;
+}
