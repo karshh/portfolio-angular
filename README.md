@@ -1,10 +1,10 @@
 # Portfolio
 
-This project uses Angular 22. Use Node.js 22.23.4 and npm 10. Run `npm ci`, then copy `config.ts.example` to `config.ts` and fill in the API settings you need.
+This project uses Angular 22 with server-side rendering. Use Node.js 22.23.4 and npm 10, then run `npm ci`.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm run dev:ssr -- --port 4200` for the Angular and Node development server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any source files.
 
 ## Code scaffolding
 
@@ -12,15 +12,34 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `npm run build` to build the project. The build artifacts are stored in `dist/portfolio`. Use `npm run build -- --configuration production` for a production build.
+Run `npm run build:ssr` to build the browser and server bundles in `dist/portfolio`. Run `npm run serve:ssr` to serve the completed build.
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `npm test -- --watch=false --browsers=ChromeHeadless` for browser unit tests and `npm run test:server` for the contact API tests.
 
 ## Running end-to-end tests
 
 Run `npx playwright install chromium` once, then `npm run e2e` to check page rendering, navigation, and contact-form validation. Playwright starts the local development server when needed. The tests use local API responses and skip the external Maps API.
+
+## Secure contact form
+
+The contact form posts to the same-origin Node endpoint at `/api/contact`. The recipient address and email-provider key are server-only environment variables and are never included in the browser bundle. The endpoint validates field types and lengths, checks a hidden honeypot, verifies Cloudflare Turnstile, rate-limits each client, and sends mail through Resend's HTTPS API.
+
+Local development uses Cloudflare's official always-pass Turnstile test credentials and treats delivery as a dry run. Production fails closed unless all of these variables are set:
+
+- `TURNSTILE_SITE_KEY`: public key for the deployed hostname
+- `TURNSTILE_SECRET_KEY`: private Turnstile verification key
+- `RESEND_API_KEY`: private Resend API key
+- `CONTACT_TO_EMAIL`: fixed private recipient address
+- `CONTACT_FROM_EMAIL`: verified sender, such as `Portfolio <contact@example.com>`
+- `NG_ALLOWED_HOSTS`: optional comma-separated custom hostnames; `localhost`, `127.0.0.1`, and `*.koyeb.app` are already allowed
+
+Do not use the local test keys in production. No auto-reply is sent, which avoids giving spammers an email relay.
+
+### Free hobby deployment
+
+Build the included Dockerfile as one Koyeb Web Service using its `free` instance, port `4000`, and health path `/health`. Add the production variables above as secrets. The free Koyeb hostname works without buying a domain; its instance scales to zero after an idle hour, so the first request after inactivity can be slower. Resend's free plan and Cloudflare Turnstile's free plan are sufficient for hobby traffic.
 
 ## Further help
 

@@ -1,5 +1,7 @@
 import { defineConfig } from '@playwright/test';
 
+const baseURL = process.env['PLAYWRIGHT_BASE_URL'] ?? 'http://localhost:4200';
+
 export default defineConfig({
   testDir: './e2e',
   projects: [
@@ -9,14 +11,14 @@ export default defineConfig({
   workers: 1,
   reporter: 'list',
   use: {
-    baseURL: 'http://localhost:4200',
+    baseURL,
     viewport: { width: 1440, height: 1000 },
     launchOptions: {
       executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH
     }
   },
-  webServer: {
-    command: 'npm start -- --host localhost --port 4200',
+  webServer: process.env['PLAYWRIGHT_SKIP_WEBSERVER'] ? undefined : {
+    command: 'npm start -- --port 4200',
     url: 'http://localhost:4200',
     reuseExistingServer: true
   }

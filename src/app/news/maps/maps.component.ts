@@ -1,5 +1,6 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
-import * as L from 'leaflet';
+import { isPlatformBrowser } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, Input, OnDestroy, PLATFORM_ID, ViewChild } from '@angular/core';
+import type { LayerGroup, Map } from 'leaflet';
 import { Observable, Subscription } from 'rxjs';
 import { MapInfo } from '../classes/map-info';
 
@@ -19,24 +20,36 @@ export class MapsComponent implements AfterViewInit, OnDestroy {
   @ViewChild('mapContainer') private mapContainer: ElementRef<HTMLDivElement>;
 
   status: MapStatus = 'loading';
-  private map: L.Map;
-  private markers: L.LayerGroup;
+  mapReady: Promise<void> = Promise.resolve();
+  private leaflet: typeof import('leaflet');
+  private map: Map;
+  private markers: LayerGroup;
   private subscription: Subscription;
 
-  constructor(private readonly changeDetector: ChangeDetectorRef) {}
+  constructor(
+    private readonly changeDetector: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) private readonly platformId: object
+  ) {}
 
   ngAfterViewInit(): void {
-    this.map = L.map(this.mapContainer.nativeElement, {
+    if (!isPlatformBrowser(this.platformId)) return;
+    this.mapReady = this.initializeMap();
+  }
+
+  private async initializeMap(): Promise<void> {
+    const leafletModule = await import('leaflet');
+    this.leaflet = (leafletModule as unknown as { default?: typeof import('leaflet') }).default ?? leafletModule;
+    this.map = this.leaflet.map(this.mapContainer.nativeElement, {
       center: [51.0486, -114.0516],
       zoom: 10,
       zoomControl: true
     });
     this.map.getPane('tilePane').style.filter = 'grayscale(1) contrast(0.9) brightness(1.08)';
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    this.leaflet.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
-    this.markers = L.layerGroup().addTo(this.map);
+    this.markers = this.leaflet.layerGroup().addTo(this.map);
     Promise.resolve().then(() => this.loadMarkers());
   }
 
@@ -65,9 +78,9 @@ export class MapsComponent implements AfterViewInit, OnDestroy {
 
   private renderMarkers(items: MapInfo[]): void {
     this.markers.clearLayers();
-    const bounds = L.latLngBounds([]);
+    const bounds = this.leaflet.latLngBounds([]);
     for (const item of items) {
-      const marker = L.circleMarker([item.latitude, item.longitude], {
+      const marker = this.leaflet.circleMarker([item.latitude, item.longitude], {
         radius: 7,
         color: '#fff',
         weight: 2,

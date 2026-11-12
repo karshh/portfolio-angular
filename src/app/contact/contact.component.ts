@@ -1,7 +1,17 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Inject, NgZone, OnDestroy, PLATFORM_ID, ViewChild } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ContactService } from '../services/contact.service';
 import { Contact } from '../portfolio/classes/contact';
+
+interface TurnstileApi {
+  render(container: HTMLElement, options: Record<string, unknown>): string;
+  reset(widgetId?: string): void;
+}
+
+declare global {
+  interface Window { turnstile?: TurnstileApi; }
+}
 
 @Component({
   selector: 'app-contact',
@@ -10,7 +20,10 @@ import { Contact } from '../portfolio/classes/contact';
   changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
-export class ContactComponent implements OnInit {
+
+export class ContactComponent implements AfterViewInit, OnDestroy {
+
+  @ViewChild('turnstileContainer') turnstileContainer?: ElementRef<HTMLElement>;
 
 	link: string;
   contactForm: UntypedFormGroup;
@@ -19,14 +32,21 @@ export class ContactComponent implements OnInit {
   email: UntypedFormControl;
   subject: UntypedFormControl;
   message: UntypedFormControl;
-  additionalInfo: UntypedFormControl;
+  website: UntypedFormControl;
+  turnstileToken: UntypedFormControl;
 
   messagePassed: boolean;
   messageSent: boolean;
 
   errMessage: string;
 
-  constructor(private contactService: ContactService) { 
+  private widgetId?: string;
+  constructor(
+    private contactService: ContactService,
+    private zone: NgZone,
+    @Inject(DOCUMENT) private document: Document,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {
     this.link = 'contact';
 
     this.messagePassed = false;
@@ -38,7 +58,8 @@ export class ContactComponent implements OnInit {
       email: this.email,
       subject: this.subject,
       message: this.message,
-      additionalInfo: this.additionalInfo
+      website: this.website,
+      turnstileToken: this.turnstileToken
     });
      
   }
@@ -48,10 +69,22 @@ export class ContactComponent implements OnInit {
     this.email = new UntypedFormControl('', [ Validators.required, Validators.email]);
     this.subject = new UntypedFormControl('', Validators.required);
     this.message = new UntypedFormControl('', [Validators.required]);
-    this.additionalInfo = new UntypedFormControl();
+    this.website = new UntypedFormControl('');
+    this.turnstileToken = new UntypedFormControl('', Validators.required);
   }
 
-  ngOnInit() {
+  ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    this.contactService.getConfig().subscribe({
+      next: ({ turnstileSiteKey }) => this.loadTurnstile(turnstileSiteKey),
+      error: () => this.errMessage = 'The contact form is temporarily unavailable.'
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (isPlatformBrowser(this.platformId) && this.widgetId && window.turnstile) {
+      window.turnstile.reset(this.widgetId);
+    }
   }
 
   onSubmit(): void {
@@ -70,11 +103,15 @@ export class ContactComponent implements OnInit {
     // service is already sending a message.
     if (!this.isAvailable()) {
       this.errMessage = 'The service is currently busy. Please try again in a bit.';
-    };
+      return;
+    }
 
     this.contactService.sendEmail(contact);
     this.messagePassed = true;
-    this.contactForm.reset();
+    this.contactForm.reset({ website: '', turnstileToken: '' });
+    if (isPlatformBrowser(this.platformId) && window.turnstile) {
+      window.turnstile.reset(this.widgetId);
+    }
   }
 
   isAvailable():boolean {
@@ -103,13 +140,47 @@ export class ContactComponent implements OnInit {
     let contact:Contact = new Contact();
 
     contact.name = form.name;
-    contact._replyto = form.email;
-    contact._subject = form.subject;
+    contact.email = form.email;
+    contact.subject = form.subject;
     contact.message = form.message;
-    contact._honeypot = form.additionalInfo;
-    contact._confirmation = 'sent.';
+    contact.website = form.website;
+    contact.turnstileToken = form.turnstileToken;
 
     return contact;
+  }
+
+  private loadTurnstile(siteKey: string): void {
+    if (window.turnstile) {
+      this.renderTurnstile(siteKey);
+      return;
+    }
+
+    const existing = this.document.querySelector<HTMLScriptElement>('script[data-portfolio-turnstile]');
+    const script = existing ?? this.document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    script.async = true;
+    script.defer = true;
+    script.dataset['portfolioTurnstile'] = 'true';
+    script.addEventListener('load', () => this.renderTurnstile(siteKey), { once: true });
+    script.addEventListener('error', () => {
+      this.errMessage = 'The anti-spam check could not load. Please refresh and try again.';
+    }, { once: true });
+    if (!existing) this.document.head.appendChild(script);
+  }
+
+  private renderTurnstile(siteKey: string): void {
+    if (!this.turnstileContainer || !window.turnstile || this.widgetId) return;
+    this.widgetId = window.turnstile.render(this.turnstileContainer.nativeElement, {
+      sitekey: siteKey,
+      theme: 'light',
+      size: 'flexible',
+      callback: (token: string) => this.zone.run(() => this.turnstileToken.setValue(token)),
+      'expired-callback': () => this.zone.run(() => this.turnstileToken.reset('')),
+      'error-callback': () => this.zone.run(() => {
+        this.turnstileToken.reset('');
+        this.errMessage = 'The anti-spam check failed. Please try again.';
+      })
+    });
   }
 
 }

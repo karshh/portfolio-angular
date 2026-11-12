@@ -22,6 +22,7 @@ describe('MapsComponent', () => {
     ]);
 
     fixture.detectChanges();
+    await component.mapReady;
     await fixture.whenStable();
     fixture.detectChanges();
 
@@ -34,6 +35,7 @@ describe('MapsComponent', () => {
   it('shows a retryable error and recovers', async () => {
     component.mapInfo = throwError(() => new Error('Unavailable'));
     fixture.detectChanges();
+    await component.mapReady;
     await fixture.whenStable();
     fixture.detectChanges();
     expect(component.status).toBe('error');
