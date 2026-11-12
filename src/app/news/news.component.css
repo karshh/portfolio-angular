@@ -9,6 +9,11 @@
     color: #f3f3f3;
 }
 
+.trafficContent > .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .newsLoading,
 .newsError {
     min-height: 8rem;

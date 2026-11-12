@@ -8,6 +8,8 @@
 
 .contentPanel2 {
 	padding: 50px;
+	margin-left: 0;
+	margin-right: 0;
 	color: #f3f3f3;
 	background-color: #404040;
   	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);

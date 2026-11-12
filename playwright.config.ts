@@ -4,6 +4,7 @@ const baseURL = process.env['PLAYWRIGHT_BASE_URL'] ?? 'http://localhost:4200';
 
 export default defineConfig({
   testDir: './e2e',
+  snapshotPathTemplate: '{testDir}/{testFilePath}-snapshots/{arg}{ext}',
   projects: [
     { name: 'app', testIgnore: '**/*.live.spec.ts' },
     { name: 'live-weather', testMatch: '**/*.live.spec.ts', timeout: 45000 }

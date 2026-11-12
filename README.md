@@ -20,7 +20,7 @@ Run `npm test -- --watch=false --browsers=ChromeHeadless` for browser unit tests
 
 ## Running end-to-end tests
 
-Run `npx playwright install chromium` once, then `npm run e2e` to check page rendering, navigation, and contact-form validation. Playwright starts the local development server when needed. The tests use local API responses and skip the external Maps API.
+Run `npx playwright install chromium` once, then `npm run e2e` to check functional behavior, keyboard usability, responsive overflow at 390/768/1440px, shared design tokens, and desktop/mobile visual-regression snapshots for every route. The tests use deterministic local API responses. Only run `npm run test:visual:update` after reviewing an intentional design change; ordinary upgrades must pass against the committed baselines.
 
 ## Secure contact form
 

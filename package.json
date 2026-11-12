@@ -9,6 +9,7 @@
     "test:server": "node --import tsx --test server-tests/**/*.spec.ts",
     "lint": "ng lint",
     "e2e": "playwright test --project=app",
+    "test:visual:update": "playwright test --project=app e2e/visual.spec.ts --update-snapshots",
     "dev:ssr": "ng serve",
     "build:ssr": "ng build",
     "serve:ssr": "node dist/portfolio/server/server.mjs"

@@ -12,6 +12,7 @@ html {
 
 body {
 	font-family: 'LucidaConsole';
+	overflow-x: hidden;
 }
 
 .btn-extra {
