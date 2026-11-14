@@ -11,10 +11,8 @@ for (const timezoneId of ['UTC', 'Asia/Tokyo']) {
     test.use({ timezoneId });
 
     test('shows Calgary time and keeps ticking independently of the visitor zone', async ({ page }) => {
-      await page.clock.install({ time: new Date('2026-11-11T20:30:00Z') });
-      await page.clock.pauseAt(new Date('2026-11-11T20:30:05Z'));
+      await page.clock.install({ time: new Date('2026-11-11T20:30:05Z') });
       await page.goto('/home');
-      await page.clock.runFor(1);
       const clock = page.getByRole('timer', { name: 'Calgary time' });
       await expect(clock).toHaveText('2:30:05 PM ABT');
       await page.clock.runFor(1000);
@@ -24,10 +22,8 @@ for (const timezoneId of ['UTC', 'Asia/Tokyo']) {
 }
 
 test('does not move Calgary back an hour at the November 2026 changeover', async ({ page }) => {
-  await page.clock.install({ time: new Date('2026-11-01T07:59:54Z') });
-  await page.clock.pauseAt(new Date('2026-11-01T07:59:59Z'));
+  await page.clock.install({ time: new Date('2026-11-01T07:59:59Z') });
   await page.goto('/home');
-  await page.clock.runFor(1);
   const clock = page.getByRole('timer', { name: 'Calgary time' });
   await expect(clock).toHaveText('1:59:59 AM MDT');
   await page.clock.runFor(1000);
