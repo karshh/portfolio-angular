@@ -1,6 +1,6 @@
 import { defineConfig } from '@playwright/test';
 
-const baseURL = process.env['PLAYWRIGHT_BASE_URL'] ?? 'http://localhost:4200';
+const baseURL = process.env['PLAYWRIGHT_BASE_URL'] ?? 'http://localhost:4202';
 
 export default defineConfig({
   testDir: './e2e',
@@ -19,8 +19,8 @@ export default defineConfig({
     }
   },
   webServer: process.env['PLAYWRIGHT_SKIP_WEBSERVER'] ? undefined : {
-    command: 'npm start -- --port 4200',
-    url: 'http://localhost:4200',
+    command: 'npm start -- --port 4202',
+    url: 'http://localhost:4202',
     reuseExistingServer: true
   }
 });
